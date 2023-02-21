@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+            layout:decorate="layout/main.html">
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-6 mt-3 mx-auto">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.success != null}">
+                User created successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.error != null}">
+                Error on registration!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form th:action="@{'/register'}" method="post">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="EMAIL"></label>
+                    </div>
+                </div>
+                <div class="row" mt-1>
+                    <div class="col-12">
+                        <input type="email" name="user_email" class="form-control"
+                               required placeholder="Email">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'FIRST NAME'}"></label>
+                    </div>
+                </div>
+                <div class="row" mt-1>
+                    <div class="col-12">
+                        <input type="text" name="user_firstname" class="form-control"
+                               required placeholder="First Name">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'LAST NAME'}"></label>
+                    </div>
+                </div>
+                <div class="row" mt-1>
+                    <div class="col-12">
+                        <input type="text" name="user_lastname" class="form-control"
+                               required placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'BIRTH DAY'}"></label>
+                    </div>
+                </div>
+                <div class="row" mt-1>
+                    <div class="col-12">
+                        <input type="date" name="user_birth_day" class="form-control"
+                               required placeholder="Birth Day">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="PASSWORD"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="password" name="user_password" class="form-control"
+                               required placeholder="Password">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'REPEAT PASSWORD'}"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="password" name="user_re_password" class="form-control"
+                               required placeholder="Password">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-success" th:text="${'SIGN UP'}"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

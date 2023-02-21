@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<div layout:fragment="content">
+    <div class="row">
+        <!-- EDIT FULL NAME -->
+        <div class="col-4 mt-3 mx-auto">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.update_success != null}">
+                User profile updated successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.update_error != null}">
+                Error updating user profile!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form th:action="@{'/update-profile'}" method="post">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="EMAIL"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input class="form-control" style="background-color: lightgray;" readonly
+                               th:value="${#authentication.principal.email}">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'FIRST NAME'}"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="user_firstname" required
+                               th:value="${#authentication.principal.firstname}">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'LAST NAME'}"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="user_lastname" required
+                               th:value="${#authentication.principal.lastname}">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'BIRTH DAY'}"></label>
+                    </div>
+                </div>
+                <div class="row" mt-1>
+                    <div class="col-12">
+                        <input type="date" name="user_birth_day" class="form-control" required
+                               th:value="${#authentication.principal.birthDay}">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="ROLES"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <div class="form-check" th:each="usr : ${#authentication.principal.roles}">
+                            <input class="form-check-input" type="checkbox"
+                                   value="" id="${'flexCheckRole' + usr.role.id}" checked disabled>
+                            <label class="form-check-label"
+                                   for="${'flexCheckRole' + usr.role.id}" th:text="${usr.role}">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success mt-3"
+                        th:text="SAVE">
+                </button>
+            </form>
+        </div>
+        <!-- UPDATE PASSWORD -->
+        <div class="col-4 mt-3 mx-auto">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.password_success != null}">
+                User password updated successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.password_error != null}">
+                Error updating password!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form th:action="@{'/update-password'}" method="post">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'OLD PASSWORD'}"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="password" class="form-control" name="user_old_password" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'NEW PASSWORD'}"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="password" class="form-control" name="user_new_password" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <label class="fw-bold" th:text="${'REPEAT NEW PASSWORD'}"></label>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <input type="password" class="form-control" name="user_re_new_password" required>
+                    </div>
+                </div>
+                <button class="btn btn-success mt-3"
+                        th:text="${'UPDATE PASSWORD'}">
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</html>

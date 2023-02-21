@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+           xmlns:th="http://www.thymeleaf.org"
+           xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link th:insert = "~{head.html}">
+    <meta charset="UTF-8">
+    <title>Family Budget</title>
+</head>
+<body>
+    <div class="container">
+        <div th:insert = "~{navbar.html}"></div>
+    </div>
+    <div class="container mt-3" style="min-height: 480px;">
+        <div class="row">
+            <div class="col-12">
+                <div layout:fragment = "content"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div th:insert = "~{footer.html}"></div>
+    </div>
+</body>
+</html>
