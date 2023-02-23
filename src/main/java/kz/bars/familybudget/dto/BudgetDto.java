@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
+//@Builder
 public class BudgetDto {
 
     private Long id;

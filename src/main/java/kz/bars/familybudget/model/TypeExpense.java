@@ -1,21 +1,20 @@
 package kz.bars.familybudget.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 //@Table(name = "type_expense")
 public class TypeExpense extends BaseEntity {
-
-    @Column(nullable = false)
-    private String name;
 
     @OneToOne
     @JoinColumn(name = "category_expense_id")
     private CategoryExpense categoryExpense;
+
+    @Column(nullable = false)
+    private String name;
 
     private String description;
 

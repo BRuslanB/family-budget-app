@@ -2,9 +2,12 @@ package kz.bars.familybudget.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 //@Table(name = "type_receipt")
 public class TypeReceipt extends BaseEntity {
 

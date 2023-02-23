@@ -2,11 +2,14 @@ package kz.bars.familybudget.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "checks")
 public class Check extends BaseEntity {
 
@@ -21,11 +24,5 @@ public class Check extends BaseEntity {
     private LocalDate date;
 
     private String note;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Budget budget;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Purchases purchase;
 
 }

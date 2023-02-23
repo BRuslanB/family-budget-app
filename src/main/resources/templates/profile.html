@@ -70,9 +70,9 @@
                     <div class="col-12">
                         <div class="form-check" th:each="usr : ${#authentication.principal.roles}">
                             <input class="form-check-input" type="checkbox"
-                                   value="" id="${'flexCheckRole' + usr.role.id}" checked disabled>
+                                   value="" id="${'role' + usr.role.id}" checked disabled>
                             <label class="form-check-label"
-                                   for="${'flexCheckRole' + usr.role.id}" th:text="${usr.role}">
+                                   for="${'role' + usr.role.id}" th:text="${usr.name}">
                             </label>
                         </div>
                     </div>

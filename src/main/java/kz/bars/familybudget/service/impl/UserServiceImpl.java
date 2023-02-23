@@ -28,8 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            User user = (User) authentication.getPrincipal();
-            return user;
+            return (User) authentication.getPrincipal();
         }
         return null;
     }

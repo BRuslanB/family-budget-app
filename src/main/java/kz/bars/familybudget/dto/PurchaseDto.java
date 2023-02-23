@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
+//@Builder
 public class PurchaseDto {
 
     private Long id;
