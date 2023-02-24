@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/income")
+@RequestMapping(value = "/incomes")
 @CrossOrigin
 public class TypeIncomeController {
 

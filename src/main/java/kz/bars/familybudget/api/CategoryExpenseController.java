@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/category")
+@RequestMapping(value = "/categories")
 @CrossOrigin
 public class CategoryExpenseController {
 
