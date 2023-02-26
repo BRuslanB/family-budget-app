@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PurchaseMapper {
 
-    PurchaseDto toDto(Purchase purchase);
-    Purchase toEntity(PurchaseDto purchaseDto);
-    List<PurchaseDto> toDtoList(List<Purchase> purchases);
+//    PurchaseDto toDto(Purchase purchase);
+//    Purchase toEntity(PurchaseDto purchaseDto);
+//    List<PurchaseDto> toDtoList(List<Purchase> purchases);
 
 }

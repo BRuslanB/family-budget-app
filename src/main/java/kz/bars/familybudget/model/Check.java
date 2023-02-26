@@ -1,5 +1,6 @@
 package kz.bars.familybudget.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -13,9 +14,9 @@ import java.time.LocalDate;
 @Table(name = "checks")
 public class Check extends BaseEntity {
 
-    @OneToOne
-    @JoinColumn(name = "type_receipt_id")
-    private TypeReceipt typeReceipt;
+//    @OneToOne
+//    @JoinColumn(name = "type_receipt_id")
+//    private TypeReceipt typeReceipt;
 
     @Column(nullable = false)
     private Double value;
@@ -24,5 +25,15 @@ public class Check extends BaseEntity {
     private LocalDate date;
 
     private String note;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="budget_id")
+    @JsonIgnore
+    private Budget budget;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="purchase_id")
+    @JsonIgnore
+    private Purchase purchase;
 
 }

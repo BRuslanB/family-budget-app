@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class CategoryExpenseDto {
+public class ExpenseCategoryDto {
 
     private Long id;
     private String name;

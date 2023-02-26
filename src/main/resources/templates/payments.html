@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+            layout:decorate="layout/main.html">
+
+<div layout:fragment="mainContent">
+    <!-- Title Two Tables -->
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-6" style="color: red;">EXPENSES</th>
+                    <th class="col-6" style="color: darkblue;">INCOMES</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <!-- List of Expenses -->
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>EXPENSE</th>
+                    <th style="text-align: center;">SUM VALUE</th>
+                    <th style="text-align: center; width: 10%;">DETAILS</th>
+                </tr>
+                </thead>
+                <tbody id=tbodyExpensesList>
+                    <!--htmlCode-->
+                </tbody>
+            </table>
+        </div>
+        <!-- List of Incomes -->
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>INCOME</th>
+                    <th style="text-align: center;">SUM VALUE</th>
+                    <th style="text-align: center; width: 10%;">DETAILS</th>
+                </tr>
+                </thead>
+                <tbody id=tbodyIncomesList>
+                <!--htmlCode-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Title Tables -->
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-12" style="color: darkgreen;">CHECKS</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!-- Button Add Type Income -->
+    <div class="row">
+        <div class="col-12 my-2">
+            <button type="button" class="button_style_add" onclick="addCheck()"
+                    th:text="${'+Add Check Expense'}" style="color: red;">
+            </button>
+            <button type="button" class="button_style_add" onclick="addCheck()"
+                    th:text="${'+Add Check Income'}" style="color: darkblue;">
+            </button>
+        </div>
+    </div>
+    <!-- List of Checks -->
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th style="text-align: center;">VALUE</th>
+                    <th style="text-align: center;">DATE</th>
+                    <th>NOTE</th>
+                    <th style="text-align: center; width: 10%;">DETAILS</th>
+                </tr>
+                </thead>
+                <tbody id=tbodyChecksList>
+                    <!--htmlCode-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+
+        loadAllContent();
+
+        function loadAllContent() {
+            // alert("loadAllContent"); //для проверки вызова
+            loadIncomesContent();
+            loadExpensesContent();
+            loadChecksContent();
+        }
+
+        function loadIncomesContent() {
+            //проверка параметров
+            //console.log(object_id + ", " + course_Content);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if (this.status === 200) {
+                    const result = this.responseText;
+                    var incomesList = JSON.parse(result);
+                    var htmlCode = "";
+                    var totalSum = 0;
+                    for (i = 0; i < incomesList.length; i++) {
+                        htmlCode += "<tr>";
+                        htmlCode += "<td>" + incomesList[i]["id"] + "</td>";
+                        htmlCode += "<td>" + incomesList[i]["typeIncome"]["name"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + incomesList[i]["sumValue"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" +
+                                    "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
+                                    "onclick='openIncomesModal(" + incomesList[i].id + ")'>Details</a>" + "</td>";
+                        htmlCode += "</tr>";
+                        totalSum += incomesList[i]["sumValue"];
+                    }
+                    htmlCode += "<tr>";
+                    htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
+                    htmlCode += "</tr>";
+                }
+                //прорисовка tbodyIncomesList
+                tbodyIncomesList.innerHTML = htmlCode;
+            }
+            xhttp.open("GET","http://localhost:8000/budget");
+            xhttp.send();
+        }
+
+        function loadExpensesContent() {
+            //проверка параметров
+            //console.log(object_id + ", " + course_Content);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if (this.status === 200) {
+                    const result = this.responseText;
+                    var expensesList = JSON.parse(result);
+                    var htmlCode = "";
+                    var totalSum = 0;
+                    for (i = 0; i < expensesList.length; i++) {
+                        htmlCode += "<tr>";
+                        htmlCode += "<td>" + expensesList[i]["id"] + "</td>";
+                        htmlCode += "<td>" + expensesList[i]["typeExpense"]["name"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + expensesList[i]["sumValue"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" +
+                                    "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
+                                    "onclick='openExpensesModal(" + expensesList[i].id + ")'>Details</a>" + "</td>";
+                        htmlCode += "</tr>";
+                        totalSum += expensesList[i]["sumValue"];
+                    }
+                    htmlCode += "<tr>";
+                    htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
+                    htmlCode += "</tr>";
+                }
+                //прорисовка tbodyExpensesList
+                tbodyExpensesList.innerHTML = htmlCode;
+            }
+            xhttp.open("GET","http://localhost:8000/purchases");
+            xhttp.send();
+        }
+
+        function loadChecksContent() {
+            //проверка параметров
+            //console.log(object_id + ", " + course_Content);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if (this.status === 200) {
+                    const result = this.responseText;
+                    var checksList = JSON.parse(result);
+                    var htmlCode = "";
+                    var totalSum = 0;
+                    for (i = 0; i < checksList.length; i++) {
+                        htmlCode += "<tr>";
+                        htmlCode += "<td>" + checksList[i]["id"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + (checksList[i]["budgetId"] === -1 ? "-" : "+") +
+                                     checksList[i]["value"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + checksList[i]["date"] + "</td>";
+                        htmlCode += "<td>" + checksList[i]["note"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" +
+                                    "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
+                                    "onclick='openChecksModal(" + checksList[i].id + ")'>Details</a>" + "</td>";
+                        htmlCode += "</tr>";
+                        if (checksList[i]["budgetId"] === -1) {
+                            totalSum -= checksList[i]["value"];
+                        } else {
+                            totalSum += checksList[i]["value"];
+                        }
+                    }
+                    htmlCode += "<tr>";
+                    htmlCode += "<td colspan='5' style='font-weight: bold; text-align: right;'>" + "The rest of money: " + totalSum + "</td>";
+                    htmlCode += "</tr>";
+                }
+                //прорисовка tbodyChecksList
+                tbodyChecksList.innerHTML = htmlCode;
+            }
+            xhttp.open("GET","http://localhost:8000/checks");
+            xhttp.send();
+        }
+
+    </script>
+</div>
+
+</html>

@@ -6,16 +6,17 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-//@Table(name = "type_expense")
 public class TypeExpense extends BaseEntity {
 
     @OneToOne
-    @JoinColumn(name = "category_expense_id")
-    private CategoryExpense categoryExpense;
+    @JoinColumn(name = "expense_category_id")
+    private ExpenseCategory expenseCategory;
 
     @Column(nullable = false)
     private String name;
 
     private String description;
+
+    private Boolean isValid = true;
 
 }

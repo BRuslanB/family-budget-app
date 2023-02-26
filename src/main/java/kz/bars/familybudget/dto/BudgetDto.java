@@ -13,7 +13,8 @@ import java.util.List;
 public class BudgetDto {
 
     private Long id;
-    private TypeIncomeDto income;
-    private List<CheckDto> checks = new ArrayList<>();
+    private TypeIncomeDto typeIncome;
+    private Double sumValue;
+//    private List<CheckDto> checks = new ArrayList<>();
 
 }

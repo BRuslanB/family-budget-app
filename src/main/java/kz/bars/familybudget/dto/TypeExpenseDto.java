@@ -9,7 +9,8 @@ public class TypeExpenseDto {
 
     private Long id;
     private String name;
-    private CategoryExpenseDto categoryExpense;
+    private ExpenseCategoryDto expenseCategory;
     private String description;
+    private Boolean isValid;
 
 }

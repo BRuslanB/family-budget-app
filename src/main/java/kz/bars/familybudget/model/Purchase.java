@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -14,10 +15,13 @@ import java.util.List;
 public class Purchase extends BaseEntity {
 
     @OneToOne
-    @JoinColumn(name = "type_expense_id")
+    @JoinColumn(name = "type_expense_id", unique = true)
     private TypeExpense typeExpense;
 
-    @OneToMany
-    private List<Check> checks = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "purchase_id")
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Check> checks;
 
 }

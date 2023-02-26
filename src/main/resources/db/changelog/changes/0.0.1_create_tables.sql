@@ -1,38 +1,27 @@
 DROP TABLE IF EXISTS budget CASCADE;
 CREATE TABLE budget (
     id SERIAL PRIMARY KEY NOT NULL,
-    type_income_id INT
+    type_income_id INT UNIQUE
 );
 
 DROP TABLE IF EXISTS purchase CASCADE;
 CREATE TABLE purchase (
     id SERIAL PRIMARY KEY NOT NULL,
-    type_expense_id INT
+    type_expense_id INT UNIQUE
 );
 
 DROP TABLE IF EXISTS checks CASCADE;
 CREATE TABLE checks (
     id SERIAL PRIMARY KEY NOT NULL,
-    type_receipt_id INT NOT NULL,
     value DOUBLE PRECISION NOT NULL,
     date DATE NOT NULL,
-    note TEXT
+    note TEXT,
+    budget_id INT,
+    purchase_id INT
 );
 
-DROP TABLE IF EXISTS budget_checks;
-CREATE TABLE budget_checks (
-    budget_id INT NOT NULL,
-    checks_id INT NOT NULL
-);
-
-DROP TABLE IF EXISTS purchase_checks;
-CREATE TABLE purchase_checks (
-    purchase_id INT NOT NULL,
-    checks_id INT NOT NULL
-);
-
-DROP TABLE IF EXISTS category_expense CASCADE;
-CREATE TABLE category_expense (
+DROP TABLE IF EXISTS expense_category CASCADE;
+CREATE TABLE expense_category (
     id SERIAL PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     description TEXT
@@ -41,23 +30,18 @@ CREATE TABLE category_expense (
 DROP TABLE IF EXISTS type_expense CASCADE;
 CREATE TABLE type_expense (
     id SERIAL PRIMARY KEY NOT NULL,
-    category_expense_id INT,
+    expense_category_id INT,
     name TEXT NOT NULL,
-    description TEXT
+    description TEXT,
+    is_valid BOOLEAN DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS type_income CASCADE;
 CREATE TABLE type_income (
     id SERIAL PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
-    description TEXT
-);
-
-DROP TABLE IF EXISTS type_receipt CASCADE;
-CREATE TABLE type_receipt (
-    id SERIAL PRIMARY KEY NOT NULL,
-    name TEXT NOT NULL,
-    description TEXT
+    description TEXT,
+    is_valid BOOLEAN DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS role CASCADE;

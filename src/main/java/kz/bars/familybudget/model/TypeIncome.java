@@ -8,12 +8,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-//@Table(name = "type_income")
 public class TypeIncome extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
 
     private String description;
+
+    private Boolean isValid = true;
 
 }

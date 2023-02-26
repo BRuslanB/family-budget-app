@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface BudgetMapper {
 
-    BudgetDto toDto(Budget budget);
-    Budget toEntity(BudgetDto budgetDto);
-    List<BudgetDto> toDtoList(List<Budget> budgetList);
+//    BudgetDto toDto(Budget budget);
+//    Budget toEntity(BudgetDto budgetDto);
+//    List<BudgetDto> toDtoList(List<Budget> budgetList);
 
 }

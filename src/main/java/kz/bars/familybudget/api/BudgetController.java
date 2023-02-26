@@ -17,28 +17,28 @@ public class BudgetController {
     private final BudgetService budgetService;
 
     @GetMapping
-    public List<BudgetDto> getAllBudget() {
+    public List<BudgetDto> getAllBudgetDto() {
         return budgetService.getAllBudgetDto();
     }
 
-    @GetMapping(value = "{id}")
-    public BudgetDto getBudget(@PathVariable(name = "id") Long id) {
-        return budgetService.getBudgetDto(id);
-    }
+//    @GetMapping(value = "{id}")
+//    public BudgetDto getBudget(@PathVariable(name = "id") Long id) {
+//        return budgetService.getBudgetDto(id);
+//    }
 
-    @PostMapping
-    public BudgetDto addBudget(@RequestBody BudgetDto budgetDto) {
-        return budgetService.addBudgetDto(budgetDto);
-    }
+//    @PostMapping
+//    public BudgetDto addBudget(@RequestBody BudgetDto budgetDto) {
+//        return budgetService.addBudgetDto(budgetDto);
+//    }
 
-    @PutMapping
-    public BudgetDto updateBudget(@RequestBody BudgetDto budgetDto) {
-        return budgetService.updateBudgetDto(budgetDto);
-    }
+//    @PutMapping
+//    public BudgetDto updateBudget(@RequestBody BudgetDto budgetDto) {
+//        return budgetService.updateBudgetDto(budgetDto);
+//    }
 
-    @DeleteMapping(value = "{id}")
-    public void deleteBudget(@PathVariable(name = "id") Long id) {
-        budgetService.deleteBudget(id);
-    }
+//    @DeleteMapping(value = "{id}")
+//    public void deleteBudget(@PathVariable(name = "id") Long id) {
+//        budgetService.deleteBudget(id);
+//    }
 
 }

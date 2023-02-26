@@ -14,6 +14,7 @@ public class PurchaseDto {
 
     private Long id;
     private TypeExpenseDto typeExpense;
-    private List<CheckDto> checks = new ArrayList<>();
+    private Double sumValue;
+//    private List<CheckDto> checks = new ArrayList<>();
 
 }
