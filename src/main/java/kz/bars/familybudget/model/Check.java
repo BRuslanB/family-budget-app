@@ -26,12 +26,12 @@ public class Check extends BaseEntity {
 
     private String note;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="budget_id")
     @JsonIgnore
     private Budget budget;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="purchase_id")
     @JsonIgnore
     private Purchase purchase;

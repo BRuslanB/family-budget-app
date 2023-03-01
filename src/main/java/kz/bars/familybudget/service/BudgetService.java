@@ -12,6 +12,7 @@ public interface BudgetService {
 //    public Budget addBudget(Budget budget);
 //    public Budget updateBudget(Budget budget);
 //    public void deleteBudget(Long id);
+    public BudgetDto toDto(Budget budget);
     public List<BudgetDto> getAllBudgetDto();
 //    public BudgetDto getBudgetDto(Long id);
 //    public BudgetDto addBudgetDto(BudgetDto budgetDto);

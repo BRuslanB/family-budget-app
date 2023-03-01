@@ -1,10 +1,12 @@
 package kz.bars.familybudget.service.impl;
 
 import kz.bars.familybudget.dto.BudgetDto;
+import kz.bars.familybudget.dto.TypeIncomeDto;
 import kz.bars.familybudget.mapper.BudgetMapper;
 import kz.bars.familybudget.mapper.TypeIncomeMapper;
 import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Check;
+import kz.bars.familybudget.model.TypeIncome;
 import kz.bars.familybudget.repository.BudgetRepo;
 import kz.bars.familybudget.service.BudgetService;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +47,20 @@ public class BudgetServiceImpl implements BudgetService {
 //    public void deleteBudget(Long id) {
 //        budgetRepo.deleteById(id);
 //    }
+
+    @Override
+    public BudgetDto toDto(Budget budget) {
+
+        if (budget == null) {
+            return null;
+        }
+
+        BudgetDto budgetDto = new BudgetDto();
+        budgetDto.setId(budget.getId());
+        budgetDto.setTypeIncome(typeIncomeMapper.toDto(budget.getTypeIncome()));
+
+        return budgetDto;
+    }
 
     @Override
     public List<BudgetDto> getAllBudgetDto() {

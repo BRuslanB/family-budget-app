@@ -1,7 +1,9 @@
 package kz.bars.familybudget.service.impl;
 
+import kz.bars.familybudget.dto.BudgetDto;
 import kz.bars.familybudget.dto.PurchaseDto;
 import kz.bars.familybudget.mapper.TypeExpenseMapper;
+import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Check;
 import kz.bars.familybudget.model.Purchase;
 import kz.bars.familybudget.repository.PurchaseRepo;
@@ -44,6 +46,20 @@ public class PurchasesServiceImpl implements PurchaseService {
 //    public void deletePurchase(Long id) {
 //        purchaseRepo.deleteById(id);
 //    }
+
+    @Override
+    public PurchaseDto toDto(Purchase purchase) {
+
+        if (purchase == null) {
+            return null;
+        }
+
+        PurchaseDto purchaseDto = new PurchaseDto();
+        purchaseDto.setId(purchase.getId());
+        purchaseDto.setTypeExpense(typeExpenseMapper.toDto(purchase.getTypeExpense()));
+
+        return purchaseDto;
+    }
 
     @Override
     public List<PurchaseDto> getAllPurchaseDto() {

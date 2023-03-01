@@ -23,7 +23,8 @@ ALTER TABLE checks
     DROP CONSTRAINT IF EXISTS checks_purchase_id_fk;
 ALTER TABLE checks
     ADD CONSTRAINT checks_purchase_id_fk
-        FOREIGN KEY (purchase_id) REFERENCES purchase(id);
+        FOREIGN KEY (purchase_id) REFERENCES purchase(id)
+            ON DELETE SET NULL;
 
 ALTER TABLE type_expense
     DROP CONSTRAINT IF EXISTS type_expense_expense_category_id_fk;

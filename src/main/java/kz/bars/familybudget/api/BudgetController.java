@@ -17,7 +17,7 @@ public class BudgetController {
     private final BudgetService budgetService;
 
     @GetMapping
-    public List<BudgetDto> getAllBudgetDto() {
+    public List<BudgetDto> getAllBudget() {
         return budgetService.getAllBudgetDto();
     }
 

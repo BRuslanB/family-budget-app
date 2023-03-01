@@ -16,8 +16,8 @@ CREATE TABLE checks (
     value DOUBLE PRECISION NOT NULL,
     date DATE NOT NULL,
     note TEXT,
-    budget_id INT,
-    purchase_id INT
+    budget_id INT NULL,
+    purchase_id INT NULL
 );
 
 DROP TABLE IF EXISTS expense_category CASCADE;

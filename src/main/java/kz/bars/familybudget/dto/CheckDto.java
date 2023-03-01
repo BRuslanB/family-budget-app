@@ -18,9 +18,9 @@ public class CheckDto {
     private Double value;
     private LocalDate date;
     private String note;
-    private Long budgetId;
-    private Long purchaseId;
-//    private BudgetDto budget;
-//    private PurchaseDto purchase;
+//    private Long budgetId;
+//    private Long purchaseId;
+    private BudgetDto budget;
+    private PurchaseDto purchase;
 
 }

@@ -17,7 +17,7 @@ public class PurchaseController {
     private final PurchaseService purchaseService;
 
     @GetMapping
-    public List<PurchaseDto> getAllPurchaseDto() {
+    public List<PurchaseDto> getAllPurchase() {
         return purchaseService.getAllPurchaseDto();
     }
 
