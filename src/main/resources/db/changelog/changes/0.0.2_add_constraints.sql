@@ -1,15 +1,8 @@
-ALTER TABLE budget
-    DROP CONSTRAINT IF EXISTS budget_type_income_id_fk;
-ALTER TABLE budget
-    ADD CONSTRAINT budget_type_income_id_fk
-        FOREIGN KEY (type_income_id) REFERENCES type_income(id)
-            ON DELETE SET NULL;
-
 ALTER TABLE purchase
-    DROP CONSTRAINT IF EXISTS purchase_type_expense_id_fk;
+    DROP CONSTRAINT IF EXISTS purchase_expense_category_id_fk;
 ALTER TABLE purchase
-    ADD CONSTRAINT purchase_type_expense_id_fk
-        FOREIGN KEY (type_expense_id) REFERENCES type_expense(id)
+    ADD CONSTRAINT purchase_expense_category_id_fk
+        FOREIGN KEY (category_id) REFERENCES expense_category(id)
             ON DELETE SET NULL;
 
 ALTER TABLE checks
@@ -24,13 +17,6 @@ ALTER TABLE checks
 ALTER TABLE checks
     ADD CONSTRAINT checks_purchase_id_fk
         FOREIGN KEY (purchase_id) REFERENCES purchase(id)
-            ON DELETE SET NULL;
-
-ALTER TABLE type_expense
-    DROP CONSTRAINT IF EXISTS type_expense_expense_category_id_fk;
-ALTER TABLE type_expense
-    ADD CONSTRAINT type_expense_expense_category_id_fk
-        FOREIGN KEY (expense_category_id) REFERENCES expense_category(id)
             ON DELETE SET NULL;
 
 ALTER TABLE users_roles

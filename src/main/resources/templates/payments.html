@@ -27,6 +27,7 @@
                 <tr>
                     <th>ID</th>
                     <th>EXPENSE</th>
+                    <th>DESCRIPTION</th>
                     <th style="text-align: center;">SUM VALUE</th>
                     <th style="text-align: center; width: 10%;">DETAILS</th>
                 </tr>
@@ -68,6 +69,7 @@
                 <tr>
                     <th>ID</th>
                     <th>INCOME</th>
+                    <th>DESCRIPTION</th>
                     <th style="text-align: center;">SUM VALUE</th>
                     <th style="text-align: center; width: 10%;">DETAILS</th>
                 </tr>
@@ -148,73 +150,75 @@
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header" id="divTitleModal">
-                            <!--htmlCode-->
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" id="editCheckId">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div id="divTitleType">
-                                        <!--htmlCode-->
-                                    </div>
-                                </div>
+                        <form>
+                            <div class="modal-header" id="divTitleModal">
+                                <!--htmlCode-->
                             </div>
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div>
-                                        <select class="form-select" id="editCheckType" required>
+                            <div class="modal-body">
+                                <input type="hidden" id="editCheckId">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="divTitleType">
                                             <!--htmlCode-->
-                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div>
+                                            <select class="form-select" id="editCheckType" required>
+                                                <!--htmlCode-->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div>
+                                            <label class="fw-bold" th:text="VALUE"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div>
+                                            <input type="number" class="form-control" id="editCheckValue"
+                                                   required min="0.0" step="0.01">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div>
+                                            <label class="fw-bold" th:text="DATE"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div>
+                                            <input type="date" class="form-control" id="editCheckDate" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div>
+                                            <label class="fw-bold" th:text="NOTE"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div>
+                                            <input type="text" class="form-control" id="editCheckNote">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <div>
-                                        <label class="fw-bold" th:text="VALUE"></label>
-                                    </div>
-                                </div>
+                            <div class="modal-footer" id="divActionButtons">
                             </div>
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div>
-                                        <input type="number" class="form-control" id="editCheckValue"
-                                               required min="0.0" step="0.01">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <div>
-                                        <label class="fw-bold" th:text="DATE"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div>
-                                        <input type="date" class="form-control" id="editCheckDate" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <div>
-                                        <label class="fw-bold" th:text="NOTE"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div>
-                                        <input type="text" class="form-control" id="editCheckNote">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer" id="divActionButtons">
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -245,7 +249,8 @@
                     for (i = 0; i < incomesList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + incomesList[i]["id"] + "</td>";
-                        htmlCode += "<td>" + incomesList[i]["typeIncome"]["name"] + "</td>";
+                        htmlCode += "<td>" + incomesList[i]["income"] + "</td>";
+                        htmlCode += "<td>" + incomesList[i]["description"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + incomesList[i]["sumValue"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
@@ -275,7 +280,8 @@
                     for (i = 0; i < expensesList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + expensesList[i]["id"] + "</td>";
-                        htmlCode += "<td>" + expensesList[i]["typeExpense"]["name"] + "</td>";
+                        htmlCode += "<td>" + expensesList[i]["expense"] + "</td>";
+                        htmlCode += "<td>" + expensesList[i]["description"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + expensesList[i]["sumValue"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
@@ -433,28 +439,29 @@
                 htmlCode = "";
                 if (result.budget !== null) {
                     receipt = "income";
-                    divTitleType.innerHTML = "<label class='fw-bold'>TYPE INCOME</label>";
+                    divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
                     for (i = 0; i < incomesList.length; i++) {
                         htmlCode += "<option value =" + incomesList[i]["id"];
                         htmlCode += (incomesList[i]["id"] === result.budget.id ? " selected" : "")  + ">";
-                        htmlCode += incomesList[i]["typeIncome"]["name"] + "</option>";
+                        htmlCode += incomesList[i]["income"] + "</option>";
                     }
                     //filling editCheckType
                     editCheckType.innerHTML = htmlCode;
                 } else if (result.purchase !== null) {
                     receipt = "expense";
-                    divTitleType.innerHTML = "<label class='fw-bold'>TYPE EXPENSE</label>";
+                    divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
                     for (i = 0; i < expensesList.length; i++) {
                         htmlCode += "<option value =" + expensesList[i]["id"];
                         htmlCode += (expensesList[i]["id"] === result.purchase.id ? " selected" : "")  + ">";
-                        htmlCode += expensesList[i]["typeExpense"]["name"] + "</option>";
+                        htmlCode += expensesList[i]["expense"] + "</option>";
                     }
                     //filling editCheckType
                     editCheckType.innerHTML = htmlCode;
                 }
                 htmlCode = "";
                 htmlCode += "<button type='button' class='btn btn-danger me-auto' onClick='deleteCheck()'>DELETE</button>";
-                htmlCode += "<button type='button' class='btn button_style' onClick='saveCheck(\"" + receipt + "\")'>SAVE</button>";
+                htmlCode += "<button type='submit' class='btn button_style' onClick='saveCheck(\"" + receipt +
+                            "\")'>SAVE</button>";
                 htmlCode += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>CLOSE</button>";
                 //filling divActionButtons
                 divActionButtons.innerHTML = htmlCode;
@@ -475,24 +482,25 @@
             divTitleModal.innerHTML = htmlCode;
             htmlCode = "";
             if (receipt === "income") {
-                divTitleType.innerHTML = "<label class='fw-bold'>TYPE INCOME</label>";
+                divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
                 for (i = 0; i < incomesList.length; i++) {
                     htmlCode += "<option value =" + incomesList[i]["id"] + ">";
-                    htmlCode += incomesList[i]["typeIncome"]["name"] + "</option>";
+                    htmlCode += incomesList[i]["income"] + "</option>";
                 }
                 //filling editCheckType
                 editCheckType.innerHTML = htmlCode;
             } else if (receipt === "expense") {
-                divTitleType.innerHTML = "<label class='fw-bold'>TYPE EXPENSE</label>";
+                divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
                 for (i = 0; i < expensesList.length; i++) {
                     htmlCode += "<option value =" + expensesList[i]["id"] + ">";
-                    htmlCode += expensesList[i]["typeExpense"]["name"] + "</option>";
+                    htmlCode += expensesList[i]["expense"] + "</option>";
                 }
                 //filling editCheckType
                 editCheckType.innerHTML = htmlCode;
             }
             htmlCode="";
-            htmlCode += "<button type='button' class='btn button_style' onClick='addCheck(\"" + receipt + "\")'>ADD</button>";
+            htmlCode += "<button type='submit' class='btn button_style' onClick='addCheck(\"" + receipt +
+                        "\")'>ADD</button>";
             htmlCode += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>CLOSE</button>";
             //filling divActionButtons
             divActionButtons.innerHTML = htmlCode;
@@ -500,7 +508,9 @@
         }
 
         function saveCheck(receipt){
-            // alert("receipt=" + receipt);
+            if (editCheckId.value === "" || editCheckValue.value === "" || editCheckDate.value === "") {
+                return;
+            }
             const request = new XMLHttpRequest();
             request.open("PUT", '/checks', true);
             request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -549,7 +559,9 @@
         }
 
         function addCheck(receipt){
-            // alert("receipt=" + receipt);
+            if (editCheckValue.value === "" || editCheckDate.value === "") {
+                return;
+            }
             const request = new XMLHttpRequest();
             request.open("POST", '/checks', true);
             request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");

@@ -8,7 +8,9 @@ import lombok.Setter;
 public class PurchaseDto {
 
     private Long id;
-    private TypeExpenseDto typeExpense;
+    private String expense;
+    private String description;
+    private ExpenseCategoryDto category;
     private Double sumValue;
 
 }

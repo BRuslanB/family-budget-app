@@ -10,9 +10,14 @@ import java.util.Set;
 @Setter
 public class Purchase extends BaseEntity {
 
+    @Column(nullable = false)
+    private String expense;
+
+    private String description;
+
     @OneToOne
-    @JoinColumn(name = "type_expense_id", unique = true)
-    private TypeExpense typeExpense;
+    @JoinColumn(name = "category_id")
+    private ExpenseCategory category;
 
     @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)

@@ -19,13 +19,13 @@
                                  param.expense_error != null ? ' active' : '')}"
                     id="v-pills-expense-tab"
                     data-bs-toggle="pill" data-bs-target="#v-pills-expense" type="button"
-                    role="tab" aria-controls="v-pills-expense" aria-selected="false">Type Expense
+                    role="tab" aria-controls="v-pills-expense" aria-selected="false">Expense
             </button>
             <button th:class="${'nav-link' + (param.income_success != null ||
                                  param.income_error != null ? ' active' : '')}"
                     id="v-pills-income-tab"
                     data-bs-toggle="pill" data-bs-target="#v-pills-income" type="button"
-                    role="tab" aria-controls="v-pills-income" aria-selected="false">Type Income
+                    role="tab" aria-controls="v-pills-income" aria-selected="false">Income
             </button>
         </div>
         <div class="tab-content col-10" id="v-pills-tabContent">
@@ -50,6 +50,7 @@
                             <tr class="fw-bold">
                                 <td th:text="ID"></td>
                                 <td th:text="NAME"></td>
+                                <td th:text="DESCRIPTION"></td>
                                 <td style="text-align: center; width: 10%"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')"
                                     th:text="DETAILS">
@@ -64,6 +65,7 @@
                             <tr th:each="cat : ${allExpenseCategory}">
                                 <td th:text="${cat.id}"></td>
                                 <td th:text="${cat.name}"></td>
+                                <td th:text="${cat.description}"></td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
@@ -104,6 +106,18 @@
                                                             <input type="text" class="form-control"
                                                                    name="expense_category_name" required
                                                                    th:value="${cat.name}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div class="col-12">
+                                                            <label th:text="DESCRIPTION"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="col-12">
+                                                            <input type="text" class="form-control"
+                                                                   name="expense_category_description"
+                                                                   th:value="${cat.description}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,6 +188,16 @@
                                             <input type="text" class="form-control" name="expense_category_name" required>
                                         </div>
                                     </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <label th:text="DESCRIPTION"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" name="expense_category_description">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn button_style"
@@ -192,17 +216,17 @@
             <div th:class="${'tab-pane fade' + (param.expense_success != null ||
                               param.expense_error != null ? ' show active' : '')}"
                  id="v-pills-expense" role="tabpanel" aria-labelledby="v-pills-expense-tab" tabindex="0">
-                <!-- BEGIN BLOCK: Type Expense -->
-                <!-- Button Add Type Expense -->
+                <!-- BEGIN BLOCK: Expense -->
+                <!-- Button Add Expense -->
                 <div class="row" sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <div class="col-12 my-2">
                         <button type="button" class="button_style_add"
-                                data-bs-toggle="modal" data-bs-target="#addTypeExpenseModal"
-                                th:text="${'+Add Type Expense'}">
+                                data-bs-toggle="modal" data-bs-target="#addExpenseModal"
+                                th:text="${'+Add Expense'}">
                         </button>
                     </div>
                 </div>
-                <!-- List of Type Expenses -->
+                <!-- List of Expenses -->
                 <div class="row">
                     <div class="col-12 mt-3">
                         <table class="table table-striped">
@@ -210,6 +234,7 @@
                             <tr class="fw-bold">
                                 <td th:text="ID"></td>
                                 <td th:text="NAME"></td>
+                                <td th:text="DESCRIPTION"></td>
                                 <td th:text="CATEGORY"></td>
                                 <td style="text-align: center; width: 10%"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')"
@@ -222,35 +247,36 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="crs : ${allTypeExpense}">
-                                <td th:text="${crs.id}"></td>
-                                <td th:text="${crs.name}"></td>
-                                <td th:text="${crs.expenseCategory.name}"></td>
+                            <tr th:each="exp : ${allExpense}">
+                                <td th:text="${exp.id}"></td>
+                                <td th:text="${exp.expense}"></td>
+                                <td th:text="${exp.description}"></td>
+                                <td th:text="${exp.category.name}"></td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                            th:data-bs-target="'#editTypeExpenseModal' + ${crs.id}"
+                                            th:data-bs-target="'#editExpenseModal' + ${exp.id}"
                                             th:text="DETAILS">
                                     </button>
                                 </td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            th:data-bs-target="'#deleteTypeExpenseModal' + ${crs.id}"
+                                            th:data-bs-target="'#deleteExpenseModal' + ${exp.id}"
                                             th:text="DELETE">
                                     </button>
                                 </td>
-                                <!-- Modal Edit Type Expense -->
-                                <div class="modal fade" th:id="'editTypeExpenseModal' + ${crs.id}"
+                                <!-- Modal Edit Expense -->
+                                <div class="modal fade" th:id="'editExpenseModal' + ${exp.id}"
                                      data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-                                            <form th:action="@{'/update-type-expense'}" method="post">
-                                                <input type="hidden" name="type_expense_id" th:value="${crs.id}">
+                                            <form th:action="@{'/update-expense'}" method="post">
+                                                <input type="hidden" name="expense_id" th:value="${exp.id}">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title"
-                                                        th:text="${'EDIT TYPE EXPENSE'}">
+                                                        th:text="${'EDIT EXPENSE'}">
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
@@ -264,8 +290,20 @@
                                                     <div class="row mt-2">
                                                         <div class="col-12">
                                                             <input type="text" class="form-control"
-                                                                   name="type_expense_name" required
-                                                                   th:value="${crs.name}">
+                                                                   name="expense_name" required
+                                                                   th:value="${exp.expense}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div class="col-12">
+                                                            <label th:text="DESCRIPTION"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="col-12">
+                                                            <input type="text" class="form-control"
+                                                                   name="expense_description"
+                                                                   th:value="${exp.description}">
                                                         </div>
                                                     </div>
                                                     <div class="row mt-3">
@@ -279,8 +317,8 @@
                                                                 <option th:each="cat : ${allExpenseCategory}"
                                                                         th:text="${cat.name}"
                                                                         th:value="${cat.id}"
-                                                                        th:selected="${crs.expenseCategory.id != null &&
-                                                                                     crs.expenseCategory.id == cat.id}">
+                                                                        th:selected="${exp.category.id != null &&
+                                                                                     exp.category.id == cat.id}">
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -298,21 +336,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal Delete Type Expense -->
-                                <div class="modal fade" th:id="'deleteTypeExpenseModal' + ${crs.id}"
+                                <!-- Modal Delete Expense -->
+                                <div class="modal fade" th:id="'deleteExpenseModal' + ${exp.id}"
                                      data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form th:action="@{'/delete-type-expense'}" method="post">
-                                                <input type="hidden" name="type_expense_id" th:value="${crs.id}">
+                                            <form th:action="@{'/delete-expense'}" method="post">
+                                                <input type="hidden" name="expense_id" th:value="${exp.id}">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" th:text="${'DELETE TYPE EXPENSE'}"></h5>
+                                                    <h5 class="modal-title" th:text="${'DELETE EXPENSE'}"></h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h6 th:text="${'Do you want to remove the Type Expense?'}"></h6>
+                                                    <h6 th:text="${'Do you want to remove the Expense?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-danger me-auto" th:text="DELETE"></button>
@@ -328,16 +366,16 @@
                         </table>
                     </div>
                 </div>
-                <!-- Modal Add Type Expense -->
-                <div class="modal fade" id="addTypeExpenseModal"
+                <!-- Modal Add Expense -->
+                <div class="modal fade" id="addExpenseModal"
                      data-bs-backdrop="static" data-bs-keyboard="true"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
-                            <form th:action="@{'/add-type-expense'}" method="post">
+                            <form th:action="@{'/add-expense'}" method="post">
                                 <div class="modal-header">
                                     <h5 class="modal-title"
-                                        th:text="${'ADD EXPENSE TYPE EXPENSE'}">
+                                        th:text="${'ADD EXPENSE'}">
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -350,7 +388,17 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
-                                            <input type="text" class="form-control" name="type_expense_name" required>
+                                            <input type="text" class="form-control" name="expense_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <label th:text="DESCRIPTION"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" name="expense_description">
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -381,22 +429,22 @@
                         </div>
                     </div>
                 </div>
-                <!-- BLOCK END: Type Expense -->
+                <!-- BLOCK END: Expense -->
             </div>
             <div th:class="${'tab-pane fade' + (param.income_success != null ||
                               param.income_error != null ? ' show active' : '')}"
                  id="v-pills-income" role="tabpanel" aria-labelledby="v-pills-income-tab" tabindex="0">
-                <!-- BEGIN BLOCK: Type Income -->
-                <!-- Button Add Type Income -->
+                <!-- BEGIN BLOCK: Income -->
+                <!-- Button Add Income -->
                 <div class="row" sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <div class="col-12 my-2">
                         <button type="button" class="button_style_add"
-                                data-bs-toggle="modal" data-bs-target="#addTypeIncomeModal"
-                                th:text="${'+Add Type Income'}">
+                                data-bs-toggle="modal" data-bs-target="#addIncomeModal"
+                                th:text="${'+Add Income'}">
                         </button>
                     </div>
                 </div>
-                <!-- List of Type Incomes -->
+                <!-- List of Incomes -->
                 <div class="row">
                     <div class="col-12 mt-3">
                         <table class="table table-striped">
@@ -404,6 +452,7 @@
                             <tr class="fw-bold">
                                 <td th:text="ID"></td>
                                 <td th:text="NAME"></td>
+                                <td th:text="DESCRIPTION"></td>
                                 <td style="text-align: center; width: 10%"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')"
                                     th:text="DETAILS">
@@ -415,34 +464,35 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="cat : ${allTypeIncome}">
-                                <td th:text="${cat.id}"></td>
-                                <td th:text="${cat.name}"></td>
+                            <tr th:each="inc : ${allIncome}">
+                                <td th:text="${inc.id}"></td>
+                                <td th:text="${inc.income}"></td>
+                                <td th:text="${inc.description}"></td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                            th:data-bs-target="'#editTypeIncomeModal' + ${cat.id}"
+                                            th:data-bs-target="'#editIncomeModal' + ${inc.id}"
                                             th:text="DETAILS">
                                     </button>
                                 </td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            th:data-bs-target="'#deleteTypeIncomeModal' + ${cat.id}"
+                                            th:data-bs-target="'#deleteIncomeModal' + ${inc.id}"
                                             th:text="DELETE">
                                     </button>
                                 </td>
-                                <!-- Modal Edit Type Income -->
-                                <div class="modal fade" th:id="'editTypeIncomeModal' + ${cat.id}"
+                                <!-- Modal Edit Income -->
+                                <div class="modal fade" th:id="'editIncomeModal' + ${inc.id}"
                                      data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-                                            <form th:action="@{'/update-type-income'}" method="post">
-                                                <input type="hidden" name="type_income_id" th:value="${cat.id}">
+                                            <form th:action="@{'/update-income'}" method="post">
+                                                <input type="hidden" name="income_id" th:value="${inc.id}">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title"
-                                                        th:text="${'EDIT TYPE INCOME'}">
+                                                        th:text="${'EDIT INCOME'}">
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
@@ -456,8 +506,20 @@
                                                     <div class="row mt-2">
                                                         <div class="col-12">
                                                             <input type="text" class="form-control"
-                                                                   name="type_income_name" required
-                                                                   th:value="${cat.name}">
+                                                                   name="income_name" required
+                                                                   th:value="${inc.income}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div class="col-12">
+                                                            <label th:text="DESCRIPTION"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="col-12">
+                                                            <input type="text" class="form-control"
+                                                                   name="income_description"
+                                                                   th:value="${inc.description}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -473,21 +535,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal Delete Type Income -->
-                                <div class="modal fade" th:id="'deleteTypeIncomeModal' + ${cat.id}"
+                                <!-- Modal Delete Income -->
+                                <div class="modal fade" th:id="'deleteIncomeModal' + ${inc.id}"
                                      data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form th:action="@{'/delete-type-income'}" method="post">
-                                                <input type="hidden" name="type_income_id" th:value="${cat.id}">
+                                            <form th:action="@{'/delete-income'}" method="post">
+                                                <input type="hidden" name="income_id" th:value="${inc.id}">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" th:text="${'DELETE TYPE INCOME'}"></h5>
+                                                    <h5 class="modal-title" th:text="${'DELETE INCOME'}"></h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h6 th:text="${'Do you want to remove the Type Income?'}"></h6>
+                                                    <h6 th:text="${'Do you want to remove the Income?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-danger me-auto" th:text="DELETE"></button>
@@ -503,16 +565,16 @@
                         </table>
                     </div>
                 </div>
-                <!-- Modal Add Type Income -->
-                <div class="modal fade" id="addTypeIncomeModal"
+                <!-- Modal Add Income -->
+                <div class="modal fade" id="addIncomeModal"
                      data-bs-backdrop="static" data-bs-keyboard="true"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
-                            <form th:action="@{'/add-type-income'}" method="post">
+                            <form th:action="@{'/add-income'}" method="post">
                                 <div class="modal-header">
                                     <h5 class="modal-title"
-                                        th:text="${'ADD EXPENSE TYPE INCOME'}">
+                                        th:text="${'ADD EXPENSE INCOME'}">
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -525,7 +587,17 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
-                                            <input type="text" class="form-control" name="type_income_name" required>
+                                            <input type="text" class="form-control" name="income_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <label th:text="DESCRIPTION"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" name="income_description">
                                         </div>
                                     </div>
                                 </div>
@@ -541,7 +613,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- BLOCK END: Type Income -->
+                <!-- BLOCK END: Income -->
             </div>
         </div>
     </div>

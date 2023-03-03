@@ -1,7 +1,6 @@
 package kz.bars.familybudget.service.impl;
 
 import kz.bars.familybudget.dto.BudgetDto;
-import kz.bars.familybudget.mapper.TypeIncomeMapper;
 import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Check;
 import kz.bars.familybudget.repository.BudgetRepo;
@@ -17,7 +16,31 @@ import java.util.List;
 public class BudgetServiceImpl implements BudgetService {
 
     final BudgetRepo budgetRepo;
-    final TypeIncomeMapper typeIncomeMapper;
+
+    @Override
+    public List<Budget> getAllBudget() {
+        return budgetRepo.findAll();
+    }
+
+    @Override
+    public Budget getPurchase(Long id) {
+        return budgetRepo.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Budget addPurchase(Budget budget) {
+        return budgetRepo.save(budget);
+    }
+
+    @Override
+    public Budget updatePurchase(Budget budget) {
+        return budgetRepo.save(budget);
+    }
+
+    @Override
+    public void deletePurchase(Long id) {
+        budgetRepo.deleteById(id);
+    }
 
     @Override
     public BudgetDto toDto(Budget budget) {
@@ -28,7 +51,8 @@ public class BudgetServiceImpl implements BudgetService {
 
         BudgetDto budgetDto = new BudgetDto();
         budgetDto.setId(budget.getId());
-        budgetDto.setTypeIncome(typeIncomeMapper.toDto(budget.getTypeIncome()));
+        budgetDto.setIncome(budget.getIncome());
+        budgetDto.setDescription(budget.getDescription());
 
         return budgetDto;
     }
@@ -44,7 +68,8 @@ public class BudgetServiceImpl implements BudgetService {
         for (Budget budget : budgetList) {
             budgetDto = new BudgetDto();
             budgetDto.setId(budget.getId());
-            budgetDto.setTypeIncome(typeIncomeMapper.toDto(budget.getTypeIncome()));
+            budgetDto.setIncome(budget.getIncome());
+            budgetDto.setDescription(budget.getDescription());
             // Count Value
             var sum = 0.0;
             for (Check check : budget.getChecks()) {

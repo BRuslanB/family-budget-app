@@ -8,7 +8,8 @@ import lombok.Setter;
 public class BudgetDto {
 
     private Long id;
-    private TypeIncomeDto typeIncome;
+    private String income;
+    private String description;
     private Double sumValue;
 
 }
