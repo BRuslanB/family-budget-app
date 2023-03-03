@@ -1,8 +1,6 @@
 package kz.bars.familybudget.service.impl;
 
-import kz.bars.familybudget.dto.BudgetDto;
 import kz.bars.familybudget.dto.CheckDto;
-import kz.bars.familybudget.mapper.CheckMapper;
 import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Check;
 import kz.bars.familybudget.model.Purchase;
@@ -28,15 +26,9 @@ public class CheckServiceImpl implements CheckService {
     private final PurchaseRepo purchaseRepo;
     private final PurchaseService purchaseService;
 
-//    private final CheckMapper checkMapper;
-
-//    @Override
-//    public List<Check> getAllCheck() {
-//        return checkRepo.findAll();
-//    }
-//
     @Override
     public CheckDto getCheckDto(Long id) {
+
         Check check = checkRepo.findById(id).orElse(null);
         CheckDto checkDto = new CheckDto();
 
@@ -53,6 +45,7 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public CheckDto addCheckDto(CheckDto checkDto) {
+
         Check check = new Check();
 
         check.setValue(checkDto.getValue());
@@ -70,8 +63,6 @@ public class CheckServiceImpl implements CheckService {
         }
         try {
             if (checkDto.getPurchase() != null) {
-//            if (checkDto.getPurchaseId() != null) {
-//                Purchase purchase = purchaseRepo.findById(checkDto.getPurchaseId()).orElse(null);
                 Purchase purchase = purchaseRepo.findById(checkDto.getPurchase().getId()).orElse(null);
                 if (purchase != null) {
                     check.setPurchase(purchase);
@@ -86,6 +77,7 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public CheckDto updateCheckDto(CheckDto checkDto) {
+
         Check check = checkRepo.findById(checkDto.getId()).orElse(null);
 
         if (check != null) {
@@ -116,7 +108,7 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public List<CheckDto> getAllCheckDto() {
-//        return checkMapper.toDtoList(checkRepo.findAll());
+
         List<Check> checkList;
         checkList = checkRepo.findAll();
 
@@ -138,6 +130,7 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public List<CheckDto> getAllCheckByBudgetIdDto(Long id) {
+
         List<Check> checkList = checkRepo.findAllByBudgetId(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
@@ -157,6 +150,7 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public List<CheckDto> getAllCheckByPurchaseIdDto(Long id) {
+
         List<Check> checkList = checkRepo.findAllByPurchaseId(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
@@ -173,20 +167,5 @@ public class CheckServiceImpl implements CheckService {
         }
         return checkDtoList;
     }
-
-//    @Override
-//    public CheckDto getCheckDto(Long id) {
-//        return checkMapper.toDto(checkRepo.findById(id).orElseThrow());
-//    }
-//
-//    @Override
-//    public CheckDto addCheckDto(CheckDto checkDto) {
-//        return checkMapper.toDto(checkRepo.save(checkMapper.toEntity(checkDto)));
-//    }
-//
-//    @Override
-//    public CheckDto updateCheckDto(CheckDto checkDto) {
-//        return checkMapper.toDto(checkRepo.save(checkMapper.toEntity(checkDto)));
-//    }
 
 }

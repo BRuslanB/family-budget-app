@@ -9,12 +9,6 @@
     <div class="d-flex align-items-start">
         <div class="nav flex-column nav-pills me-3 col-2"
              id="v-pills-tab" role="tablist" aria-orientation="vertical">
-<!--            <button th:class="${'nav-link' + (param.receipt_success != null ||-->
-<!--                                 param.receipt_error != null || param.isEmpty() ? ' active' : '')}"-->
-<!--                    id="v-pills-receipt-tab"-->
-<!--                    data-bs-toggle="pill" data-bs-target="#v-pills-receipt" type="button"-->
-<!--                    role="tab" aria-controls="v-pills-receipt" aria-selected="true">Type Receipt-->
-<!--            </button>-->
             <button th:class="${'nav-link' + (param.category_success != null ||
                                  param.category_error != null || param.isEmpty() ? ' active' : '')}"
                     id="v-pills-category-tab"
@@ -35,167 +29,6 @@
             </button>
         </div>
         <div class="tab-content col-10" id="v-pills-tabContent">
-<!--            <div th:class="${'tab-pane fade' + (param.receipt_success != null || param.receipt_error != null ||-->
-<!--                              param.isEmpty() ? ' show active' : '')}"-->
-<!--                 id="v-pills-receipt" role="tabpanel" aria-labelledby="v-pills-receipt-tab" tabindex="0">-->
-<!--                &lt;!&ndash; BEGIN BLOCK: Type Receipt &ndash;&gt;-->
-<!--                &lt;!&ndash; Button Add Type Receipt &ndash;&gt;-->
-<!--                <div class="row" sec:authorize="hasAnyRole('ROLE_ADMIN')">-->
-<!--                    <div class="col-12 my-2">-->
-<!--                        <button type="button" class="button_style_add"-->
-<!--                                data-bs-toggle="modal" data-bs-target="#addTypeReceiptModal"-->
-<!--                                th:text="${'+Add Type Receipt'}">-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; List of Type Receipts &ndash;&gt;-->
-<!--                <div class="row">-->
-<!--                    <div class="col-12 mt-3">-->
-<!--                        <table class="table table-striped">-->
-<!--                            <thead>-->
-<!--                            <tr class="fw-bold">-->
-<!--                                <td th:text="ID"></td>-->
-<!--                                <td th:text="NAME"></td>-->
-<!--                                <td style="text-align: center; width: 10%"-->
-<!--                                    sec:authorize="hasAnyRole('ROLE_ADMIN')"-->
-<!--                                    th:text="DETAILS">-->
-<!--                                </td>-->
-<!--                                <td style="text-align: center; width: 10%"-->
-<!--                                    sec:authorize="hasAnyRole('ROLE_ADMIN')"-->
-<!--                                    th:text="DELETE">-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            <tbody>-->
-<!--                            <tr th:each="cat : ${allTypeReceipt}">-->
-<!--                                <td th:text="${cat.id}"></td>-->
-<!--                                <td th:text="${cat.name}"></td>-->
-<!--                                <td style="text-align: center;"-->
-<!--                                    sec:authorize="hasAnyRole('ROLE_ADMIN')">-->
-<!--                                    <button class="btn btn-primary btn-sm"-->
-<!--                                            data-bs-toggle="modal" th:data-bs-target="'#editTypeReceiptModal' + ${cat.id}"-->
-<!--                                            th:text="DETAILS">-->
-<!--                                    </button>-->
-<!--                                </td>-->
-<!--                                <td style="text-align: center;"-->
-<!--                                    sec:authorize="hasAnyRole('ROLE_ADMIN')">-->
-<!--                                    <button class="btn btn-danger btn-sm"-->
-<!--                                            data-bs-toggle="modal" th:data-bs-target="'#deleteTypeReceiptModal' + ${cat.id}"-->
-<!--                                            th:text="DELETE">-->
-<!--                                    </button>-->
-<!--                                </td>-->
-<!--                                &lt;!&ndash; Modal Edit Type Receipt &ndash;&gt;-->
-<!--                                <div class="modal fade" th:id="'editTypeReceiptModal' + ${cat.id}"-->
-<!--                                     data-bs-backdrop="static" data-bs-keyboard="false"-->
-<!--                                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--                                    <div class="modal-dialog modal-lg">-->
-<!--                                        <div class="modal-content">-->
-<!--                                            <form th:action="@{'/update-type-receipt'}" method="post">-->
-<!--                                                <input type="hidden" name="type_receipt_id" th:value="${cat.id}">-->
-<!--                                                <div class="modal-header">-->
-<!--                                                    <h5 class="modal-title"-->
-<!--                                                        th:text="${'EDIT TYPE RECEIPT'}">-->
-<!--                                                    </h5>-->
-<!--                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-<!--                                                            aria-label="Close"></button>-->
-<!--                                                </div>-->
-<!--                                                <div class="modal-body">-->
-<!--                                                    <div class="row mt-3">-->
-<!--                                                        <div class="col-12">-->
-<!--                                                            <label th:text="NAME"></label>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="row mt-2">-->
-<!--                                                        <div class="col-12">-->
-<!--                                                            <input type="text" class="form-control"-->
-<!--                                                                   name="type_receipt_name" required-->
-<!--                                                                   th:value="${cat.name}">-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <div class="modal-footer">-->
-<!--                                                    <button type="button" class="btn btn-secondary"-->
-<!--                                                            data-bs-dismiss="modal"-->
-<!--                                                            th:text="CLOSE">-->
-<!--                                                    </button>-->
-<!--                                                    <button class="btn button_style"-->
-<!--                                                            th:text="SAVE">-->
-<!--                                                    </button>-->
-<!--                                                </div>-->
-<!--                                            </form>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                &lt;!&ndash; Modal Delete Type Receipt &ndash;&gt;-->
-<!--                                <div class="modal fade" th:id="'deleteTypeReceiptModal' + ${cat.id}"-->
-<!--                                     data-bs-backdrop="static" data-bs-keyboard="false"-->
-<!--                                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--                                    <div class="modal-dialog">-->
-<!--                                        <div class="modal-content">-->
-<!--                                            <form th:action="@{'/delete-type-receipt'}" method="post">-->
-<!--                                                <input type="hidden" name="type_receipt_id" th:value="${cat.id}">-->
-<!--                                                <div class="modal-header">-->
-<!--                                                    <h5 class="modal-title" th:text="${'DELETE TYPE RECEIPT'}"></h5>-->
-<!--                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-<!--                                                            aria-label="Close"></button>-->
-<!--                                                </div>-->
-<!--                                                <div class="modal-body">-->
-<!--                                                    <h6 th:text="${'Do you want to remove the Type Receipt?'}"></h6>-->
-<!--                                                </div>-->
-<!--                                                <div class="modal-footer">-->
-<!--                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"-->
-<!--                                                            th:text="CANCEL"></button>-->
-<!--                                                    <button class="btn btn-danger" th:text="DELETE"></button>-->
-<!--                                                </div>-->
-<!--                                            </form>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; Modal Add Type Receipt &ndash;&gt;-->
-<!--                <div class="modal fade" id="addTypeReceiptModal"-->
-<!--                     data-bs-backdrop="static" data-bs-keyboard="false"-->
-<!--                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--                    <div class="modal-dialog modal-lg">-->
-<!--                        <div class="modal-content">-->
-<!--                            <form th:action="@{'/add-type-receipt'}" method="post">-->
-<!--                                <div class="modal-header">-->
-<!--                                    <h5 class="modal-title"-->
-<!--                                        th:text="${'ADD EXPENSE TYPE RECEIPT'}">-->
-<!--                                    </h5>-->
-<!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-<!--                                            aria-label="Close"></button>-->
-<!--                                </div>-->
-<!--                                <div class="modal-body">-->
-<!--                                    <div class="row mt-3">-->
-<!--                                        <div class="col-12">-->
-<!--                                            <label th:text="NAME"></label>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="row mt-2">-->
-<!--                                        <div class="col-12">-->
-<!--                                            <input type="text" class="form-control" name="type_receipt_name" required>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="modal-footer">-->
-<!--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"-->
-<!--                                            th:text="CLOSE">-->
-<!--                                    </button>-->
-<!--                                    <button class="btn button_style"-->
-<!--                                            th:text="ADD">-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; BLOCK END: Type Receipt &ndash;&gt;-->
-<!--            </div>-->
             <div th:class="${'tab-pane fade' + (param.category_success != null ||
                               param.category_error != null || param.isEmpty() ? ' show active' : '')}"
                  id="v-pills-category" role="tabpanel" aria-labelledby="v-pills-category-tab" tabindex="0">
@@ -247,7 +80,7 @@
                                 </td>
                                 <!-- Modal Edit Expense Category -->
                                 <div class="modal fade" th:id="'editExpenseCategoryModal' + ${cat.id}"
-                                     data-bs-backdrop="static" data-bs-keyboard="false"
+                                     data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -288,7 +121,7 @@
                                 </div>
                                 <!-- Modal Delete Expense Category -->
                                 <div class="modal fade" th:id="'deleteExpenseCategoryModal' + ${cat.id}"
-                                     data-bs-backdrop="static" data-bs-keyboard="false"
+                                     data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -303,7 +136,7 @@
                                                     <h6 th:text="${'Do you want to remove the Expense Category?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-danger ms-auto" th:text="DELETE"></button>
+                                                    <button class="btn btn-danger me-auto" th:text="DELETE"></button>
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                                             th:text="CANCEL"></button>
                                                 </div>
@@ -318,7 +151,7 @@
                 </div>
                 <!-- Modal Add Expense Category -->
                 <div class="modal fade" id="addExpenseCategoryModal"
-                     data-bs-backdrop="static" data-bs-keyboard="false"
+                     data-bs-backdrop="static" data-bs-keyboard="true"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -343,11 +176,11 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                            th:text="CLOSE">
-                                    </button>
                                     <button class="btn button_style"
                                             th:text="ADD">
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            th:text="CLOSE">
                                     </button>
                                 </div>
                             </form>
@@ -409,7 +242,7 @@
                                 </td>
                                 <!-- Modal Edit Type Expense -->
                                 <div class="modal fade" th:id="'editTypeExpenseModal' + ${crs.id}"
-                                     data-bs-backdrop="static" data-bs-keyboard="false"
+                                     data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -446,7 +279,8 @@
                                                                 <option th:each="cat : ${allExpenseCategory}"
                                                                         th:text="${cat.name}"
                                                                         th:value="${cat.id}"
-                                                                        th:selected="${crs.expenseCategory.id != null && crs.expenseCategory.id == cat.id}">
+                                                                        th:selected="${crs.expenseCategory.id != null &&
+                                                                                     crs.expenseCategory.id == cat.id}">
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -466,7 +300,7 @@
                                 </div>
                                 <!-- Modal Delete Type Expense -->
                                 <div class="modal fade" th:id="'deleteTypeExpenseModal' + ${crs.id}"
-                                     data-bs-backdrop="static" data-bs-keyboard="false"
+                                     data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -481,7 +315,7 @@
                                                     <h6 th:text="${'Do you want to remove the Type Expense?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-danger ms-auto" th:text="DELETE"></button>
+                                                    <button class="btn btn-danger me-auto" th:text="DELETE"></button>
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                                             th:text="CANCEL"></button>
                                                 </div>
@@ -496,7 +330,7 @@
                 </div>
                 <!-- Modal Add Type Expense -->
                 <div class="modal fade" id="addTypeExpenseModal"
-                     data-bs-backdrop="static" data-bs-keyboard="false"
+                     data-bs-backdrop="static" data-bs-keyboard="true"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -536,11 +370,11 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                            th:text="CLOSE">
-                                    </button>
                                     <button class="btn button_style"
                                             th:text="ADD">
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            th:text="CLOSE">
                                     </button>
                                 </div>
                             </form>
@@ -600,7 +434,7 @@
                                 </td>
                                 <!-- Modal Edit Type Income -->
                                 <div class="modal fade" th:id="'editTypeIncomeModal' + ${cat.id}"
-                                     data-bs-backdrop="static" data-bs-keyboard="false"
+                                     data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -641,7 +475,7 @@
                                 </div>
                                 <!-- Modal Delete Type Income -->
                                 <div class="modal fade" th:id="'deleteTypeIncomeModal' + ${cat.id}"
-                                     data-bs-backdrop="static" data-bs-keyboard="false"
+                                     data-bs-backdrop="static" data-bs-keyboard="true"
                                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -655,8 +489,8 @@
                                                 <div class="modal-body">
                                                     <h6 th:text="${'Do you want to remove the Type Income?'}"></h6>
                                                 </div>
-                                                <button class="btn btn-danger ms-auto" th:text="DELETE"></button>
                                                 <div class="modal-footer">
+                                                    <button class="btn btn-danger me-auto" th:text="DELETE"></button>
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                                             th:text="CANCEL"></button>
                                                 </div>
@@ -671,7 +505,7 @@
                 </div>
                 <!-- Modal Add Type Income -->
                 <div class="modal fade" id="addTypeIncomeModal"
-                     data-bs-backdrop="static" data-bs-keyboard="false"
+                     data-bs-backdrop="static" data-bs-keyboard="true"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -712,5 +546,4 @@
         </div>
     </div>
 </div>
-
 </html>

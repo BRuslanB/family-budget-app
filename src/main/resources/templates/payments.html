@@ -31,12 +31,12 @@
                     <th style="text-align: center; width: 10%;">DETAILS</th>
                 </tr>
                 </thead>
-                <tbody id=tbodyExpensesList>
+                <tbody id="tbodyExpensesList">
                     <!--htmlCode-->
                 </tbody>
             </table>
-            <!-- detailExpensesModal -->
-            <div class="modal fade" id="detailExpensesModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            <!-- expenseDetailsModal -->
+            <div class="modal fade" id="expenseDetailsModal" data-bs-backdrop="static" data-bs-keyboard="true"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
@@ -72,12 +72,12 @@
                     <th style="text-align: center; width: 10%;">DETAILS</th>
                 </tr>
                 </thead>
-                <tbody id=tbodyIncomesList>
-                <!--htmlCode-->
+                <tbody id="tbodyIncomesList">
+                    <!--htmlCode-->
                 </tbody>
             </table>
-            <!-- detailIncomesModal -->
-            <div class="modal fade" id="detailIncomesModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            <!-- incomeDetailsModal -->
+            <div class="modal fade" id="incomeDetailsModal" data-bs-backdrop="static" data-bs-keyboard="true"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
@@ -118,10 +118,10 @@
     <!-- Buttons Add Check Expense & Add Check Income -->
     <div class="row">
         <div class="col-12 my-2">
-            <button type="button" class="button_style_add" onclick="addCheckExpense()"
+            <button type="button" class="button_style_add" onclick="openCheckAddModal('expense')"
                     th:text="${'+Add Check Expense'}" style="color: red;">
             </button>
-            <button type="button" class="button_style_add" onclick="addCheckIncome()"
+            <button type="button" class="button_style_add" onclick="openCheckAddModal('income')"
                     th:text="${'+Add Check Income'}" style="color: darkblue;">
             </button>
         </div>
@@ -139,71 +139,40 @@
                     <th style="text-align: center; width: 10%;">DETAILS</th>
                 </tr>
                 </thead>
-                <tbody id=tbodyChecksList>
+                <tbody id="tbodyChecksList">
                     <!--htmlCode-->
                 </tbody>
             </table>
-            <!-- detailCheckModal -->
-            <div class="modal fade" id="detailChecksModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            <!-- checkDetailsModal -->
+            <div class="modal fade" id="checkDetailsModal" data-bs-backdrop="static" data-bs-keyboard="true"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5">Checks Modal Details</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-header" id="divTitleModal">
+                            <!--htmlCode-->
                         </div>
                         <div class="modal-body">
                             <input type="hidden" id="editCheckId">
-                            <input type="hidden" id="editCheckBudgetId">
-                            <input type="hidden" id="editCheckBudgetTypeIncomeId">
-                            <input type="hidden" id="editCheckPurchaseId">
-                            <input type="hidden" id="editCheckPurchaseTypeExpenseId">
                             <div class="row">
                                 <div class="col-12">
-                                    <div>
-                                        <label th:text="${'TYPE INCOME'}"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div>
-                                        <input type="text" class="form-control" id="editCheckBudgetTypeIncomeName">
-                                    </div>
-                                </div>
-                            </div>
-
-<!--                            <div class="row mt-2">-->
-<!--                                <div class="col-12">-->
-<!--                                    <select class="form-select" id="editCheckBudgetTypeIncomeName" required>-->
-<!--                                        <option th:each="cat : ${allExpenseCategory}"-->
-<!--                                                th:text="${cat.name}"-->
-<!--                                                th:value="${cat.id}"-->
-<!--                                                th:selected="${crs.expenseCategory.id != null && crs.expenseCategory.id == cat.id}">-->
-<!--                                        </option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <div>
-                                        <label th:text="${'TYPE EXPENSE'}"></label>
+                                    <div id="divTitleType">
+                                        <!--htmlCode-->
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <div>
-                                        <input type="text" class="form-control" id="editCheckPurchaseTypeExpenseName">
+                                        <select class="form-select" id="editCheckType" required>
+                                            <!--htmlCode-->
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div>
-                                        <label th:text="VALUE"></label>
+                                        <label class="fw-bold" th:text="VALUE"></label>
                                     </div>
                                 </div>
                             </div>
@@ -218,21 +187,21 @@
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div>
-                                        <label th:text="DATE"></label>
+                                        <label class="fw-bold" th:text="DATE"></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <div>
-                                        <input type="date" class="form-control" id="editCheckDate">
+                                        <input type="date" class="form-control" id="editCheckDate" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div>
-                                        <label th:text="NOTE"></label>
+                                        <label class="fw-bold" th:text="NOTE"></label>
                                     </div>
                                 </div>
                             </div>
@@ -244,10 +213,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger ms-auto" onclick="deleteCheck()">DELETE</button>
-                            <button type="button" class="btn button_style" onclick="saveCheck()">SAVE</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                        <div class="modal-footer" id="divActionButtons">
                         </div>
                     </div>
                 </div>
@@ -255,12 +221,12 @@
         </div>
     </div>
     <script>
+        // Block global variable
+        var expensesList;
+        var incomesList;
+        var modalChecks = new bootstrap.Modal(document.getElementById('checkDetailsModal'));
 
         loadAllContent();
-
-        var modalIncomes = new bootstrap.Modal(document.getElementById('detailIncomesModal'));
-        var modalExpenses = new bootstrap.Modal(document.getElementById('detailExpensesModal'));
-        var modalChecks = new bootstrap.Modal(document.getElementById('detailChecksModal'));
 
         function loadAllContent() {
             loadIncomesContent();
@@ -273,7 +239,7 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var incomesList = JSON.parse(result);
+                    incomesList = JSON.parse(result);
                     var htmlCode = "";
                     var totalSum = 0;
                     for (i = 0; i < incomesList.length; i++) {
@@ -283,7 +249,7 @@
                         htmlCode += "<td style='text-align: center;'>" + incomesList[i]["sumValue"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
-                                    "onclick='openIncomesModal(" + incomesList[i].id + ")'>Details</a>" + "</td>";
+                                    "onclick='openIncomeDetailsModal(" + incomesList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
                         totalSum += incomesList[i]["sumValue"];
                     }
@@ -291,7 +257,7 @@
                     htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
                     htmlCode += "</tr>";
                 }
-                //прорисовка tbodyIncomesList
+                //filling tbodyIncomesList
                 tbodyIncomesList.innerHTML = htmlCode;
             }
             xhttp.open("GET","/budget");
@@ -303,7 +269,7 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var expensesList = JSON.parse(result);
+                    expensesList = JSON.parse(result);
                     var htmlCode = "";
                     var totalSum = 0;
                     for (i = 0; i < expensesList.length; i++) {
@@ -313,7 +279,7 @@
                         htmlCode += "<td style='text-align: center;'>" + expensesList[i]["sumValue"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
-                                    "onclick='openExpensesModal(" + expensesList[i].id + ")'>Details</a>" + "</td>";
+                                    "onclick='openExpenseDetailsModal(" + expensesList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
                         totalSum += expensesList[i]["sumValue"];
                     }
@@ -321,7 +287,7 @@
                     htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
                     htmlCode += "</tr>";
                 }
-                //прорисовка tbodyExpensesList
+                //filling tbodyExpensesList
                 tbodyExpensesList.innerHTML = htmlCode;
             }
             xhttp.open("GET","/purchases");
@@ -340,13 +306,13 @@
                     for (i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
-                        htmlCode += "<td style='text-align: center;'>" + (checksList[i]["budget"] === null ? "-" : "+") + //-1
+                        htmlCode += "<td style='text-align: center;'>" + (checksList[i]["budget"] === null ? "-" : "+") +
                                      checksList[i]["value"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["date"] + "</td>";
                         htmlCode += "<td>" + checksList[i]["note"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
-                                    "onclick='openChecksModal(" + checksList[i].id + ")'>Details</a>" + "</td>";
+                                    "onclick='openCheckDetailsModal(" + checksList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
                         if (checksList[i]["budget"] === null) {
                             totalSum -= checksList[i]["value"];
@@ -355,31 +321,33 @@
                         }
                     }
                     htmlCode += "<tr>";
-                    htmlCode += "<td colspan='5' style='font-weight: bold; text-align: right;'>" + "The rest of money: " + totalSum + "</td>";
+                    htmlCode += "<td colspan='5' style='font-weight: bold; text-align: right;'>" + "The rest of money: " +
+                                 totalSum + "</td>";
                     htmlCode += "</tr>";
                 }
-                //прорисовка tbodyChecksList
+                //filling tbodyChecksList
                 tbodyChecksList.innerHTML = htmlCode;
             }
             xhttp.open("GET","/checks");
             xhttp.send();
         }
 
-        function openIncomesModal(id){
+        function openIncomeDetailsModal(id){
             const xhttp = new XMLHttpRequest();
+            var modalIncomes = new bootstrap.Modal(document.getElementById('incomeDetailsModal'));
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
                     var checksList = JSON.parse(result);
-                    console.log(checksList);
+                    // console.log(checksList);
                     var htmlCode = "";
                     var countRec = 0;
                     htmlCode += "<thead class='mt-2'>";
                     htmlCode += "<tr>";
-                    htmlCode += "<th style='width: 10%;'>ID</th>";
-                    htmlCode += "<th style='width: 20%;'>VALUE</th>";
-                    htmlCode += "<th style='width: 20%;'>DATE</th>";
-                    htmlCode += "<th style='width: 50%;'>NOTE</th>";
+                    htmlCode += "<th style='width: 5%;'>ID</th>";
+                    htmlCode += "<th style='text-align: center; width: 10%;'>VALUE</th>";
+                    htmlCode += "<th style='text-align: center; width: 20%;'>DATE</th>";
+                    htmlCode += "<th style='width: 65%;'>NOTE</th>";
                     htmlCode += "</tr>";
                     htmlCode += "</thead>"
                     htmlCode += "<tbody>"
@@ -394,7 +362,7 @@
                     }
                     htmlCode += "</tbody>";
                 }
-                //прорисовка tableIncomeChecksList
+                //filling tableIncomeChecksList
                 if (countRec > 0) {
                     tableIncomeChecksList.innerHTML = htmlCode;
                 } else {
@@ -406,21 +374,22 @@
             modalIncomes.show();
         }
 
-        function openExpensesModal(id){
+        function openExpenseDetailsModal(id){
             const xhttp = new XMLHttpRequest();
+            var modalExpenses = new bootstrap.Modal(document.getElementById('expenseDetailsModal'));
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
                     var checksList = JSON.parse(result);
-                    console.log(checksList);
+                    // console.log(checksList);
                     var htmlCode = "";
                     var countRec = 0;
                     htmlCode += "<thead class='mt-2'>";
                     htmlCode += "<tr>";
-                    htmlCode += "<th style='width: 10%;'>ID</th>";
-                    htmlCode += "<th style='width: 20%;'>VALUE</th>";
-                    htmlCode += "<th style='width: 20%;'>DATE</th>";
-                    htmlCode += "<th style='width: 50%;'>NOTE</th>";
+                    htmlCode += "<th style='width: 5%;'>ID</th>";
+                    htmlCode += "<th style='text-align: center; width: 10%;'>VALUE</th>";
+                    htmlCode += "<th style='text-align: center; width: 20%;'>DATE</th>";
+                    htmlCode += "<th style='width: 65%;'>NOTE</th>";
                     htmlCode += "</tr>";
                     htmlCode += "</thead>"
                     htmlCode += "<tbody>"
@@ -435,7 +404,7 @@
                     }
                     htmlCode += "</tbody>";
                 }
-                //прорисовка tableExpenseChecksList
+                //filling tableExpenseChecksList
                 if (countRec > 0) {
                     tableExpenseChecksList.innerHTML = htmlCode;
                 } else {
@@ -447,55 +416,182 @@
             modalExpenses.show();
         }
 
-        function openChecksModal(id){
+        function openCheckDetailsModal(id){
             const request = new XMLHttpRequest();
             request.onload = (e) => {
                 let result = JSON.parse(request.responseText);
-                console.log(result);
+                // console.log(result);
+                var htmlCode = "";
+                var receipt = "";
                 editCheckId.value = result.id;
                 editCheckValue.value = result.value;
                 editCheckDate.value = result.date;
                 editCheckNote.value = result.note;
-                editCheckBudgetId.value = result.budget !== null ? result.budget.id : null;
-                editCheckBudgetTypeIncomeId.value = result.budget !== null ? result.budget.typeIncome.id : null;
-                editCheckBudgetTypeIncomeName.value = result.budget !== null ? result.budget.typeIncome.name : null;
-                editCheckPurchaseId.value = result.purchase !== null ? result.purchase.id : null;
-                editCheckPurchaseTypeExpenseId.value =  result.purchase !== null ? result.purchase.typeExpense.id : null;
-                editCheckPurchaseTypeExpenseName.value = result.purchase !== null ? result.purchase.typeExpense.name : null;
+                htmlCode += "<h1 class='modal-title fs-5'>Check Modal Details</h1>"
+                htmlCode += "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+                divTitleModal.innerHTML = htmlCode;
+                htmlCode = "";
+                if (result.budget !== null) {
+                    receipt = "income";
+                    divTitleType.innerHTML = "<label class='fw-bold'>TYPE INCOME</label>";
+                    for (i = 0; i < incomesList.length; i++) {
+                        htmlCode += "<option value =" + incomesList[i]["id"];
+                        htmlCode += (incomesList[i]["id"] === result.budget.id ? " selected" : "")  + ">";
+                        htmlCode += incomesList[i]["typeIncome"]["name"] + "</option>";
+                    }
+                    //filling editCheckType
+                    editCheckType.innerHTML = htmlCode;
+                } else if (result.purchase !== null) {
+                    receipt = "expense";
+                    divTitleType.innerHTML = "<label class='fw-bold'>TYPE EXPENSE</label>";
+                    for (i = 0; i < expensesList.length; i++) {
+                        htmlCode += "<option value =" + expensesList[i]["id"];
+                        htmlCode += (expensesList[i]["id"] === result.purchase.id ? " selected" : "")  + ">";
+                        htmlCode += expensesList[i]["typeExpense"]["name"] + "</option>";
+                    }
+                    //filling editCheckType
+                    editCheckType.innerHTML = htmlCode;
+                }
+                htmlCode = "";
+                htmlCode += "<button type='button' class='btn btn-danger me-auto' onClick='deleteCheck()'>DELETE</button>";
+                htmlCode += "<button type='button' class='btn button_style' onClick='saveCheck(\"" + receipt + "\")'>SAVE</button>";
+                htmlCode += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>CLOSE</button>";
+                //filling divActionButtons
+                divActionButtons.innerHTML = htmlCode;
             };
             request.open("GET", "/checks/" + id);
             request.send();
             modalChecks.show();
         }
 
-        function saveCheck(){
+        function openCheckAddModal(receipt){
+            var htmlCode = "";
+            editCheckId.value = null;
+            editCheckValue.value = null;
+            editCheckDate.value = null;
+            editCheckNote.value = null;
+            htmlCode += "<h1 class='modal-title fs-5'>Add Check Modal</h1>"
+            htmlCode += "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+            divTitleModal.innerHTML = htmlCode;
+            htmlCode = "";
+            if (receipt === "income") {
+                divTitleType.innerHTML = "<label class='fw-bold'>TYPE INCOME</label>";
+                for (i = 0; i < incomesList.length; i++) {
+                    htmlCode += "<option value =" + incomesList[i]["id"] + ">";
+                    htmlCode += incomesList[i]["typeIncome"]["name"] + "</option>";
+                }
+                //filling editCheckType
+                editCheckType.innerHTML = htmlCode;
+            } else if (receipt === "expense") {
+                divTitleType.innerHTML = "<label class='fw-bold'>TYPE EXPENSE</label>";
+                for (i = 0; i < expensesList.length; i++) {
+                    htmlCode += "<option value =" + expensesList[i]["id"] + ">";
+                    htmlCode += expensesList[i]["typeExpense"]["name"] + "</option>";
+                }
+                //filling editCheckType
+                editCheckType.innerHTML = htmlCode;
+            }
+            htmlCode="";
+            htmlCode += "<button type='button' class='btn button_style' onClick='addCheck(\"" + receipt + "\")'>ADD</button>";
+            htmlCode += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>CLOSE</button>";
+            //filling divActionButtons
+            divActionButtons.innerHTML = htmlCode;
+            modalChecks.show();
+        }
+
+        function saveCheck(receipt){
+            // alert("receipt=" + receipt);
             const request = new XMLHttpRequest();
             request.open("PUT", '/checks', true);
-            request.setRequestHeader("Content-Type", "application/json");
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
             request.onreadystatechange = () => {
                 if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
                     loadAllContent();
                 }
             }
-            request.send(
-                JSON.stringify(
-                    {
-                        "id": editCheckId.value,
-                        "value": editCheckValue.value,
-                        "date": editCheckDate.value,
-                        "note": editCheckNote.value,
-                        "budget":
-                            {
-                                "id": editCheckBudgetId.value,
-                            },
-                        "purchase":
-                            {
-                                "id": editCheckPurchaseId.value,
-                            }
-                    }
-                )
-            );
+
+            if (receipt === "income") {
+                request.send(
+                    JSON.stringify(
+                        {
+                            "id": editCheckId.value,
+                            "value": editCheckValue.value,
+                            "date": editCheckDate.value,
+                            "note": editCheckNote.value,
+                            "budget":
+                                {
+                                    "id": editCheckType.value
+                                },
+                            "purchase": null
+                        }
+                    )
+                );
+            } else if (receipt === "expense") {
+                request.send(
+                    JSON.stringify(
+                        {
+                            "id": editCheckId.value,
+                            "value": editCheckValue.value,
+                            "date": editCheckDate.value,
+                            "note": editCheckNote.value,
+                            "budget": null,
+                            "purchase":
+                                {
+                                    "id": editCheckType.value
+                                }
+                        }
+                    )
+                );
+            }
+            // alert("editCheckType.value=" + editCheckType.value);
+            modalChecks.hide();
+        }
+
+        function addCheck(receipt){
+            // alert("receipt=" + receipt);
+            const request = new XMLHttpRequest();
+            request.open("POST", '/checks', true);
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+            request.onreadystatechange = () => {
+                if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+                    loadAllContent();
+                }
+            }
+
+            if (receipt === "income") {
+                request.send(
+                    JSON.stringify(
+                        {
+                            "value": editCheckValue.value,
+                            "date": editCheckDate.value,
+                            "note": editCheckNote.value,
+                            "budget":
+                                {
+                                    "id": editCheckType.value
+                                },
+                            "purchase": null
+                        }
+                    )
+                );
+            } else if (receipt === "expense") {
+                request.send(
+                    JSON.stringify(
+                        {
+                            "value": editCheckValue.value,
+                            "date": editCheckDate.value,
+                            "note": editCheckNote.value,
+                            "budget": null,
+                            "purchase":
+                                {
+                                    "id": editCheckType.value
+                                }
+                        }
+                    )
+                );
+            }
+            // alert("editCheckType.value=" + editCheckType.value);
             modalChecks.hide();
         }
 
@@ -515,38 +611,6 @@
             modalChecks.hide();
         }
 
-        function addCheck(receipt){
-
-            const request = new XMLHttpRequest();
-            request.open("POST", '/checks', true);
-            request.setRequestHeader("Content-Type", "application/json");
-
-            request.onreadystatechange = () => {
-                if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-                    loadAllContent();
-                }
-            }
-            request.send(
-                JSON.stringify(
-                    {
-                        "value": editCheckValue.value,
-                        "date": editCheckDate.value,
-                        "note": editCheckNote.value,
-                        "budget":
-                            {
-                                "id": editCheckBudgetId.value,
-                            },
-                        "purchase":
-                            {
-                                "id": editCheckPurchaseId.value,
-                            }
-                    }
-                )
-            );
-            modalChecks.show();
-        }
-
     </script>
 </div>
-
 </html>

@@ -17,7 +17,6 @@ public class TypeExpenseServiceImpl implements TypeExpenseService {
     private final TypeExpenseRepo typeExpenseRepo;
     private final TypeExpenseMapper typeExpenseMapper;
 
-
     @Override
     public List<TypeExpense> getAllTypeExpense() {
         return typeExpenseRepo.findAll();
@@ -62,4 +61,5 @@ public class TypeExpenseServiceImpl implements TypeExpenseService {
     public TypeExpenseDto updateTypeExpenseDto(TypeExpenseDto typeExpenseDto) {
         return typeExpenseMapper.toDto(typeExpenseRepo.save(typeExpenseMapper.toEntity(typeExpenseDto)));
     }
+
 }

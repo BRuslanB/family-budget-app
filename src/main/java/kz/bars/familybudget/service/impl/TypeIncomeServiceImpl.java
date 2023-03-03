@@ -17,7 +17,6 @@ public class TypeIncomeServiceImpl implements TypeIncomeService {
     private final TypeIncomeRepo typeIncomeRepo;
     private final TypeIncomeMapper typeIncomeMapper;
 
-
     @Override
     public List<TypeIncome> getAllTypeIncome() {
         return typeIncomeRepo.findAll();
@@ -62,4 +61,5 @@ public class TypeIncomeServiceImpl implements TypeIncomeService {
     public TypeIncomeDto updateTypeIncomeDto(TypeIncomeDto typeIncomeDto) {
         return typeIncomeMapper.toDto(typeIncomeRepo.save(typeIncomeMapper.toEntity(typeIncomeDto)));
     }
+
 }

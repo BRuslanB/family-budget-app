@@ -1,7 +1,6 @@
 package kz.bars.familybudget.api;
 
 import kz.bars.familybudget.dto.CheckDto;
-import kz.bars.familybudget.model.Check;
 import kz.bars.familybudget.service.CheckService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

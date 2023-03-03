@@ -7,16 +7,7 @@ import java.util.List;
 
 public interface BudgetService {
 
-//    public List<Budget> getAllBudget();
-//    public Budget getBudget(Long id);
-//    public Budget addBudget(Budget budget);
-//    public Budget updateBudget(Budget budget);
-//    public void deleteBudget(Long id);
     public BudgetDto toDto(Budget budget);
     public List<BudgetDto> getAllBudgetDto();
-//    public BudgetDto getBudgetDto(Long id);
-//    public BudgetDto addBudgetDto(BudgetDto budgetDto);
-//    public BudgetDto updateBudgetDto(BudgetDto budgetDto);
-//    public Double budgetByChecksSum(Long id);
 
 }

@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .logoutUrl("/logout") //<form action = 'logout' method = 'post'>
                 .logoutSuccessUrl("/signin");
 
-        http.csrf().disable(); //запрет на post запросы
+        http.csrf().disable(); //ban on post requests
 
         return http.build();
     }

@@ -1,7 +1,6 @@
 package kz.bars.familybudget.service;
 
 import kz.bars.familybudget.dto.CheckDto;
-import kz.bars.familybudget.model.Check;
 
 import java.util.List;
 

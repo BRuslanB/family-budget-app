@@ -61,4 +61,5 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     public ExpenseCategoryDto updateExpenseCategoryDto(ExpenseCategoryDto expenseCategoryDto) {
         return expenseCategoryMapper.toDto(expenseCategoryRepo.save(expenseCategoryMapper.toEntity(expenseCategoryDto)));
     }
+
 }

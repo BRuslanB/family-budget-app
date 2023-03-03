@@ -1,12 +1,9 @@
 package kz.bars.familybudget.service.impl;
 
 import kz.bars.familybudget.dto.BudgetDto;
-import kz.bars.familybudget.dto.TypeIncomeDto;
-import kz.bars.familybudget.mapper.BudgetMapper;
 import kz.bars.familybudget.mapper.TypeIncomeMapper;
 import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Check;
-import kz.bars.familybudget.model.TypeIncome;
 import kz.bars.familybudget.repository.BudgetRepo;
 import kz.bars.familybudget.service.BudgetService;
 import lombok.RequiredArgsConstructor;
@@ -20,33 +17,7 @@ import java.util.List;
 public class BudgetServiceImpl implements BudgetService {
 
     final BudgetRepo budgetRepo;
-//    final BudgetMapper budgetMapper;
     final TypeIncomeMapper typeIncomeMapper;
-
-//    @Override
-//    public List<Budget> getAllBudget() {
-//        return budgetRepo.findAll();
-//    }
-//
-//    @Override
-//    public Budget getBudget(Long id) {
-//        return budgetRepo.findById(id).orElseThrow();
-//    }
-//
-//    @Override
-//    public Budget addBudget(Budget budget) {
-//        return budgetRepo.save(budget);
-//    }
-//
-//    @Override
-//    public Budget updateBudget(Budget budget) {
-//        return budgetRepo.save(budget);
-//    }
-//
-//    @Override
-//    public void deleteBudget(Long id) {
-//        budgetRepo.deleteById(id);
-//    }
 
     @Override
     public BudgetDto toDto(Budget budget) {
@@ -64,7 +35,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public List<BudgetDto> getAllBudgetDto() {
-//        return budgetMapper.toDtoList(budgetRepo.findAll());
+
         List<Budget> budgetList;
         budgetList = budgetRepo.findAll();
 
@@ -85,25 +56,5 @@ public class BudgetServiceImpl implements BudgetService {
         }
         return budgetDtoList;
     }
-
-//    @Override
-//    public BudgetDto getBudgetDto(Long id) {
-//        return budgetMapper.toDto(budgetRepo.findById(id).orElseThrow());
-//    }
-//
-//    @Override
-//    public BudgetDto addBudgetDto(BudgetDto budgetDto) {
-//        return budgetMapper.toDto(budgetRepo.save(budgetMapper.toEntity(budgetDto)));
-//    }
-//
-//    @Override
-//    public BudgetDto updateBudgetDto(BudgetDto budgetDto) {
-//        return budgetMapper.toDto(budgetRepo.save(budgetMapper.toEntity(budgetDto)));
-//    }
-
-//    @Override
-//    public Double budgetByChecksSum(Long id) {
-//        return budgetRepo.findBudgetByChecksSumValue(id);
-//    }
 
 }

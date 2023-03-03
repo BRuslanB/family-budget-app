@@ -20,7 +20,6 @@ import java.util.List;
 public class HomeController {
     private final AccountService accountService;
     private final ExpenseCategoryService expenseCategoryService;
-//    private final TypeReceiptService typeReceiptService;
     private final TypeExpenseService typeExpenseService;
     private final TypeIncomeService typeIncomeService;
 
@@ -54,9 +53,6 @@ public class HomeController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/settings")
     public String settings(Model model) {
-
-//        List<TypeReceipt> allTypeReceipt = typeReceiptService.getAllTypeReceipt();
-//        model.addAttribute("allTypeReceipt", allTypeReceipt);
 
         List<ExpenseCategory> allExpenseCategory = expenseCategoryService.getAllExpenseCategory();
         model.addAttribute("allExpenseCategory", allExpenseCategory);
@@ -115,47 +111,6 @@ public class HomeController {
         }
         return "redirect:/profile?update_error";
     }
-
-//    @PreAuthorize("isAuthenticated()")
-//    @PostMapping("/add-type-receipt")
-//    public String addTypeReceipt(@RequestParam(name = "type_receipt_name") String typeReceiptName) {
-//
-//        TypeReceipt typeReceipt = new TypeReceipt();
-//        typeReceipt.setName(typeReceiptName);
-//        typeReceiptService.addTypeReceipt(typeReceipt);
-//
-//        return "redirect:/settings?receipt_success";
-//    }
-//
-//    @PreAuthorize("isAuthenticated()")
-//    @PostMapping("/update-type-receipt")
-//    public String updateTypeReceipt(@RequestParam(name = "type_receipt_id") Long typeReceiptId,
-//                                    @RequestParam(name = "type_receipt_name") String typeReceiptName) {
-//
-//        TypeReceipt typeReceipt = typeReceiptService.getTypeReceipt(typeReceiptId);
-//
-//        if (typeReceipt != null) {
-//            typeReceipt.setName(typeReceiptName);
-//            typeReceiptService.updateTypeReceipt(typeReceipt);
-//
-//            return "redirect:/settings?receipt_success";
-//        }
-//        return "redirect:/settings?receipt_error";
-//    }
-//
-//    @PreAuthorize("isAuthenticated()")
-//    @PostMapping("/delete-type-receipt")
-//    public String deleteTypeReceipt(@RequestParam(name = "type_receipt_id") Long typeReceiptId){
-//
-//        try {
-//            typeReceiptService.deleteTypeReceipt(typeReceiptId);
-//            return "redirect:/settings?receipt_success";
-//
-//        } catch (Exception e) {
-//
-//            return "redirect:/settings?receipt_error";
-//        }
-//    }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/add-category-expense")
