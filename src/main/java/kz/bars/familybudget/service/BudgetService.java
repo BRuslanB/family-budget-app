@@ -4,6 +4,7 @@ import kz.bars.familybudget.dto.BudgetDto;
 import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Purchase;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BudgetService {
@@ -15,5 +16,6 @@ public interface BudgetService {
     public void deletePurchase(Long id);
     public BudgetDto toDto(Budget budget);
     public List<BudgetDto> getAllBudgetDto();
+    public List<BudgetDto> getAllBudgetBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
 
 }

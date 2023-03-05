@@ -6,6 +6,27 @@
             layout:decorate="layout/main.html">
 
 <div layout:fragment="mainContent">
+    <!-- Block parameters -->
+    <div class="row d-flex flex-row offset-3 mt-2">
+        <div class="row col-3">
+            <div>
+                <label class="fw-bold">DATE FROM</label>
+                <input type="date" class="form-control" id="dateFrom" required>
+            </div>
+        </div>
+        <div class="row col-3">
+            <div>
+                <label class="fw-bold">DATE TO</label>
+                <input type="date" class="form-control" id="dateTo" required>
+            </div>
+        </div>
+        <div class="row col-3">
+            <div>
+                <button type='submit' class='btn button_style mt-4' onClick='applyParam()'>APPLY</button>
+                <button type='button' class='btn btn-primary mt-4 ms-2' onClick='resetParam()'>RESET</button>
+            </div>
+        </div>
+    </div>
     <!-- Title Two Tables -->
     <div class="row">
         <div class="col-12">
@@ -226,16 +247,82 @@
     </div>
     <script>
         // Block global variable
-        var expensesList;
-        var incomesList;
+        var dateFromCheck;
+        var dateToCheck;
+        var allExpenses;
+        var allIncomes;
         var modalChecks = new bootstrap.Modal(document.getElementById('checkDetailsModal'));
 
-        loadAllContent();
+        loadMain();
+
+        function loadMain() {
+            // var date = new Date();
+            // var currentDay = date.getDate();
+            // var currentMonth = date.getMonth() + 1;
+            // var currentYear = date.getFullYear();
+            //
+            // var paddedMonth = currentMonth < 10 ? "0" + currentMonth : currentMonth;
+            // var paddedDay = currentDay < 10 ? "0" + currentDay : currentDay;
+
+            dateFromCheck = localStorage.getItem('date_from');
+            dateToCheck = localStorage.getItem('date_to');
+
+            // if (dateFromCheck != null) {
+            //     dateFromCheck = currentYear + "-" + paddedMonth + "-" + "01";
+            //     localStorage.setItem('date_from', dateFromCheck);
+            // }
+            // if (dateToCheck != null) {
+            //     dateToCheck = currentYear + "-" + paddedMonth + "-" + paddedDay;
+            //     localStorage.setItem('date_to', dateToCheck);
+            // }
+            loadAllIncomes();
+            loadAllExpenses();
+            loadAllContent();
+        }
+
+        function applyParam() {
+            dateFromCheck = dateFrom.value;
+            dateToCheck = dateTo.value;
+
+            if (dateFromCheck != null) {
+                localStorage.setItem('date_from', dateFromCheck);
+            }
+            if (dateToCheck != null) {
+                localStorage.setItem('date_to', dateToCheck);
+            }
+            loadAllContent();
+        }
+
+        function resetParam() {
+            dateFromCheck = null;
+            delete localStorage.date_from;
+
+            dateToCheck = null;
+            delete localStorage.date_to;
+
+            loadAllContent();
+        }
 
         function loadAllContent() {
+            dateFrom.value = dateFromCheck;
+            dateTo.value = dateToCheck;
+
             loadIncomesContent();
             loadExpensesContent();
             loadChecksContent();
+        }
+
+        function loadAllIncomes() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if (this.status === 200) {
+                    const result = this.responseText;
+                    allIncomes = JSON.parse(result);
+                    // console.log(allIncomes);
+                }
+            }
+            xhttp.open("GET","/budget");
+            xhttp.send();
         }
 
         function loadIncomesContent() {
@@ -243,7 +330,8 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    incomesList = JSON.parse(result);
+                    var incomesList = JSON.parse(result);
+                    // console.log(incomesList);
                     var htmlCode = "";
                     var totalSum = 0;
                     for (i = 0; i < incomesList.length; i++) {
@@ -265,7 +353,25 @@
                 //filling tbodyIncomesList
                 tbodyIncomesList.innerHTML = htmlCode;
             }
-            xhttp.open("GET","/budget");
+            if (dateFromCheck != null && dateToCheck != null) {
+                xhttp.open("GET","/budget/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.send();
+            } else {
+                xhttp.open("GET","/budget");
+                xhttp.send();
+            }
+        }
+
+        function loadAllExpenses() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if (this.status === 200) {
+                    const result = this.responseText;
+                    allExpenses = JSON.parse(result);
+                    // console.log(allExpenses);
+                }
+            }
+            xhttp.open("GET","/purchases");
             xhttp.send();
         }
 
@@ -274,7 +380,8 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    expensesList = JSON.parse(result);
+                    var expensesList = JSON.parse(result);
+                    // console.log(expensesList);
                     var htmlCode = "";
                     var totalSum = 0;
                     for (i = 0; i < expensesList.length; i++) {
@@ -296,8 +403,13 @@
                 //filling tbodyExpensesList
                 tbodyExpensesList.innerHTML = htmlCode;
             }
-            xhttp.open("GET","/purchases");
-            xhttp.send();
+            if (dateFromCheck != null && dateToCheck != null) {
+                xhttp.open("GET","/purchases/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.send();
+            } else {
+                xhttp.open("GET","/purchases");
+                xhttp.send();
+            }
         }
 
         function loadChecksContent() {
@@ -334,8 +446,13 @@
                 //filling tbodyChecksList
                 tbodyChecksList.innerHTML = htmlCode;
             }
-            xhttp.open("GET","/checks");
-            xhttp.send();
+            if (dateFromCheck != null && dateToCheck != null) {
+                xhttp.open("GET","/checks/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.send();
+            } else {
+                xhttp.open("GET","/checks");
+                xhttp.send();
+            }
         }
 
         function openIncomeDetailsModal(id){
@@ -375,7 +492,11 @@
                     tableIncomeChecksList.innerHTML = "";
                 }
             }
-            xhttp.open("GET","/checks/budget/" + id);
+            if (dateFromCheck != null && dateToCheck != null) {
+                xhttp.open("GET","/checks/budget/" + id + "/dates/" + dateFromCheck + "/" + dateToCheck);
+            } else {
+                xhttp.open("GET","/checks/budget/" + id);
+            }
             xhttp.send();
             modalIncomes.show();
         }
@@ -417,7 +538,11 @@
                     tableExpenseChecksList.innerHTML = "";
                 }
             }
-            xhttp.open("GET","/checks/purchase/" + id);
+            if (dateFromCheck != null && dateToCheck != null) {
+                xhttp.open("GET","/checks/purchase/" + id + "/dates/" + dateFromCheck + "/" + dateToCheck);
+            } else {
+                xhttp.open("GET","/checks/purchase/" + id);
+            }
             xhttp.send();
             modalExpenses.show();
         }
@@ -440,20 +565,20 @@
                 if (result.budget !== null) {
                     receipt = "income";
                     divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
-                    for (i = 0; i < incomesList.length; i++) {
-                        htmlCode += "<option value =" + incomesList[i]["id"];
-                        htmlCode += (incomesList[i]["id"] === result.budget.id ? " selected" : "")  + ">";
-                        htmlCode += incomesList[i]["income"] + "</option>";
+                    for (i = 0; i < allIncomes.length; i++) {
+                        htmlCode += "<option value =" + allIncomes[i]["id"];
+                        htmlCode += (allIncomes[i]["id"] === result.budget.id ? " selected" : "")  + ">";
+                        htmlCode += allIncomes[i]["income"] + "</option>";
                     }
                     //filling editCheckType
                     editCheckType.innerHTML = htmlCode;
                 } else if (result.purchase !== null) {
                     receipt = "expense";
                     divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
-                    for (i = 0; i < expensesList.length; i++) {
+                    for (i = 0; i < allExpenses.length; i++) {
                         htmlCode += "<option value =" + expensesList[i]["id"];
-                        htmlCode += (expensesList[i]["id"] === result.purchase.id ? " selected" : "")  + ">";
-                        htmlCode += expensesList[i]["expense"] + "</option>";
+                        htmlCode += (allExpenses[i]["id"] === result.purchase.id ? " selected" : "")  + ">";
+                        htmlCode += allExpenses[i]["expense"] + "</option>";
                     }
                     //filling editCheckType
                     editCheckType.innerHTML = htmlCode;
@@ -483,17 +608,17 @@
             htmlCode = "";
             if (receipt === "income") {
                 divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
-                for (i = 0; i < incomesList.length; i++) {
-                    htmlCode += "<option value =" + incomesList[i]["id"] + ">";
-                    htmlCode += incomesList[i]["income"] + "</option>";
+                for (i = 0; i < allIncomes.length; i++) {
+                    htmlCode += "<option value =" + allIncomes[i]["id"] + ">";
+                    htmlCode += allIncomes[i]["income"] + "</option>";
                 }
                 //filling editCheckType
                 editCheckType.innerHTML = htmlCode;
             } else if (receipt === "expense") {
                 divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
-                for (i = 0; i < expensesList.length; i++) {
-                    htmlCode += "<option value =" + expensesList[i]["id"] + ">";
-                    htmlCode += expensesList[i]["expense"] + "</option>";
+                for (i = 0; i < allExpenses.length; i++) {
+                    htmlCode += "<option value =" + allExpenses[i]["id"] + ">";
+                    htmlCode += allExpenses[i]["expense"] + "</option>";
                 }
                 //filling editCheckType
                 editCheckType.innerHTML = htmlCode;
@@ -508,7 +633,8 @@
         }
 
         function saveCheck(receipt){
-            if (editCheckId.value === "" || editCheckValue.value === "" || editCheckDate.value === "") {
+            //check required fields
+            if (editCheckValue.value === "" || editCheckDate.value === "") {
                 return;
             }
             const request = new XMLHttpRequest();
@@ -554,11 +680,11 @@
                     )
                 );
             }
-            // alert("editCheckType.value=" + editCheckType.value);
             modalChecks.hide();
         }
 
         function addCheck(receipt){
+            // check required fields
             if (editCheckValue.value === "" || editCheckDate.value === "") {
                 return;
             }
@@ -603,7 +729,6 @@
                     )
                 );
             }
-            // alert("editCheckType.value=" + editCheckType.value);
             modalChecks.hide();
         }
 
@@ -622,7 +747,6 @@
             }
             modalChecks.hide();
         }
-
     </script>
 </div>
 </html>

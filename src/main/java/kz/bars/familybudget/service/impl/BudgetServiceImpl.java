@@ -8,6 +8,7 @@ import kz.bars.familybudget.service.BudgetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +45,9 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public BudgetDto toDto(Budget budget) {
-
         if (budget == null) {
             return null;
         }
-
         BudgetDto budgetDto = new BudgetDto();
         budgetDto.setId(budget.getId());
         budgetDto.setIncome(budget.getIncome());
@@ -59,7 +58,6 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public List<BudgetDto> getAllBudgetDto() {
-
         List<Budget> budgetList;
         budgetList = budgetRepo.findAll();
 
@@ -74,6 +72,32 @@ public class BudgetServiceImpl implements BudgetService {
             var sum = 0.0;
             for (Check check : budget.getChecks()) {
                 sum += check.getValue();
+            }
+            budgetDto.setSumValue(Math.round(sum * 100.0) / 100.0);
+            //Add to budgetDtoList
+            budgetDtoList.add(budgetDto);
+        }
+        return budgetDtoList;
+    }
+
+    @Override
+    public List<BudgetDto> getAllBudgetBetweenDateDto(LocalDate dateFrom, LocalDate dateTo) {
+        List<Budget> budgetList;
+        budgetList = budgetRepo.findAllByChecksBetweenDateOrderByDate(dateFrom, dateTo);
+
+        List<BudgetDto> budgetDtoList = new ArrayList<>();
+        BudgetDto budgetDto;
+        for (Budget budget : budgetList) {
+            budgetDto = new BudgetDto();
+            budgetDto.setId(budget.getId());
+            budgetDto.setIncome(budget.getIncome());
+            budgetDto.setDescription(budget.getDescription());
+            // Count Value
+            var sum = 0.0;
+            for (Check check : budget.getChecks()) {
+                if (check.getDate().compareTo(dateFrom) >= 0 && check.getDate().compareTo(dateTo) <= 0) {
+                    sum += check.getValue();
+                }
             }
             budgetDto.setSumValue(Math.round(sum * 100.0) / 100.0);
             //Add to budgetDtoList

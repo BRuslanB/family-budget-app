@@ -11,10 +11,13 @@ import kz.bars.familybudget.service.BudgetService;
 import kz.bars.familybudget.service.CheckService;
 import kz.bars.familybudget.service.PurchaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -108,9 +111,29 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public List<CheckDto> getAllCheckDto() {
-
         List<Check> checkList;
-        checkList = checkRepo.findAll();
+        checkList = checkRepo.findAll(Sort.by(Sort.Order.by("date")));
+
+        List<CheckDto> checkDtoList = new ArrayList<>();
+        CheckDto checkDto;
+        for (Check check : checkList) {
+            checkDto = new CheckDto();
+            checkDto.setId(check.getId());
+            checkDto.setValue(check.getValue());
+            checkDto.setDate(check.getDate());
+            checkDto.setNote(check.getNote());
+            checkDto.setBudget(budgetService.toDto(check.getBudget()));
+            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            //Add to checkDtoList
+            checkDtoList.add(checkDto);
+        }
+        return checkDtoList;
+    }
+
+    @Override
+    public List<CheckDto> getAllCheckBetweenDateDto(LocalDate dateFrom, LocalDate dateTo) {
+        List<Check> checkList;
+        checkList = checkRepo.findAllByDateBetweenOrderByDate(dateFrom, dateTo);
 
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
@@ -131,7 +154,27 @@ public class CheckServiceImpl implements CheckService {
     @Override
     public List<CheckDto> getAllCheckByBudgetIdDto(Long id) {
 
-        List<Check> checkList = checkRepo.findAllByBudgetId(id);
+        List<Check> checkList = checkRepo.findAllByBudgetIdOrderByDate(id);
+        List<CheckDto> checkDtoList = new ArrayList<>();
+        CheckDto checkDto;
+
+        for (Check check : checkList) {
+            checkDto = new CheckDto();
+            checkDto.setId(check.getId());
+            checkDto.setValue(check.getValue());
+            checkDto.setDate(check.getDate());
+            checkDto.setNote(check.getNote());
+            checkDto.setBudget(budgetService.toDto(check.getBudget()));
+            //Add to checkDtoList
+            checkDtoList.add(checkDto);
+        }
+        return checkDtoList;
+    }
+
+    @Override
+    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+
+        List<Check> checkList = checkRepo.findAllByBudgetIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
 
@@ -151,7 +194,27 @@ public class CheckServiceImpl implements CheckService {
     @Override
     public List<CheckDto> getAllCheckByPurchaseIdDto(Long id) {
 
-        List<Check> checkList = checkRepo.findAllByPurchaseId(id);
+        List<Check> checkList = checkRepo.findAllByPurchaseIdOrderByDate(id);
+        List<CheckDto> checkDtoList = new ArrayList<>();
+        CheckDto checkDto;
+
+        for (Check check : checkList) {
+            checkDto = new CheckDto();
+            checkDto.setId(check.getId());
+            checkDto.setValue(check.getValue());
+            checkDto.setDate(check.getDate());
+            checkDto.setNote(check.getNote());
+            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            //Add to checkDtoList
+            checkDtoList.add(checkDto);
+        }
+        return checkDtoList;
+    }
+
+    @Override
+    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+
+        List<Check> checkList = checkRepo.findAllByPurchaseIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
 

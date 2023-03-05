@@ -5,7 +5,9 @@ import kz.bars.familybudget.service.CheckService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,9 +37,15 @@ public class CheckController {
         checkService.deleteCheckDto(id);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<CheckDto> getAllCheck() {
         return checkService.getAllCheckDto();
+    }
+
+    @GetMapping(value = "dates/{date1}/{date2}")
+    public List<CheckDto> getAllCheckBetweenDate(@PathVariable(name = "date1") LocalDate dateFrom,
+                                                 @PathVariable(name = "date2") LocalDate dateTo) {
+        return checkService.getAllCheckBetweenDateDto(dateFrom, dateTo);
     }
 
     @GetMapping(value = "budget/{id}")
@@ -45,9 +53,23 @@ public class CheckController {
         return checkService.getAllCheckByBudgetIdDto(id);
     }
 
+    @GetMapping(value = "budget/{id}/dates/{date1}/{date2}")
+    public List<CheckDto> getAllCheckByBudgetBetweenDate(@PathVariable(name = "id") Long id,
+                                                         @PathVariable(name = "date1") LocalDate dateFrom,
+                                                         @PathVariable(name = "date2") LocalDate dateTo) {
+        return checkService.getAllCheckByBudgetBetweenDateDto(id, dateFrom, dateTo);
+    }
+
     @GetMapping(value = "purchase/{id}")
     public List<CheckDto> getAllCheckByPurchaseId(@PathVariable(name = "id") Long id) {
         return checkService.getAllCheckByPurchaseIdDto(id);
+    }
+
+    @GetMapping(value = "purchase/{id}/dates/{date1}/{date2}")
+    public List<CheckDto> getAllCheckByPurchaseBetweenDate(@PathVariable(name = "id") Long id,
+                                                           @PathVariable(name = "date1") LocalDate dateFrom,
+                                                           @PathVariable(name = "date2") LocalDate dateTo) {
+        return checkService.getAllCheckByPurchaseBetweenDateDto(id, dateFrom, dateTo);
     }
 
 }
