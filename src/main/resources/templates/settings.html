@@ -147,6 +147,8 @@
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <h6 th:text="${'Attention, all expenses in this Category will remain uncategorized!'}"
+                                                        th:style="'color: red'"></h6>
                                                     <h6 th:text="${'Do you want to remove the Expense Category?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">
@@ -251,7 +253,8 @@
                                 <td th:text="${exp.id}"></td>
                                 <td th:text="${exp.expense}"></td>
                                 <td th:text="${exp.description}"></td>
-                                <td th:text="${exp.category.name}"></td>
+                                <td th:if="${exp.category != null}" th:text="${exp.category.name}"></td>
+                                <td th:if="${exp.category == null}" th:text="${'No Category'}" th:style="'color: red'"></td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
@@ -317,7 +320,7 @@
                                                                 <option th:each="cat : ${allExpenseCategory}"
                                                                         th:text="${cat.name}"
                                                                         th:value="${cat.id}"
-                                                                        th:selected="${exp.category.id != null &&
+                                                                        th:selected="${exp.category != null &&
                                                                                      exp.category.id == cat.id}">
                                                                 </option>
                                                             </select>
@@ -350,6 +353,8 @@
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <h6 th:text="${'Attention, all checks of this type of Expense will be deleted!'}"
+                                                        th:style="'color: red'"></h6>
                                                     <h6 th:text="${'Do you want to remove the Expense?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">
@@ -549,6 +554,8 @@
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <h6 th:text="${'Attention, all checks of this type of Income will be deleted!'}"
+                                                        th:style="'color: red'"></h6>
                                                     <h6 th:text="${'Do you want to remove the Income?'}"></h6>
                                                 </div>
                                                 <div class="modal-footer">

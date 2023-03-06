@@ -4,7 +4,6 @@ import kz.bars.familybudget.dto.CheckDto;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface CheckService {
     public CheckDto getCheckDto(Long id);

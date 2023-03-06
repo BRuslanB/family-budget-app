@@ -24,29 +24,29 @@ public class HomeController {
     private final BudgetService budgetService;
 
     @GetMapping(value = "/")
-    public String index(Model model) {
+    public String index() {
         return "index";
     }
 
     @GetMapping(value = "/signin")
-    public String signin(Model model) {
+    public String signin() {
         return "signin";
     }
 
     @GetMapping(value = "/register")
-    public String register(Model model) {
+    public String register() {
         return "register";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/profile")
-    public String profile(Model model) {
+    public String profile() {
         return "profile";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/payments")
-    public String payments(Model model) {
+    public String payments() {
         return "payments";
     }
 
@@ -67,7 +67,7 @@ public class HomeController {
     }
 
     @GetMapping(value = "/forbidden")
-    public String forbidden(Model model) {
+    public String forbidden() {
         return "forbidden";
     }
 

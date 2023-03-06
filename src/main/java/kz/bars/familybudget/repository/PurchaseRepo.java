@@ -1,6 +1,5 @@
 package kz.bars.familybudget.repository;
 
-import kz.bars.familybudget.model.Budget;
 import kz.bars.familybudget.model.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

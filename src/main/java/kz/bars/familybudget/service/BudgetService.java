@@ -2,7 +2,6 @@ package kz.bars.familybudget.service;
 
 import kz.bars.familybudget.dto.BudgetDto;
 import kz.bars.familybudget.model.Budget;
-import kz.bars.familybudget.model.Purchase;
 
 import java.time.LocalDate;
 import java.util.List;

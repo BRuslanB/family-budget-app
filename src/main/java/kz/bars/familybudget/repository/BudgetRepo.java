@@ -1,7 +1,6 @@
 package kz.bars.familybudget.repository;
 
 import kz.bars.familybudget.model.Budget;
-import kz.bars.familybudget.model.Check;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
