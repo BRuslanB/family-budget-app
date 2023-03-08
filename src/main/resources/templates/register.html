@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
             layout:decorate="layout/main.html">
 
 <div layout:fragment="mainContent">
@@ -19,67 +18,79 @@
             <form th:action="@{'/register'}" method="post">
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="EMAIL"></label>
+                        <label class="fw-bold" th:text="EMAIL"
+                               for="user_email"></label>
                     </div>
                 </div>
-                <div class="row" mt-1>
+                <div class="row mt-1">
                     <div class="col-12">
-                        <input type="email" name="user_email" class="form-control"
+                        <input type="email" class="form-control"
+                               id="user_email" name="user_email"
                                required placeholder="Email">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'FIRST NAME'}"></label>
+                        <label class="fw-bold" th:text="${'FIRST NAME'}"
+                               for="user_firstname"></label>
                     </div>
                 </div>
-                <div class="row" mt-1>
+                <div class="row mt-1">
                     <div class="col-12">
-                        <input type="text" name="user_firstname" class="form-control"
+                        <input type="text" class="form-control"
+                               id="user_firstname" name="user_firstname"
                                required placeholder="First Name">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'LAST NAME'}"></label>
+                        <label class="fw-bold" th:text="${'LAST NAME'}"
+                               for="user_lastname"></label>
                     </div>
                 </div>
-                <div class="row" mt-1>
+                <div class="row mt-1">
                     <div class="col-12">
-                        <input type="text" name="user_lastname" class="form-control"
+                        <input type="text" class="form-control"
+                               id="user_lastname" name="user_lastname"
                                required placeholder="Last Name">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'BIRTH DAY'}"></label>
+                        <label class="fw-bold" th:text="${'BIRTH DAY'}"
+                               for="user_birth_day"></label>
                     </div>
                 </div>
-                <div class="row" mt-1>
+                <div class="row mt-1">
                     <div class="col-12">
-                        <input type="date" name="user_birth_day" class="form-control"
+                        <input type="date" class="form-control"
+                               id="user_birth_day" name="user_birth_day"
                                required placeholder="Birth Day">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="PASSWORD"></label>
+                        <label class="fw-bold" th:text="PASSWORD"
+                               for="user_password"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="password" name="user_password" class="form-control"
+                        <input type="password" class="form-control"
+                               id="user_password" name="user_password"
                                required placeholder="Password">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'REPEAT PASSWORD'}"></label>
+                        <label class="fw-bold" th:text="${'REPEAT PASSWORD'}"
+                               for="user_re_password"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="password" name="user_re_password" class="form-control"
+                        <input type="password" class="form-control"
+                               id="user_re_password" name="user_re_password"
                                required placeholder="Password">
                     </div>
                 </div>

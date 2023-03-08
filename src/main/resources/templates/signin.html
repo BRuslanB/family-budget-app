@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
             layout:decorate="layout/main.html">
 
 <div layout:fragment="mainContent">
@@ -15,23 +14,27 @@
             <form th:action="@{'/auth'}" method="post">
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="EMAIL"></label>
+                        <label class="fw-bold" th:text="EMAIL"
+                               for="user_email"></label>
                     </div>
                 </div>
-                <div class="row" mt-1>
+                <div class="row mt-1">
                     <div class="col-12">
-                        <input type="email" name="user_email" class="form-control"
+                        <input type="email" class="form-control"
+                               id="user_email" name="user_email"
                                required placeholder="Email">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="PASSWORD"></label>
+                        <label class="fw-bold" th:text="PASSWORD"
+                               for="user_password"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="password" name="user_password" class="form-control"
+                        <input type="password" class="form-control"
+                               id="user_password" name="user_password"
                                required placeholder="Password">
                     </div>
                 </div>

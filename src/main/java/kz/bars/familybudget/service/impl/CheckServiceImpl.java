@@ -55,20 +55,14 @@ public class CheckServiceImpl implements CheckService {
         check.setNote(checkDto.getNote());
         try {
             if (checkDto.getBudget() != null) {
-                Budget budget = budgetRepo.findById(checkDto.getBudget().getId()).orElse(null);
-                if (budget != null) {
-                    check.setBudget(budget);
-                }
+                budgetRepo.findById(checkDto.getBudget().getId()).ifPresent(check::setBudget);
             }
         } catch(Exception ex) {
 //            check.setBudget(null);
         }
         try {
             if (checkDto.getPurchase() != null) {
-                Purchase purchase = purchaseRepo.findById(checkDto.getPurchase().getId()).orElse(null);
-                if (purchase != null) {
-                    check.setPurchase(purchase);
-                }
+                purchaseRepo.findById(checkDto.getPurchase().getId()).ifPresent(check::setPurchase);
             }
         } catch(Exception ex) {
 //            check.setPurchase(null);

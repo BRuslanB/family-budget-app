@@ -6,15 +6,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface CheckService {
-    public CheckDto getCheckDto(Long id);
-    public CheckDto addCheckDto(CheckDto checkDto);
-    public CheckDto updateCheckDto(CheckDto checkDto);
-    public void deleteCheckDto(Long id);
-    public List<CheckDto> getAllCheckDto();
-    public List<CheckDto> getAllCheckBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
-    public List<CheckDto> getAllCheckByBudgetIdDto(Long id);
-    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo);
-    public List<CheckDto> getAllCheckByPurchaseIdDto(Long id);
-    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo);
+    CheckDto getCheckDto(Long id);
+    CheckDto addCheckDto(CheckDto checkDto);
+    CheckDto updateCheckDto(CheckDto checkDto);
+    void deleteCheckDto(Long id);
+    List<CheckDto> getAllCheckDto();
+    List<CheckDto> getAllCheckBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
+    List<CheckDto> getAllCheckByBudgetIdDto(Long id);
+    List<CheckDto> getAllCheckByBudgetBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo);
+    List<CheckDto> getAllCheckByPurchaseIdDto(Long id);
+    List<CheckDto> getAllCheckByPurchaseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo);
 
 }

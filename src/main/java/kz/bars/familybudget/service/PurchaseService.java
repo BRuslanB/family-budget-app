@@ -7,13 +7,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PurchaseService {
-    public List<Purchase> getAllPurchase();
-    public Purchase getPurchase(Long id);
-    public Purchase addPurchase(Purchase purchase);
-    public Purchase updatePurchase(Purchase purchase);
-    public void deletePurchase(Long id);
-    public PurchaseDto toDto(Purchase purchase);
-    public List<PurchaseDto> getAllPurchaseDto();
-    public List<PurchaseDto> getAllPurchaseBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
+    List<Purchase> getAllPurchase();
+    Purchase getPurchase(Long id);
+    Purchase addPurchase(Purchase purchase);
+    Purchase updatePurchase(Purchase purchase);
+    void deletePurchase(Long id);
+    PurchaseDto toDto(Purchase purchase);
+    List<PurchaseDto> getAllPurchaseDto();
+    List<PurchaseDto> getAllPurchaseBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
 
 }

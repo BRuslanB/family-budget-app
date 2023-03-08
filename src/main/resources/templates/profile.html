@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
             layout:decorate="layout/main.html">
 
 <div layout:fragment="mainContent">
@@ -20,45 +19,53 @@
             <form th:action="@{'/update-profile'}" method="post">
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="EMAIL"></label>
+                        <label class="fw-bold" th:text="EMAIL"
+                               for="email"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input class="form-control" style="background-color: lightgray;" readonly
+                        <input class="form-control" id="email" readonly
+                               th:style="'background-color: lightgray;'"
                                th:value="${#authentication.principal.email}">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'FIRST NAME'}"></label>
+                        <label class="fw-bold" th:text="${'FIRST NAME'}"
+                               for="user_firstname"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="text" class="form-control" name="user_firstname" required
+                        <input type="text" class="form-control"
+                               id="user_firstname" name="user_firstname" required
                                th:value="${#authentication.principal.firstname}">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'LAST NAME'}"></label>
+                        <label class="fw-bold" th:text="${'LAST NAME'}"
+                               for="user_lastname"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="text" class="form-control" name="user_lastname" required
+                        <input type="text" class="form-control"
+                               id="user_lastname" name="user_lastname" required
                                th:value="${#authentication.principal.lastname}">
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'BIRTH DAY'}"></label>
+                        <label class="fw-bold" th:text="${'BIRTH DAY'}"
+                               for="user_birth_day"></label>
                     </div>
                 </div>
-                <div class="row" mt-1>
+                <div class="row mt-1">
                     <div class="col-12">
-                        <input type="date" name="user_birth_day" class="form-control" required
+                        <input type="date" class="form-control"
+                               id="user_birth_day" name="user_birth_day" required
                                th:value="${#authentication.principal.birthDay}">
                     </div>
                 </div>
@@ -96,39 +103,44 @@
             <form th:action="@{'/update-password'}" method="post">
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'OLD PASSWORD'}"></label>
+                        <label class="fw-bold" th:text="${'OLD PASSWORD'}"
+                               for="user_old_password"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="password" class="form-control" name="user_old_password" required>
+                        <input type="password" class="form-control"
+                               id="user_old_password" name="user_old_password" required>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'NEW PASSWORD'}"></label>
+                        <label class="fw-bold" th:text="${'NEW PASSWORD'}"
+                               for="user_new_password"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="password" class="form-control" name="user_new_password" required>
+                        <input type="password" class="form-control"
+                               id="user_new_password" name="user_new_password" required>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <label class="fw-bold" th:text="${'REPEAT NEW PASSWORD'}"></label>
+                        <label class="fw-bold" th:text="${'REPEAT NEW PASSWORD'}"
+                               for="user_re_new_password"></label>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12">
-                        <input type="password" class="form-control" name="user_re_new_password" required>
+                        <input type="password" class="form-control"
+                               id="user_re_new_password" name="user_re_new_password" required>
                     </div>
                 </div>
                 <button class="btn button_style mt-3"
                         th:text="${'UPDATE PASSWORD'}">
                 </button>
             </form>
-
         </div>
     </div>
 </div>

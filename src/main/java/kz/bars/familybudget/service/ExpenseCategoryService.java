@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ExpenseCategoryService {
 
-    public List<ExpenseCategory> getAllExpenseCategory();
-    public ExpenseCategory getExpenseCategory(Long id);
-    public ExpenseCategory addExpenseCategory(ExpenseCategory expenseCategory);
-    public ExpenseCategory updateExpenseCategory(ExpenseCategory expenseCategory);
-    public void deleteExpenseCategory(Long id);
+    List<ExpenseCategory> getAllExpenseCategory();
+    ExpenseCategory getExpenseCategory(Long id);
+    ExpenseCategory addExpenseCategory(ExpenseCategory expenseCategory);
+    ExpenseCategory updateExpenseCategory(ExpenseCategory expenseCategory);
+    void deleteExpenseCategory(Long id);
 
 }

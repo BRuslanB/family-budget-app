@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface UserService {
 
-    public UserDetails loadUserByUsername(String username);
-    public User getCurrentUser();
+    UserDetails loadUserByUsername(String username);
+    User getCurrentUser();
 
 }

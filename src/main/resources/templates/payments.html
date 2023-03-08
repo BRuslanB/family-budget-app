@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
-      xmlns:layout ="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
             layout:decorate="layout/main.html">
 
 <div layout:fragment="mainContent">
@@ -10,13 +9,13 @@
     <div class="row d-flex flex-row offset-3 mt-2">
         <div class="row col-3">
             <div>
-                <label class="fw-bold">DATE FROM</label>
+                <label class="fw-bold" for="dateFrom">DATE FROM</label>
                 <input type="date" class="form-control" id="dateFrom" required>
             </div>
         </div>
         <div class="row col-3">
             <div>
-                <label class="fw-bold">DATE TO</label>
+                <label class="fw-bold" for="dateTo">DATE TO</label>
                 <input type="date" class="form-control" id="dateTo" required>
             </div>
         </div>
@@ -110,7 +109,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="row d-flex flex-row">
-                                <div class="row">
+                                <div class="row" >
                                     <div class="col-12">
                                         <table class="table table-striped" id="tableIncomeChecksList">
                                         </table>
@@ -142,10 +141,10 @@
     <div class="row">
         <div class="col-12 my-2">
             <button type="button" class="button_style_add" onclick="openCheckAddModal('expense')"
-                    th:text="${'+Add Check Expense'}" style="color: red;">
+                    th:text="${'+Add Check Expense'}" th:style="'color: red;'">
             </button>
             <button type="button" class="button_style_add" onclick="openCheckAddModal('income')"
-                    th:text="${'+Add Check Income'}" style="color: darkblue;">
+                    th:text="${'+Add Check Income'}" th:style="'color: darkblue;'">
             </button>
         </div>
     </div>
@@ -193,14 +192,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-2">
                                     <div class="col-12">
                                         <div>
-                                            <label class="fw-bold" th:text="VALUE"></label>
+                                            <label class="fw-bold" th:text="VALUE"
+                                                   for="editCheckValue"></label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                                <div class="row mt-1">
                                     <div class="col-12">
                                         <div>
                                             <input type="number" class="form-control" id="editCheckValue"
@@ -208,28 +208,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-2">
                                     <div class="col-12">
                                         <div>
-                                            <label class="fw-bold" th:text="DATE"></label>
+                                            <label class="fw-bold" th:text="DATE"
+                                                   for="editCheckDate"></label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                                <div class="row mt-1">
                                     <div class="col-12">
                                         <div>
                                             <input type="date" class="form-control" id="editCheckDate" required>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-2">
                                     <div class="col-12">
                                         <div>
-                                            <label class="fw-bold" th:text="NOTE"></label>
+                                            <label class="fw-bold" th:text="NOTE"
+                                                   for="editCheckNote"></label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                                <div class="row mt-1">
                                     <div class="col-12">
                                         <div>
                                             <input type="text" class="form-control" id="editCheckNote">
@@ -247,11 +249,11 @@
     </div>
     <script>
         // Block global variable
-        var dateFromCheck;
-        var dateToCheck;
-        var allExpenses;
-        var allIncomes;
-        var modalChecks = new bootstrap.Modal(document.getElementById('checkDetailsModal'));
+        let dateFromCheck;
+        let dateToCheck;
+        let allExpenses;
+        let allIncomes;
+        const modalChecks = new bootstrap.Modal(document.getElementById('checkDetailsModal'));
 
         loadMain();
 
@@ -315,11 +317,11 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var incomesList = JSON.parse(result);
+                    const incomesList = JSON.parse(result);
                     // console.log(incomesList);
                     var htmlCode = "";
-                    var totalSum = 0;
-                    for (i = 0; i < incomesList.length; i++) {
+                    let totalSum = 0;
+                    for (let i = 0; i < incomesList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + incomesList[i]["id"] + "</td>";
                         htmlCode += "<td>" + incomesList[i]["income"] + "</td>";
@@ -365,11 +367,11 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var expensesList = JSON.parse(result);
+                    const expensesList = JSON.parse(result);
                     // console.log(expensesList);
                     var htmlCode = "";
-                    var totalSum = 0;
-                    for (i = 0; i < expensesList.length; i++) {
+                    let totalSum = 0;
+                    for (let i = 0; i < expensesList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + expensesList[i]["id"] + "</td>";
                         htmlCode += "<td>" + expensesList[i]["expense"] + "</td>";
@@ -402,11 +404,11 @@
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var checksList = JSON.parse(result);
+                    const checksList = JSON.parse(result);
                     // console.log(checksList);
                     var htmlCode = "";
-                    var totalSum = 0;
-                    for (i = 0; i < checksList.length; i++) {
+                    let totalSum = 0;
+                    for (let i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + (checksList[i]["budget"] === null ? "-" : "+") +
@@ -442,11 +444,11 @@
 
         function openIncomeDetailsModal(id){
             const xhttp = new XMLHttpRequest();
-            var modalIncomes = new bootstrap.Modal(document.getElementById('incomeDetailsModal'));
+            const modalIncomes = new bootstrap.Modal(document.getElementById('incomeDetailsModal'));
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var checksList = JSON.parse(result);
+                    const checksList = JSON.parse(result);
                     // console.log(checksList);
                     var htmlCode = "";
                     var countRec = 0;
@@ -459,7 +461,7 @@
                     htmlCode += "</tr>";
                     htmlCode += "</thead>"
                     htmlCode += "<tbody>"
-                    for (i = 0; i < checksList.length; i++) {
+                    for (let i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["value"] + "</td>";
@@ -488,11 +490,11 @@
 
         function openExpenseDetailsModal(id){
             const xhttp = new XMLHttpRequest();
-            var modalExpenses = new bootstrap.Modal(document.getElementById('expenseDetailsModal'));
+            const modalExpenses = new bootstrap.Modal(document.getElementById('expenseDetailsModal'));
             xhttp.onload = function(){
                 if (this.status === 200) {
                     const result = this.responseText;
-                    var checksList = JSON.parse(result);
+                    const checksList = JSON.parse(result);
                     // console.log(checksList);
                     var htmlCode = "";
                     var countRec = 0;
@@ -505,7 +507,7 @@
                     htmlCode += "</tr>";
                     htmlCode += "</thead>"
                     htmlCode += "<tbody>"
-                    for (i = 0; i < checksList.length; i++) {
+                    for (let i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["value"] + "</td>";
@@ -537,8 +539,8 @@
             request.onload = (e) => {
                 let result = JSON.parse(request.responseText);
                 // console.log(result);
-                var htmlCode = "";
-                var receipt = "";
+                let htmlCode = "";
+                let receipt = "";
                 editCheckId.value = result.id;
                 editCheckValue.value = result.value;
                 editCheckDate.value = result.date;
@@ -549,8 +551,8 @@
                 htmlCode = "";
                 if (result.budget !== null) {
                     receipt = "income";
-                    divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
-                    for (i = 0; i < allIncomes.length; i++) {
+                    divTitleType.innerHTML = "<label class='fw-bold' for='editCheckType'>INCOME</label>";
+                    for (let i = 0; i < allIncomes.length; i++) {
                         htmlCode += "<option value =" + allIncomes[i]["id"];
                         htmlCode += (allIncomes[i]["id"] === result.budget.id ? " selected" : "")  + ">";
                         htmlCode += allIncomes[i]["income"] + "</option>";
@@ -559,8 +561,8 @@
                     editCheckType.innerHTML = htmlCode;
                 } else if (result.purchase !== null) {
                     receipt = "expense";
-                    divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
-                    for (i = 0; i < allExpenses.length; i++) {
+                    divTitleType.innerHTML = "<label class='fw-bold' for='editCheckType'>EXPENSE</label>";
+                    for (let i = 0; i < allExpenses.length; i++) {
                         htmlCode += "<option value =" + allExpenses[i]["id"];
                         htmlCode += (allExpenses[i]["id"] === result.purchase.id ? " selected" : "")  + ">";
                         htmlCode += allExpenses[i]["expense"] + "</option>";
@@ -582,7 +584,7 @@
         }
 
         function openCheckAddModal(receipt){
-            var htmlCode = "";
+            let htmlCode = "";
             editCheckId.value = null;
             editCheckValue.value = null;
             editCheckDate.value = null;
@@ -593,7 +595,7 @@
             htmlCode = "";
             if (receipt === "income") {
                 divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
-                for (i = 0; i < allIncomes.length; i++) {
+                for (let i = 0; i < allIncomes.length; i++) {
                     htmlCode += "<option value =" + allIncomes[i]["id"] + ">";
                     htmlCode += allIncomes[i]["income"] + "</option>";
                 }
@@ -601,7 +603,7 @@
                 editCheckType.innerHTML = htmlCode;
             } else if (receipt === "expense") {
                 divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
-                for (i = 0; i < allExpenses.length; i++) {
+                for (let i = 0; i < allExpenses.length; i++) {
                     htmlCode += "<option value =" + allExpenses[i]["id"] + ">";
                     htmlCode += allExpenses[i]["expense"] + "</option>";
                 }
@@ -718,7 +720,7 @@
         }
 
         function deleteCheck(){
-            var conf = confirm("ARE YOU SURE?");
+            const conf = confirm("ARE YOU SURE?");
             if (conf) {
                 const request = new XMLHttpRequest();
                 request.open("DELETE", '/checks/' + editCheckId.value, true);

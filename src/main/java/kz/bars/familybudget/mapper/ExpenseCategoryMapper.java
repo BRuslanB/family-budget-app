@@ -10,7 +10,7 @@ import java.util.List;
 public interface ExpenseCategoryMapper {
 
     ExpenseCategoryDto toDto(ExpenseCategory expenseCategory);
-    ExpenseCategory toEntity(ExpenseCategoryDto expenseCategoryDto);
-    List<ExpenseCategoryDto> toDtoList(List<ExpenseCategory> expenseCategories);
+//    ExpenseCategory toEntity(ExpenseCategoryDto expenseCategoryDto);
+//    List<ExpenseCategoryDto> toDtoList(List<ExpenseCategory> expenseCategories);
 
 }
