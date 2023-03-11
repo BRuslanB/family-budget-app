@@ -89,3 +89,9 @@ fabric.properties
 
 .gradle
 /build/
+
+### VS Code ###
+.vscode/
+
+### Data ###
+data/
