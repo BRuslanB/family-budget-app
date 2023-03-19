@@ -15,12 +15,12 @@ public class Purchase extends BaseEntity {
 
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "category_id")
     private ExpenseCategory category;
 
     @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+            cascade = CascadeType.ALL) //, orphanRemoval = true)
     private Set<Check> checks;
 
 }

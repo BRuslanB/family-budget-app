@@ -9,10 +9,10 @@ import java.util.List;
 public interface BudgetService {
 
     List<Budget> getAllBudget();
-    Budget getPurchase(Long id);
-    Budget addPurchase(Budget budget);
-    Budget updatePurchase(Budget budget);
-    void deletePurchase(Long id);
+    Budget getBudget(Long id);
+    Budget addBudget(Budget budget);
+    Budget updateBudget(Budget budget);
+    void deleteBudget(Long id);
     BudgetDto toDto(Budget budget);
     List<BudgetDto> getAllBudgetDto();
     List<BudgetDto> getAllBudgetBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);

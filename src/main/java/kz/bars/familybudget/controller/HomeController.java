@@ -223,7 +223,7 @@ public class HomeController {
         Budget budget = new Budget();
         budget.setIncome(incomeName);
         budget.setDescription(incomeDescription);
-        budgetService.addPurchase(budget);
+        budgetService.addBudget(budget);
 
         return "redirect:/settings?income_success";
     }
@@ -234,13 +234,13 @@ public class HomeController {
                                    @RequestParam(name = "income_name") String incomeName,
                                    @RequestParam(name = "income_description") String incomeDescription) {
 
-        Budget budget = budgetService.getPurchase(incomeId);
+        Budget budget = budgetService.getBudget(incomeId);
 
         if (budget != null) {
 
             budget.setIncome(incomeName);
             budget.setDescription(incomeDescription);
-            budgetService.updatePurchase(budget);
+            budgetService.updateBudget(budget);
 
             return "redirect:/settings?income_success";
         }
@@ -252,7 +252,7 @@ public class HomeController {
     public String deleteTypeIncome(@RequestParam(name = "income_id") Long incomeId) {
 
         try {
-            budgetService.deletePurchase(incomeId);
+            budgetService.deleteBudget(incomeId);
             return "redirect:/settings?income_success";
 
         } catch (Exception e) {

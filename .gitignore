@@ -94,4 +94,5 @@ fabric.properties
 .vscode/
 
 ### Data ###
-data/
+/data/
+/data_test_db/

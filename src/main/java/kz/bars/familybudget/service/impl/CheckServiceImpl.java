@@ -73,8 +73,12 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public CheckDto updateCheckDto(CheckDto checkDto) {
-
-        Check check = checkRepo.findById(checkDto.getId()).orElse(null);
+        Check check;
+        try {
+            check = checkRepo.findById(checkDto.getId()).orElseThrow();
+        } catch (Exception ex) {
+            check = null;
+        }
 
         if (check != null) {
             check.setValue(checkDto.getValue());

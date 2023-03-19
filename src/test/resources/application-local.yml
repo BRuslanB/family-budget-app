@@ -1,15 +1,15 @@
-server:
-  port: 8000
+#server:
+#  port: 8080
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5440/family_budget
+    url: jdbc:postgresql://localhost:5432/family_budget_test_db
     username: postgres
     password: postgres
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:/db/changelog/changelog-master.xml

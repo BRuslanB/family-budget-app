@@ -24,22 +24,22 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget getPurchase(Long id) {
+    public Budget getBudget(Long id) {
         return budgetRepo.findById(id).orElseThrow();
     }
 
     @Override
-    public Budget addPurchase(Budget budget) {
+    public Budget addBudget(Budget budget) {
         return budgetRepo.save(budget);
     }
 
     @Override
-    public Budget updatePurchase(Budget budget) {
+    public Budget updateBudget(Budget budget) {
         return budgetRepo.save(budget);
     }
 
     @Override
-    public void deletePurchase(Long id) {
+    public void deleteBudget(Long id) {
         budgetRepo.deleteById(id);
     }
 

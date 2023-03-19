@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PurchasesServiceImpl implements PurchaseService {
+public class PurchaseServiceImpl implements PurchaseService {
 
     private final PurchaseRepo purchaseRepo;
     private final ExpenseCategoryMapper expenseCategoryMapper;

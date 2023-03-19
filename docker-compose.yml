@@ -10,9 +10,19 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: family_budget
     ports:
-      - '2345:5432'
+      - '5440:5432'
     volumes:
       - ./data:/var/lib/postgresql/data
 
-#volumes:
-#  db-data:
+  test_db:
+    image: 'postgres:alpine'
+    container_name: pg-server_test
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: family_budget_test_db
+    ports:
+      - '2345:5432'
+    volumes:
+      - ./data_test_db:/var/lib/postgresql/data
