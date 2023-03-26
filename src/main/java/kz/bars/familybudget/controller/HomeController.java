@@ -33,6 +33,11 @@ public class HomeController {
         return "signin";
     }
 
+    @GetMapping(value = "/authorize")
+    public String authorize() {
+        return "authorize";
+    }
+
     @GetMapping(value = "/register")
     public String register() {
         return "register";
