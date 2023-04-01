@@ -16,7 +16,7 @@ public class Budget extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "budget", fetch = FetchType.LAZY,
-               cascade = CascadeType.ALL, orphanRemoval = true)
+               cascade = CascadeType.ALL) //, orphanRemoval = true)
     private Set<Check> checks;
 
 }
