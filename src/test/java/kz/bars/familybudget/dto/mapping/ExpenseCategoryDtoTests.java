@@ -8,8 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.math.BigInteger;
 
 @SpringBootTest
+@ActiveProfiles("test")
 //@Component
 public class ExpenseCategoryDtoTests {
 
@@ -18,12 +22,16 @@ public class ExpenseCategoryDtoTests {
 
 	@Test
 	public void testExpenseCategoryMapToDto() {
+		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
-		expenseCategory.setId(55L);
+		expenseCategory.setId(BigInteger.valueOf(55));
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
 
+		/*Act*/
 		ExpenseCategoryDto expenseCategoryDto = expenseCategoryMapper.toDto(expenseCategory);
+
+		/*Assert*/
 		Assertions.assertNotNull(expenseCategoryDto);
 		Assertions.assertEquals(expenseCategory.getId(), expenseCategoryDto.getId());
 		Assertions.assertEquals(expenseCategory.getName(), expenseCategoryDto.getName());

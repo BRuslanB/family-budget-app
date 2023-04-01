@@ -18,7 +18,7 @@ VALUES ('Зарпалата и бонусы', 'основная работа'),
        ('Сдача аренда квартиры', 'средства от арендаторов'),
        ('Фриланс', 'дополнительная работа');
 
-INSERT INTO checks (value, date, note, budget_id, purchase_id)
+INSERT INTO checks (val, date, note, budget_id, purchase_id)
 VALUES (500000, '2023-01-31', 'зарплата', 1, null),
        (200000, '2023-01-03', 'аренда квартиры', 2, null),
        (250000, '2023-01-06', 'ипотека', null, 1),

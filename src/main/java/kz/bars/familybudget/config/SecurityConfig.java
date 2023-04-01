@@ -40,11 +40,11 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/profile") //redirect page if ok
                 .failureUrl("/signin?error") //if incorrect email or password
                 .usernameParameter("user_email") //<input type = 'email' name = 'user_email'>
-                .passwordParameter("user_password") //<input type = 'password' name = 'user_password'>
-                .and()
-                .oauth2Login()
-                .and()
-                .oauth2Client();
+                .passwordParameter("user_password"); //<input type = 'password' name = 'user_password'>
+//                .and()
+//                .oauth2Login()
+//                .and()
+//                .oauth2Client();
 
         http.logout()
                 .logoutUrl("/logout") //<form action = 'logout' method = 'post'>

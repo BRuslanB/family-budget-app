@@ -13,21 +13,22 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/changelog-master.xml
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: "335247748424-3dai46fj6e07cpnvbsbvaai08rtbvr9e.apps.googleusercontent.com"
-            client-secret: "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"
-#            redirect-uri: "http://localhost:8000/login/oauth2/code/{registrationId}"
-            redirect-uri: "http://localhost:8000/login/oauth2/code"
-            scope:
-              - email
-              - profile
-        provider:
-          google:
-            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
-            token-uri: https://oauth2.googleapis.com/token
-            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-            user-name-attribute: email
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: "335247748424-3dai46fj6e07cpnvbsbvaai08rtbvr9e.apps.googleusercontent.com"
+#            client-secret: "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"
+##            redirect-uri: "http://localhost:8000/login/oauth2/code/{registrationId}"
+#            redirect-uri: "http://localhost:8000/login/oauth2/code"
+#            scope:
+#              - email
+#              - profile
+#        provider:
+#          google:
+#            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+#            token-uri: https://oauth2.googleapis.com/token
+#            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+#            user-name-attribute: email

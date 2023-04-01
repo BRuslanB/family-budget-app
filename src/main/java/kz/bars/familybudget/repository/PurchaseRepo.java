@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 @Transactional
-public interface PurchaseRepo extends JpaRepository<Purchase, Long> {
+public interface PurchaseRepo extends JpaRepository<Purchase, BigInteger> {
 
     @Query("SELECT b FROM Purchase b JOIN b.checks c WHERE c.date >= :date1 AND c.date <= :date2 ORDER BY c.date")
     List<Purchase> findAllByChecksBetweenDateOrderByDate(LocalDate date1, LocalDate date2);
