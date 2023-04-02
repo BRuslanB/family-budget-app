@@ -30,9 +30,10 @@ public class SecurityConfig {
 
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
         builder.userDetailsService(userService)
-                        .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
 
-        http.exceptionHandling().accessDeniedPage("/forbidden");
+        http.exceptionHandling()
+                .accessDeniedPage("/forbidden");
 
         http.formLogin()
                 .loginPage("/signin") //page of login
@@ -49,6 +50,14 @@ public class SecurityConfig {
         http.logout()
                 .logoutUrl("/logout") //<form action = 'logout' method = 'post'>
                 .logoutSuccessUrl("/signin");
+
+//        http.authorizeExchange()
+//                .pathMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/api-docs").permitAll()
+//                .anyExchange().authenticated();
+
+        http.authorizeHttpRequests()
+                .requestMatchers("/", "/images/**", "/signin", "/authorize", "/register",
+                                          "/v3/api-docs", "/api-docs", "/swagger-ui.html", "/swagger-ui/**").permitAll();
 
         http.csrf().disable(); //ban on post requests
 
