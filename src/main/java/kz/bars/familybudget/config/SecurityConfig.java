@@ -8,17 +8,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig  {
 
     private final UserServiceImpl userService;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,17 +54,16 @@ public class SecurityConfig {
                 .logoutUrl("/logout") //<form action = 'logout' method = 'post'>
                 .logoutSuccessUrl("/signin");
 
-//        http.authorizeExchange()
-//                .pathMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/api-docs").permitAll()
-//                .anyExchange().authenticated();
-
-        http.authorizeHttpRequests()
-                .requestMatchers("/", "/images/**", "/signin", "/authorize", "/register",
-                                          "/v3/api-docs", "/api-docs", "/swagger-ui.html", "/swagger-ui/**").permitAll();
 
         http.csrf().disable(); //ban on post requests
 
         return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/", "/images/**", "/signin", "/authorize", "/register",
+                "/v3/api-docs**",  "/swagger-ui**", "/actuator/**");
     }
 
 }
