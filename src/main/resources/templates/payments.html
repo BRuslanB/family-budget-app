@@ -326,12 +326,12 @@
                         htmlCode += "<td>" + incomesList[i]["id"] + "</td>";
                         htmlCode += "<td>" + incomesList[i]["income"] + "</td>";
                         htmlCode += "<td>" + incomesList[i]["description"] + "</td>";
-                        htmlCode += "<td style='text-align: center;'>" + incomesList[i]["sumValue"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + incomesList[i]["sumVal"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
                                     "onclick='openIncomeDetailsModal(" + incomesList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
-                        totalSum += incomesList[i]["sumValue"];
+                        totalSum += incomesList[i]["sumVal"];
                     }
                     htmlCode += "<tr>";
                     htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
@@ -376,12 +376,12 @@
                         htmlCode += "<td>" + expensesList[i]["id"] + "</td>";
                         htmlCode += "<td>" + expensesList[i]["expense"] + "</td>";
                         htmlCode += "<td>" + expensesList[i]["description"] + "</td>";
-                        htmlCode += "<td style='text-align: center;'>" + expensesList[i]["sumValue"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + expensesList[i]["sumVal"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
                                     "onclick='openExpenseDetailsModal(" + expensesList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
-                        totalSum += expensesList[i]["sumValue"];
+                        totalSum += expensesList[i]["sumVal"];
                     }
                     htmlCode += "<tr>";
                     htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
@@ -412,7 +412,7 @@
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + (checksList[i]["budget"] === null ? "-" : "+") +
-                                     checksList[i]["value"] + "</td>";
+                                     checksList[i]["val"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["date"] + "</td>";
                         htmlCode += "<td>" + checksList[i]["note"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
@@ -420,9 +420,9 @@
                                     "onclick='openCheckDetailsModal(" + checksList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
                         if (checksList[i]["budget"] === null) {
-                            totalSum -= checksList[i]["value"];
+                            totalSum -= checksList[i]["val"];
                         } else {
-                            totalSum += checksList[i]["value"];
+                            totalSum += checksList[i]["val"];
                         }
                     }
                     htmlCode += "<tr>";
@@ -464,7 +464,7 @@
                     for (let i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
-                        htmlCode += "<td style='text-align: center;'>" + checksList[i]["value"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + checksList[i]["val"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["date"] + "</td>";
                         htmlCode += "<td>" + checksList[i]["note"] + "</td>";
                         htmlCode += "</tr>";
@@ -510,7 +510,7 @@
                     for (let i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
-                        htmlCode += "<td style='text-align: center;'>" + checksList[i]["value"] + "</td>";
+                        htmlCode += "<td style='text-align: center;'>" + checksList[i]["val"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["date"] + "</td>";
                         htmlCode += "<td>" + checksList[i]["note"] + "</td>";
                         htmlCode += "</tr>";
@@ -639,7 +639,7 @@
                     JSON.stringify(
                         {
                             "id": editCheckId.value,
-                            "value": editCheckValue.value,
+                            "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
                             "budget":
@@ -655,7 +655,7 @@
                     JSON.stringify(
                         {
                             "id": editCheckId.value,
-                            "value": editCheckValue.value,
+                            "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
                             "budget": null,
@@ -689,7 +689,7 @@
                 request.send(
                     JSON.stringify(
                         {
-                            "value": editCheckValue.value,
+                            "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
                             "budget":
@@ -704,7 +704,7 @@
                 request.send(
                     JSON.stringify(
                         {
-                            "value": editCheckValue.value,
+                            "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
                             "budget": null,

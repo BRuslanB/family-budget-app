@@ -10,8 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.math.BigInteger;
 
 @SpringBootTest
+@ActiveProfiles("test")
 //@Component
 public class PurchaseDtoTests {
 
@@ -23,14 +27,17 @@ public class PurchaseDtoTests {
 
 	@Test
 	public void testPurchaseToDto() {
+		/*Arrange*/
 		Purchase purchase = new Purchase();
-		purchase.setId(25L);
+		purchase.setId(BigInteger.valueOf(25));
 		purchase.setExpense("Новая покупка");
 		purchase.setDescription("Описание новой покупки");
 
+		/*Act*/
 		PurchaseDto purchaseDto = purchaseService.toDto(purchase);
 		ExpenseCategoryDto expenseCategoryDto = expenseCategoryMapper.toDto(purchase.getCategory());
 
+		/*Assert*/
 		Assertions.assertNotNull(purchaseDto);
 		Assertions.assertEquals(purchaseDto.getId(), purchase.getId());
 		Assertions.assertEquals(purchaseDto.getExpense(), purchase.getExpense());

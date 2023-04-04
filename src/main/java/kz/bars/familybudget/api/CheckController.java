@@ -5,6 +5,7 @@ import kz.bars.familybudget.service.CheckService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class CheckController {
     private final CheckService checkService;
 
     @GetMapping(value = "{id}")
-    public CheckDto getCheck(@PathVariable(name = "id") Long id) {
+    public CheckDto getCheck(@PathVariable(name = "id") BigInteger id) {
         return checkService.getCheckDto(id);
     }
 
@@ -32,7 +33,7 @@ public class CheckController {
     }
 
     @DeleteMapping(value = "{id}")
-    public void deleteCheck(@PathVariable(name = "id") Long id) {
+    public void deleteCheck(@PathVariable(name = "id") BigInteger id) {
         checkService.deleteCheckDto(id);
     }
 
@@ -48,24 +49,24 @@ public class CheckController {
     }
 
     @GetMapping(value = "budget/{id}")
-    public List<CheckDto> getAllCheckByBudgetId(@PathVariable(name = "id") Long id) {
+    public List<CheckDto> getAllCheckByBudgetId(@PathVariable(name = "id") BigInteger id) {
         return checkService.getAllCheckByBudgetIdDto(id);
     }
 
     @GetMapping(value = "budget/{id}/dates/{date1}/{date2}")
-    public List<CheckDto> getAllCheckByBudgetBetweenDate(@PathVariable(name = "id") Long id,
+    public List<CheckDto> getAllCheckByBudgetBetweenDate(@PathVariable(name = "id") BigInteger id,
                                                          @PathVariable(name = "date1") LocalDate dateFrom,
                                                          @PathVariable(name = "date2") LocalDate dateTo) {
         return checkService.getAllCheckByBudgetBetweenDateDto(id, dateFrom, dateTo);
     }
 
     @GetMapping(value = "purchase/{id}")
-    public List<CheckDto> getAllCheckByPurchaseId(@PathVariable(name = "id") Long id) {
+    public List<CheckDto> getAllCheckByPurchaseId(@PathVariable(name = "id") BigInteger id) {
         return checkService.getAllCheckByPurchaseIdDto(id);
     }
 
     @GetMapping(value = "purchase/{id}/dates/{date1}/{date2}")
-    public List<CheckDto> getAllCheckByPurchaseBetweenDate(@PathVariable(name = "id") Long id,
+    public List<CheckDto> getAllCheckByPurchaseBetweenDate(@PathVariable(name = "id") BigInteger id,
                                                            @PathVariable(name = "date1") LocalDate dateFrom,
                                                            @PathVariable(name = "date2") LocalDate dateTo) {
         return checkService.getAllCheckByPurchaseBetweenDateDto(id, dateFrom, dateTo);

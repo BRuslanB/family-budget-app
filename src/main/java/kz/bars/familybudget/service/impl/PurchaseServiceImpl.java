@@ -9,6 +9,7 @@ import kz.bars.familybudget.service.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public Purchase getPurchase(Long id) {
+    public Purchase getPurchase(BigInteger id) {
         return purchaseRepo.findById(id).orElseThrow();
     }
 
@@ -41,7 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public void deletePurchase(Long id) {
+    public void deletePurchase(BigInteger id) {
         purchaseRepo.deleteById(id);
     }
 
@@ -75,9 +76,9 @@ public class PurchaseServiceImpl implements PurchaseService {
             // Count Value
             var sum = 0.0;
             for (Check check : purchase.getChecks()) {
-                sum += check.getValue();
+                sum += check.getVal();
             }
-            purchaseDto.setSumValue(Math.round(sum * 100.0) / 100.0);
+            purchaseDto.setSumVal(Math.round(sum * 100.0) / 100.0);
             //Add to purchaseDtoList
             purchaseDtoList.add(purchaseDto);
         }
@@ -101,10 +102,10 @@ public class PurchaseServiceImpl implements PurchaseService {
             var sum = 0.0;
             for (Check check : purchase.getChecks()) {
                 if (check.getDate().compareTo(dateFrom) >= 0 && check.getDate().compareTo(dateTo) <= 0) {
-                    sum += check.getValue();
+                    sum += check.getVal();
                 }
             }
-            purchaseDto.setSumValue(Math.round(sum * 100.0) / 100.0);
+            purchaseDto.setSumVal(Math.round(sum * 100.0) / 100.0);
             //Add to purchaseDtoList
             purchaseDtoList.add(purchaseDto);
         }

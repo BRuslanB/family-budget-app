@@ -9,8 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.math.BigInteger;
 
 @SpringBootTest
+@ActiveProfiles("test")
 //@Component
 //@RequiredArgsConstructor
 public class BudgetDtoTests {
@@ -22,13 +26,16 @@ public class BudgetDtoTests {
 
 	@Test
 	public void testBudgetToDto() {
+		/*Arrange*/
 		Budget budget = new Budget();
-		budget.setId(35L);
+		budget.setId(BigInteger.valueOf(35));
 		budget.setIncome("Новый доход");
 		budget.setDescription("Описание нового дохода");
 
+		/*Act*/
 		BudgetDto budgetDto = budgetService.toDto(budget);
 
+		/*Assert*/
 		Assertions.assertNotNull(budgetDto);
 		Assertions.assertEquals(budgetDto.getId(), budget.getId());
 		Assertions.assertEquals(budgetDto.getIncome(), budget.getIncome());

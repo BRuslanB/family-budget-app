@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class HomeController {
     @GetMapping(value = "/signin")
     public String signin() {
         return "signin";
+    }
+
+    @GetMapping(value = "/authorize")
+    public String authorize() {
+        return "authorize";
     }
 
     @GetMapping(value = "/register")
@@ -127,7 +133,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update-category-expense")
-    public String updateExpenseCategory(@RequestParam(name = "expense_category_id") Long expenseCategoryId,
+    public String updateExpenseCategory(@RequestParam(name = "expense_category_id") BigInteger expenseCategoryId,
                                         @RequestParam(name = "expense_category_name") String expenseCategoryName,
                                         @RequestParam(name = "expense_category_description") String expenseCategoryDescription) {
 
@@ -145,7 +151,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete-category-expense")
-    public String deleteExpenseCategory(@RequestParam(name = "expense_category_id") Long expenseCategoryId) {
+    public String deleteExpenseCategory(@RequestParam(name = "expense_category_id") BigInteger expenseCategoryId) {
 
         try {
             expenseCategoryService.deleteExpenseCategory(expenseCategoryId);
@@ -161,7 +167,7 @@ public class HomeController {
     @PostMapping("/add-expense")
     public String addTypeExpense(@RequestParam(name = "expense_name") String expenseName,
                                  @RequestParam(name = "expense_description") String expenseDescription,
-                                 @RequestParam(name = "expense_category_id") Long expenseCategoryId) {
+                                 @RequestParam(name = "expense_category_id") BigInteger expenseCategoryId) {
 
         ExpenseCategory expenseCategory = expenseCategoryService.getExpenseCategory(expenseCategoryId);
 
@@ -178,10 +184,10 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update-expense")
-    public String updateTypeExpense(@RequestParam(name = "expense_id") Long expenseId,
+    public String updateTypeExpense(@RequestParam(name = "expense_id") BigInteger expenseId,
                                     @RequestParam(name = "expense_name") String expenseName,
                                     @RequestParam(name = "expense_description") String expenseDescription,
-                                    @RequestParam(name = "expense_category_id") Long expenseCategoryId) {
+                                    @RequestParam(name = "expense_category_id") BigInteger expenseCategoryId) {
 
         Purchase purchase = purchaseService.getPurchase(expenseId);
 
@@ -203,7 +209,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete-expense")
-    public String deleteTypeExpense(@RequestParam(name = "expense_id") Long expenseId) {
+    public String deleteTypeExpense(@RequestParam(name = "expense_id") BigInteger expenseId) {
 
         try {
             purchaseService.deletePurchase(expenseId);
@@ -230,7 +236,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update-income")
-    public String updateTypeIncome(@RequestParam(name = "income_id") Long incomeId,
+    public String updateTypeIncome(@RequestParam(name = "income_id") BigInteger incomeId,
                                    @RequestParam(name = "income_name") String incomeName,
                                    @RequestParam(name = "income_description") String incomeDescription) {
 
@@ -249,7 +255,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete-income")
-    public String deleteTypeIncome(@RequestParam(name = "income_id") Long incomeId) {
+    public String deleteTypeIncome(@RequestParam(name = "income_id") BigInteger incomeId) {
 
         try {
             budgetService.deleteBudget(incomeId);

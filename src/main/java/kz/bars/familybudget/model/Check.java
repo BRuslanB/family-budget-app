@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Check extends BaseEntity {
 
     @Column(nullable = false)
-    private Double value;
+    private Double val;
 
     @Column(nullable = false)
     private LocalDate date;

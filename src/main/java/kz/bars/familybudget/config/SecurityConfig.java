@@ -8,17 +8,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig  {
 
     private final UserServiceImpl userService;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -30,9 +33,10 @@ public class SecurityConfig {
 
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
         builder.userDetailsService(userService)
-                        .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
 
-        http.exceptionHandling().accessDeniedPage("/forbidden");
+        http.exceptionHandling()
+                .accessDeniedPage("/forbidden");
 
         http.formLogin()
                 .loginPage("/signin") //page of login
@@ -41,13 +45,25 @@ public class SecurityConfig {
                 .failureUrl("/signin?error") //if incorrect email or password
                 .usernameParameter("user_email") //<input type = 'email' name = 'user_email'>
                 .passwordParameter("user_password"); //<input type = 'password' name = 'user_password'>
+//                .and()
+//                .oauth2Login()
+//                .and()
+//                .oauth2Client();
 
         http.logout()
                 .logoutUrl("/logout") //<form action = 'logout' method = 'post'>
                 .logoutSuccessUrl("/signin");
 
+
         http.csrf().disable(); //ban on post requests
 
         return http.build();
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/", "/images/**", "/signin", "/authorize", "/register",
+                "/v3/api-docs**",  "/swagger-ui**", "/actuator/**");
+    }
+
 }

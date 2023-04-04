@@ -6,6 +6,7 @@ import kz.bars.familybudget.service.ExpenseCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     }
 
     @Override
-    public ExpenseCategory getExpenseCategory(Long id) {
+    public ExpenseCategory getExpenseCategory(BigInteger id) {
         return expenseCategoryRepo.findById(id).orElseThrow();
     }
 
@@ -35,7 +36,7 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     }
 
     @Override
-    public void deleteExpenseCategory(Long id) {
+    public void deleteExpenseCategory(BigInteger id) {
         expenseCategoryRepo.deleteById(id);
     }
 

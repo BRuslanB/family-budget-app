@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,14 @@ public class CheckServiceImpl implements CheckService {
     private final PurchaseService purchaseService;
 
     @Override
-    public CheckDto getCheckDto(Long id) {
+    public CheckDto getCheckDto(BigInteger id) {
 
         Check check = checkRepo.findById(id).orElse(null);
         CheckDto checkDto = new CheckDto();
 
         if (check != null) {
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setBudget(budgetService.toDto(check.getBudget()));
@@ -50,7 +51,7 @@ public class CheckServiceImpl implements CheckService {
 
         Check check = new Check();
 
-        check.setValue(checkDto.getValue());
+        check.setVal(checkDto.getVal());
         check.setDate(checkDto.getDate());
         check.setNote(checkDto.getNote());
         try {
@@ -81,7 +82,7 @@ public class CheckServiceImpl implements CheckService {
         }
 
         if (check != null) {
-            check.setValue(checkDto.getValue());
+            check.setVal(checkDto.getVal());
             check.setDate(checkDto.getDate());
             check.setNote(checkDto.getNote());
             try {
@@ -102,7 +103,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public void deleteCheckDto(Long id) {
+    public void deleteCheckDto(BigInteger id) {
         checkRepo.deleteById(id);
     }
 
@@ -116,7 +117,7 @@ public class CheckServiceImpl implements CheckService {
         for (Check check : checkList) {
             checkDto = new CheckDto();
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setBudget(budgetService.toDto(check.getBudget()));
@@ -137,7 +138,7 @@ public class CheckServiceImpl implements CheckService {
         for (Check check : checkList) {
             checkDto = new CheckDto();
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setBudget(budgetService.toDto(check.getBudget()));
@@ -149,7 +150,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByBudgetIdDto(Long id) {
+    public List<CheckDto> getAllCheckByBudgetIdDto(BigInteger id) {
 
         List<Check> checkList = checkRepo.findAllByBudgetIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -158,7 +159,7 @@ public class CheckServiceImpl implements CheckService {
         for (Check check : checkList) {
             checkDto = new CheckDto();
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setBudget(budgetService.toDto(check.getBudget()));
@@ -169,7 +170,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(BigInteger id, LocalDate dateFrom, LocalDate dateTo) {
 
         List<Check> checkList = checkRepo.findAllByBudgetIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -178,7 +179,7 @@ public class CheckServiceImpl implements CheckService {
         for (Check check : checkList) {
             checkDto = new CheckDto();
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setBudget(budgetService.toDto(check.getBudget()));
@@ -189,7 +190,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByPurchaseIdDto(Long id) {
+    public List<CheckDto> getAllCheckByPurchaseIdDto(BigInteger id) {
 
         List<Check> checkList = checkRepo.findAllByPurchaseIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -198,7 +199,7 @@ public class CheckServiceImpl implements CheckService {
         for (Check check : checkList) {
             checkDto = new CheckDto();
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
@@ -209,7 +210,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(BigInteger id, LocalDate dateFrom, LocalDate dateTo) {
 
         List<Check> checkList = checkRepo.findAllByPurchaseIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -218,7 +219,7 @@ public class CheckServiceImpl implements CheckService {
         for (Check check : checkList) {
             checkDto = new CheckDto();
             checkDto.setId(check.getId());
-            checkDto.setValue(check.getValue());
+            checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
             checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));

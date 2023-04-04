@@ -5,15 +5,22 @@ import kz.bars.familybudget.model.Purchase;
 import kz.bars.familybudget.repository.ExpenseCategoryRepo;
 import kz.bars.familybudget.repository.PurchaseRepo;
 import kz.bars.familybudget.service.PurchaseService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
+@ExtendWith(SpringExtension.class)
 //@Service
 public class PurchaseServiceTests {
 
@@ -26,23 +33,35 @@ public class PurchaseServiceTests {
 	@Autowired
 	PurchaseService purchaseService;
 
+	@BeforeEach
+	public void init() {
+		purchaseRepo.deleteAll();
+		expenseCategoryRepo.deleteAll();
+	}
+
+	@AfterEach
+	public void teardown() {
+		purchaseRepo.deleteAll();
+		expenseCategoryRepo.deleteAll();
+	}
+
 	@Test
 	public void checkPurchaseAdd() {
+		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
-
-		expenseCategoryRepo.deleteAll();
 		expenseCategoryRepo.save(expenseCategory);
-		purchaseRepo.deleteAll();
 
 		Purchase purchase = new Purchase();
 		purchase.setExpense("Новая покупка");
 		purchase.setDescription("Описание новой покупки");
 		purchase.setCategory(expenseCategory);
 
+		/*Act*/
 		purchaseService.addPurchase(purchase);
 
+		/*Assert*/
 		List<Purchase> purchaseList = purchaseRepo.findAll();
 		Assertions.assertNotNull(purchaseList);
 		Assertions.assertTrue(purchaseList.size()>0);
@@ -54,25 +73,20 @@ public class PurchaseServiceTests {
 		Assertions.assertEquals(purchaseList.get(0).getCategory().getName(), purchase.getCategory().getName());
 		Assertions.assertEquals(purchaseList.get(0).getCategory().getDescription(),
 								purchase.getCategory().getDescription());
-
-		purchaseRepo.deleteAll();
 	}
 
 	@Test
 	public void checkPurchaseUpdate() {
+		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
-
-		purchaseRepo.deleteAll();
-		expenseCategoryRepo.deleteAll();
 		expenseCategoryRepo.save(expenseCategory);
 
 		Purchase purchase = new Purchase();
 		purchase.setExpense("Новая покупка");
 		purchase.setDescription("Описание новой покупки");
 		purchase.setCategory(expenseCategory);
-
 		purchaseRepo.save(purchase);
 
 		ExpenseCategory otherExpenseCategory = new ExpenseCategory();
@@ -84,8 +98,10 @@ public class PurchaseServiceTests {
 		purchase.setDescription("Описание измененной покупки");
 		purchase.setCategory(otherExpenseCategory);
 
+		/*Act*/
 		purchaseService.updatePurchase(purchase);
 
+		/*Assert*/
 		Purchase currentPurchase = purchaseRepo.findById(purchase.getId()).orElse(null);
 		Assertions.assertNotNull(currentPurchase);
 		Assertions.assertEquals(currentPurchase.getId(), purchase.getId());
@@ -94,54 +110,51 @@ public class PurchaseServiceTests {
 		Assertions.assertNotNull(currentPurchase.getCategory());
 		Assertions.assertEquals(currentPurchase.getCategory().getName(), purchase.getCategory().getName());
 		Assertions.assertEquals(currentPurchase.getCategory().getDescription(), purchase.getCategory().getDescription());
-
-		purchaseRepo.deleteAll();
 	}
 
 	@Test
 	public void checkPurchaseDelete() {
+		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
-
-		purchaseRepo.deleteAll();
-		expenseCategoryRepo.deleteAll();
 		expenseCategoryRepo.save(expenseCategory);
 
 		Purchase purchase = new Purchase();
 		purchase.setExpense("Новая покупка");
 		purchase.setDescription("Описание новой покупки");
 		purchase.setCategory(expenseCategory);
-
 		purchaseRepo.save(purchase);
 
 		Purchase currentPurchase = purchaseRepo.findById(purchase.getId()).orElse(null);
 		Assertions.assertNotNull(currentPurchase);
 
+		/*Act*/
 		purchaseService.deletePurchase(currentPurchase.getId());
 
+		/*Assert*/
 		List<Purchase> purchaseList = purchaseRepo.findAll();
 		Assertions.assertTrue(purchaseList.isEmpty());
 	}
 
 	@Test
 	public void checkPurchaseGetById() {
+		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
-
-		expenseCategoryRepo.deleteAll();
 		expenseCategoryRepo.save(expenseCategory);
-		purchaseRepo.deleteAll();
 
 		Purchase purchase = new Purchase();
 		purchase.setExpense("Новая покупка");
 		purchase.setDescription("Описание новой покупки");
 		purchase.setCategory(expenseCategory);
-
 		purchaseRepo.save(purchase);
 
+		/*Act*/
 		Purchase currentPurchase = purchaseService.getPurchase(purchase.getId());
+
+		/*Assert*/
 		Assertions.assertNotNull(currentPurchase);
 		Assertions.assertEquals(currentPurchase.getId(), purchase.getId());
 		Assertions.assertEquals(currentPurchase.getExpense(), purchase.getExpense());
@@ -149,19 +162,15 @@ public class PurchaseServiceTests {
 		Assertions.assertNotNull(currentPurchase.getCategory());
 		Assertions.assertEquals(currentPurchase.getCategory().getName(), purchase.getCategory().getName());
 		Assertions.assertEquals(currentPurchase.getCategory().getDescription(), purchase.getCategory().getDescription());
-
-		purchaseRepo.deleteAll();
 	}
 
 	@Test
 	public void checkPurchaseGetAll() {
+		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
-
-		expenseCategoryRepo.deleteAll();
 		expenseCategoryRepo.save(expenseCategory);
-		purchaseRepo.deleteAll();
 
 		List<Purchase> purchaseList = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
@@ -173,9 +182,11 @@ public class PurchaseServiceTests {
 			purchaseRepo.save(purchase);
 		}
 
+		/*Act*/
 		List<Purchase> currentPurchaseList = purchaseService.getAllPurchase();
-		Assertions.assertFalse(currentPurchaseList.isEmpty());
 
+		/*Assert*/
+		Assertions.assertFalse(currentPurchaseList.isEmpty());
 		for (int i = 0; i < 10; i++) {
 			Assertions.assertNotNull(currentPurchaseList.get(i));
 			Assertions.assertEquals(currentPurchaseList.get(i).getExpense(), purchaseList.get(i).getExpense());
@@ -186,8 +197,6 @@ public class PurchaseServiceTests {
 			Assertions.assertEquals(currentPurchaseList.get(i).getCategory().getDescription(),
 									purchaseList.get(i).getCategory().getDescription());
 		}
-
-		purchaseRepo.deleteAll();
 	}
 
 }
