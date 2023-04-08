@@ -60,10 +60,10 @@ public class SecurityConfig  {
         return http.build();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/", "/images/**", "/signin", "/authorize", "/register",
-                "/v3/api-docs**",  "/swagger-ui**", "/actuator/**");
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().requestMatchers("/", "/images/**", "/signin", "/authorize", "/register",
+//                "/v3/api-docs**",  "/swagger-ui**", "/actuator/**");
+//    }
 
 }

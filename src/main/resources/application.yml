@@ -1,6 +1,8 @@
+# general settings
 server:
   port: 8000
 
+# spring settings
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5440/family_budget
@@ -14,7 +16,7 @@ spring:
     enabled: true
     change-log: classpath:/db/changelog/changelog-master.xml
 
-# swagger-ui and api-docs endpoint custom path
+# springdoc settings
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -23,15 +25,25 @@ springdoc:
     path: /api-docs
     enabled: true
 
-#springfox:
-#  documentation:
-#    swagger:
-#      v2:
-#        path: /swagger.json
-#    springfox:
-#      swagger-ui:
-#        enabled: true
-#        path: /swagger-ui.html
+# actuator settings
+management:
+#  server:
+#    port: 9000
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: "/"
+      path-mapping:
+        health: "healthcheck"
+        info: "info"
+        metrics: "metrics"
+  endpoint:
+    health:
+      show-details: when_authorized
+#  metrics:
+#    tags:
+#      application: initializr-dashboard
 
 #  security:
 #    oauth2:
