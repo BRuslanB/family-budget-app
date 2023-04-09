@@ -1,0 +1,91 @@
+2023-04-09T22:23:30.208+06:00  INFO 67440 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-09T22:23:30.248+06:00  INFO 67440 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-04-09T22:23:30.263+06:00  INFO 67440 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-04-09T22:23:38.318+06:00  INFO 47152 --- [main] k.b.f.FamilyBudgetApplication            : Starting FamilyBudgetApplication using Java 17.0.2 with PID 47152 (C:\Users\rbaid\IdeaProjects\JavaSpringBoot\family-budget\build\classes\java\main started by rbaid in C:\Users\rbaid\IdeaProjects\JavaSpringBoot\family-budget)
+2023-04-09T22:23:38.321+06:00  INFO 47152 --- [main] k.b.f.FamilyBudgetApplication            : No active profile set, falling back to 1 default profile: "default"
+2023-04-09T22:23:39.860+06:00  INFO 47152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-09T22:23:39.967+06:00  INFO 47152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 6 JPA repository interfaces.
+2023-04-09T22:23:40.742+06:00  INFO 47152 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8000 (http)
+2023-04-09T22:23:40.753+06:00  INFO 47152 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-09T22:23:40.753+06:00  INFO 47152 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-04-09T22:23:40.861+06:00  INFO 47152 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-09T22:23:40.862+06:00  INFO 47152 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2249 ms
+2023-04-09T22:23:41.147+06:00  INFO 47152 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-04-09T22:23:41.430+06:00  INFO 47152 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6113a26f
+2023-04-09T22:23:41.432+06:00  INFO 47152 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-04-09T22:23:41.579+06:00  INFO 47152 --- [main] liquibase.database                       : Set default schema name to public
+2023-04-09T22:23:41.925+06:00  INFO 47152 --- [main] liquibase.changelog                      : Reading from public.databasechangelog
+2023-04-09T22:23:41.935+06:00  INFO 47152 --- [main] liquibase.executor                       : Changelog query completed.
+2023-04-09T22:23:42.062+06:00  INFO 47152 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-09T22:23:42.126+06:00  INFO 47152 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-04-09T22:23:42.305+06:00  WARN 47152 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-04-09T22:23:42.447+06:00  INFO 47152 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-04-09T22:23:43.272+06:00  INFO 47152 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-09T22:23:43.284+06:00  INFO 47152 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-09T22:23:44.076+06:00  WARN 47152 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-09T22:23:44.212+06:00  INFO 47152 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2c48eb31, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@323fa578, org.springframework.security.web.context.SecurityContextHolderFilter@1d92d132, org.springframework.security.web.header.HeaderWriterFilter@5e834f3a, org.springframework.security.web.authentication.logout.LogoutFilter@17856f0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3ffa424d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2291fb1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@213f2d00, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6d543ec2, org.springframework.security.web.access.ExceptionTranslationFilter@31a1b37b]
+2023-04-09T22:23:44.421+06:00  INFO 47152 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-04-09T22:23:44.961+06:00  INFO 47152 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path ''
+2023-04-09T22:23:45.068+06:00  INFO 47152 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8000 (http) with context path ''
+2023-04-09T22:23:45.086+06:00  INFO 47152 --- [main] k.b.f.FamilyBudgetApplication            : Started FamilyBudgetApplication in 7.319 seconds (process running for 8.104)
+2023-04-09T22:23:51.397+06:00  INFO 47152 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-09T22:23:51.397+06:00  INFO 47152 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-09T22:23:51.399+06:00  INFO 47152 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-04-09T22:23:51.458+06:00  INFO 47152 --- [http-nio-8000-exec-1] k.b.f.controller.HomeController          : !Call method /signin()
+2023-04-09T22:23:52.061+06:00  WARN 47152 --- [http-nio-8000-exec-1] n.n.u.t.e.ExpressionProcessor            : Fragment expression "layout/main.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+2023-04-09T22:23:59.551+06:00  INFO 47152 --- [http-nio-8000-exec-4] k.b.familybudget.config.SecurityConfig   : !User admin@gmail.com has logged in successfully
+2023-04-09T22:31:54.056+06:00  INFO 47152 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-09T22:31:54.077+06:00  INFO 47152 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-04-09T22:31:54.088+06:00  INFO 47152 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-04-09T22:32:01.011+06:00  INFO 75696 --- [main] k.b.f.FamilyBudgetApplication            : Starting FamilyBudgetApplication using Java 17.0.2 with PID 75696 (C:\Users\rbaid\IdeaProjects\JavaSpringBoot\family-budget\build\classes\java\main started by rbaid in C:\Users\rbaid\IdeaProjects\JavaSpringBoot\family-budget)
+2023-04-09T22:32:01.015+06:00  INFO 75696 --- [main] k.b.f.FamilyBudgetApplication            : No active profile set, falling back to 1 default profile: "default"
+2023-04-09T22:32:02.426+06:00  INFO 75696 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-09T22:32:02.525+06:00  INFO 75696 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 6 JPA repository interfaces.
+2023-04-09T22:32:03.177+06:00  INFO 75696 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8000 (http)
+2023-04-09T22:32:03.186+06:00  INFO 75696 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-09T22:32:03.186+06:00  INFO 75696 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-04-09T22:32:03.287+06:00  INFO 75696 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-09T22:32:03.288+06:00  INFO 75696 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1956 ms
+2023-04-09T22:32:03.562+06:00  INFO 75696 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-04-09T22:32:03.892+06:00  INFO 75696 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@299fc582
+2023-04-09T22:32:03.894+06:00  INFO 75696 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-04-09T22:32:04.042+06:00  INFO 75696 --- [main] liquibase.database                       : Set default schema name to public
+2023-04-09T22:32:04.380+06:00  INFO 75696 --- [main] liquibase.changelog                      : Reading from public.databasechangelog
+2023-04-09T22:32:04.390+06:00  INFO 75696 --- [main] liquibase.executor                       : Changelog query completed.
+2023-04-09T22:32:04.496+06:00  INFO 75696 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-09T22:32:04.563+06:00  INFO 75696 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-04-09T22:32:04.733+06:00  WARN 75696 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-04-09T22:32:04.869+06:00  INFO 75696 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-04-09T22:32:05.728+06:00  INFO 75696 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-09T22:32:05.739+06:00  INFO 75696 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-09T22:32:06.948+06:00  WARN 75696 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-09T22:32:07.160+06:00  INFO 75696 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5cc088a8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25777ab6, org.springframework.security.web.context.SecurityContextHolderFilter@7310bc90, org.springframework.security.web.header.HeaderWriterFilter@4bdec54, org.springframework.security.web.authentication.logout.LogoutFilter@1285ec6, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2abe5132, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@18247d9b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5632bed3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38ebf8dc, org.springframework.security.web.access.ExceptionTranslationFilter@35c646b5]
+2023-04-09T22:32:08.253+06:00  INFO 75696 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-04-09T22:32:08.872+06:00  INFO 75696 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path ''
+2023-04-09T22:32:08.972+06:00  INFO 75696 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8000 (http) with context path ''
+2023-04-09T22:32:08.989+06:00  INFO 75696 --- [main] k.b.f.FamilyBudgetApplication            : Started FamilyBudgetApplication in 8.801 seconds (process running for 9.579)
+2023-04-09T22:32:28.499+06:00  INFO 75696 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-09T22:32:28.499+06:00  INFO 75696 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-09T22:32:28.501+06:00  INFO 75696 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-04-09T22:32:28.552+06:00  INFO 75696 --- [http-nio-8000-exec-1] k.b.f.controller.HomeController          : !Call method /index()
+2023-04-09T22:32:29.085+06:00  WARN 75696 --- [http-nio-8000-exec-1] n.n.u.t.e.ExpressionProcessor            : Fragment expression "layout/main.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+2023-04-09T22:32:31.014+06:00  INFO 75696 --- [http-nio-8000-exec-5] k.b.f.controller.HomeController          : !Call method /signin()
+2023-04-09T22:32:38.132+06:00  INFO 75696 --- [http-nio-8000-exec-6] k.b.familybudget.config.SecurityConfig   : !User omarov@gmail.com has logged in successfully
+2023-04-09T22:32:38.152+06:00  INFO 75696 --- [http-nio-8000-exec-9] k.b.f.controller.HomeController          : !Call method /profile()
+2023-04-09T22:32:41.578+06:00  INFO 75696 --- [http-nio-8000-exec-10] k.b.f.controller.HomeController          : !Call method /settings()
+2023-04-09T22:33:13.201+06:00  INFO 75696 --- [http-nio-8000-exec-4] k.b.f.controller.HomeController          : !Call method /payments()
+2023-04-09T22:33:13.294+06:00  INFO 75696 --- [http-nio-8000-exec-5] k.b.familybudget.api.PurchaseController  : !Getting a list of Purchase
+2023-04-09T22:33:13.294+06:00  INFO 75696 --- [http-nio-8000-exec-3] k.b.familybudget.api.BudgetController    : !Getting a list of Income
+2023-04-09T22:33:13.299+06:00  INFO 75696 --- [http-nio-8000-exec-8] k.bars.familybudget.api.CheckController  : !Getting a list of Check
+2023-04-09T22:33:13.394+06:00  INFO 75696 --- [http-nio-8000-exec-7] k.b.familybudget.api.BudgetController    : !Getting a list of Income
+2023-04-09T22:33:13.396+06:00  INFO 75696 --- [http-nio-8000-exec-6] k.b.familybudget.api.PurchaseController  : !Getting a list of Purchase
+2023-04-09T22:33:27.513+06:00  INFO 75696 --- [http-nio-8000-exec-3] k.b.familybudget.api.PurchaseController  : !Getting a list of Purchase for the period from 2023-02-01 to 2023-04-09
+2023-04-09T22:33:27.513+06:00  INFO 75696 --- [http-nio-8000-exec-5] k.bars.familybudget.api.CheckController  : !Getting a list of Check for the period from 2023-02-01 to 2023-04-09
+2023-04-09T22:33:27.514+06:00  INFO 75696 --- [http-nio-8000-exec-4] k.b.familybudget.api.BudgetController    : !Getting a list of Income for the period from 2023-02-01 to 2023-04-09
+2023-04-09T22:33:28.700+06:00  INFO 75696 --- [http-nio-8000-exec-8] k.bars.familybudget.api.CheckController  : !Getting a list of Checks for a given Income, id=1 from 2023-02-01 to 2023-04-09
+2023-04-09T22:33:31.654+06:00  INFO 75696 --- [http-nio-8000-exec-7] k.bars.familybudget.api.CheckController  : !Getting a list of Checks for a given Purchase, id=8 from 2023-02-01 to 2023-04-09
+2023-04-09T22:33:35.606+06:00  INFO 75696 --- [http-nio-8000-exec-6] k.b.familybudget.config.SecurityConfig   : !User omarov@gmail.com has logged out
+2023-04-09T22:33:35.615+06:00  INFO 75696 --- [http-nio-8000-exec-10] k.b.f.controller.HomeController          : !Call method /signin()
+2023-04-09T22:38:07.738+06:00  INFO 75696 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-09T22:38:07.772+06:00  INFO 75696 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-04-09T22:38:07.788+06:00  INFO 75696 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

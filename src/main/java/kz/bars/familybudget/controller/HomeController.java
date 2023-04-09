@@ -5,6 +5,7 @@ import kz.bars.familybudget.model.ExpenseCategory;
 import kz.bars.familybudget.model.Purchase;
 import kz.bars.familybudget.service.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Log4j2
 public class HomeController {
     private final AccountService accountService;
     private final ExpenseCategoryService expenseCategoryService;
@@ -26,33 +28,39 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String index() {
+        log.info("!Call method /index()");
         return "index";
     }
 
     @GetMapping(value = "/signin")
     public String signin() {
+        log.info("!Call method /signin()");
         return "signin";
     }
 
     @GetMapping(value = "/authorize")
     public String authorize() {
+        log.info("!Call method /authorize()");
         return "authorize";
     }
 
     @GetMapping(value = "/register")
     public String register() {
+        log.info("!Call method /register()");
         return "register";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/profile")
     public String profile() {
+        log.info("!Call method /profile()");
         return "profile";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/payments")
     public String payments() {
+        log.info("!Call method /payments()");
         return "payments";
     }
 
@@ -69,11 +77,13 @@ public class HomeController {
         List<Budget> allBudget =  budgetService.getAllBudget();
         model.addAttribute("allIncome", allBudget);
 
+        log.info("!Call method /settings()");
         return "settings";
     }
 
     @GetMapping(value = "/forbidden")
     public String forbidden() {
+        log.info("!Call method /forbidden()");
         return "forbidden";
     }
 
@@ -87,8 +97,14 @@ public class HomeController {
 
         if (accountService.registerUser(userEmail, userFirstname, userLastname, userBirthDay,
                 userPassword, userRePassword) != null) {
+            log.info("!User successfully registered, " + "email=" + userEmail + ", first name=" + userFirstname +
+                     ", last name=" + userLastname + ", birth day=" + userBirthDay + ", password=" + userPassword +
+                     ", repeat password=" + userRePassword);
             return "redirect:/register?success";
         } else {
+            log.info("!User not registered, " + "email=" + userEmail + ", first name=" + userFirstname +
+                    ", last name=" + userLastname + ", birth day=" + userBirthDay + ", password=" + userPassword +
+                    ", repeat password=" + userRePassword);
             return "redirect:/register?error";
         }
     }
@@ -100,8 +116,16 @@ public class HomeController {
                            @RequestParam(name = "user_re_new_password") String userReNewPassword) {
 
         if (accountService.updatePassword(userOldPassword, userNewPassword, userReNewPassword) != null) {
+            log.info("!User updated the Password successfully, " + "old password=" +
+                     userOldPassword.replace("(?)","*") + ", new password=" +
+                     userNewPassword.replace("(?)","*") + ", renew password=" +
+                     userReNewPassword.replace("(?)","*"));
             return "redirect:/profile?password_success";
         } else {
+            log.info("!User has not updated the Password, " + "old password=" +
+                    userOldPassword.replace("(?)","*") + ", new password=" +
+                    userNewPassword.replace("(?)","*") + ", renew password=" +
+                    userReNewPassword.replace("(?)","*"));
             return "redirect:/profile?password_error";
         }
     }
@@ -113,8 +137,12 @@ public class HomeController {
                                 @RequestParam(name = "user_birth_day") LocalDate birthDay) {
 
         if (accountService.updateProfile(firstName, lastName, birthDay) != null) {
+            log.info("!User updated the Profile successfully, " + "first name=" + firstName +
+                     ", last name=" + lastName + ", birth day=" + birthDay);
             return "redirect:/profile?update_success";
         }
+        log.info("!User has not updated the Profile, " + "first name=" + firstName +
+                 ", last name=" + lastName + ", birth day=" + birthDay);
         return "redirect:/profile?update_error";
     }
 
@@ -128,6 +156,8 @@ public class HomeController {
         expenseCategory.setDescription(expenseCategoryDescription);
         expenseCategoryService.addExpenseCategory(expenseCategory);
 
+        log.info("!New Category added, " + "name=" + expenseCategoryName +
+                 ", description=" + expenseCategoryDescription);
         return "redirect:/settings?category_success";
     }
 
@@ -144,8 +174,12 @@ public class HomeController {
             expenseCategory.setDescription(expenseCategoryDescription);
             expenseCategoryService.updateExpenseCategory(expenseCategory);
 
+            log.info("!Category updated successfully, " + "id=" + expenseCategoryId +
+                     ", name=" + expenseCategoryName + ", description=" + expenseCategoryDescription);
             return "redirect:/settings?category_success";
         }
+        log.info("!Category not updated, " + "id=" + expenseCategoryId +
+                 ", name=" + expenseCategoryName + ", description=" + expenseCategoryDescription);
         return "redirect:/settings?category_error";
     }
 
@@ -155,10 +189,11 @@ public class HomeController {
 
         try {
             expenseCategoryService.deleteExpenseCategory(expenseCategoryId);
+            log.info("!Category removed, " + "id=" + expenseCategoryId);
             return "redirect:/settings?category_success";
 
         } catch (Exception e) {
-
+            log.info("!Category not removed, " + "id=" + expenseCategoryId);
             return "redirect:/settings?category_error";
         }
     }
@@ -179,6 +214,8 @@ public class HomeController {
             purchaseService.addPurchase(purchase);
         }
 
+        log.info("!New Expense added, " + "name=" + expenseName + ", description=" + expenseDescription +
+                 ", category=" + expenseCategoryId);
         return "redirect:/settings?expense_success";
     }
 
@@ -202,8 +239,13 @@ public class HomeController {
                 purchaseService.updatePurchase(purchase);
             }
 
+            log.info("!Expense updated successfully, " + "id=" + expenseId + ", name=" + expenseName +
+                    ", description=" + expenseDescription + ", category=" + expenseCategoryId);
             return "redirect:/settings?expense_success";
         }
+
+        log.info("!Expense not updated, " + "id=" + expenseId + ", name=" + expenseName +
+                ", description=" + expenseDescription + ", category=" + expenseCategoryId);
         return "redirect:/settings?expense_error";
     }
 
@@ -213,10 +255,11 @@ public class HomeController {
 
         try {
             purchaseService.deletePurchase(expenseId);
+            log.info("!Expense removed, " + "id=" + expenseId);
             return "redirect:/settings?expense_success";
 
         } catch (Exception e) {
-
+            log.info("!Expense not removed, " + "id=" + expenseId);
             return "redirect:/settings?expense_error";
         }
     }
@@ -231,6 +274,7 @@ public class HomeController {
         budget.setDescription(incomeDescription);
         budgetService.addBudget(budget);
 
+        log.info("!New Income added, " + "name=" + incomeName + ", description=" + incomeDescription);
         return "redirect:/settings?income_success";
     }
 
@@ -243,13 +287,17 @@ public class HomeController {
         Budget budget = budgetService.getBudget(incomeId);
 
         if (budget != null) {
-
             budget.setIncome(incomeName);
             budget.setDescription(incomeDescription);
             budgetService.updateBudget(budget);
 
+            log.info("!Income updated successfully, " + "id=" + incomeId + ", name=" + incomeName +
+                     ", description=" + incomeDescription);
             return "redirect:/settings?income_success";
         }
+
+        log.info("!Income not updated, " + "id=" + incomeId + ", name=" + incomeName +
+                ", description=" + incomeDescription);
         return "redirect:/settings?income_error";
     }
 
@@ -259,10 +307,11 @@ public class HomeController {
 
         try {
             budgetService.deleteBudget(incomeId);
+            log.info("!Income removed, " + "id=" + incomeId);
             return "redirect:/settings?income_success";
 
         } catch (Exception e) {
-
+            log.info("!Income not removed, " + "id=" + incomeId);
             return "redirect:/settings?income_error";
         }
     }
