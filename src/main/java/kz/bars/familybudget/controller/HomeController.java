@@ -98,13 +98,15 @@ public class HomeController {
         if (accountService.registerUser(userEmail, userFirstname, userLastname, userBirthDay,
                 userPassword, userRePassword) != null) {
             log.info("!User successfully registered, " + "email=" + userEmail + ", first name=" + userFirstname +
-                     ", last name=" + userLastname + ", birth day=" + userBirthDay + ", password=" + userPassword +
-                     ", repeat password=" + userRePassword);
+                     ", last name=" + userLastname + ", birth day=" + userBirthDay +
+                     ", password=" + userPassword.replaceAll(".", "*") +
+                     ", repeat password=" + userRePassword.replaceAll(".", "*"));
             return "redirect:/register?success";
         } else {
             log.info("!User not registered, " + "email=" + userEmail + ", first name=" + userFirstname +
-                    ", last name=" + userLastname + ", birth day=" + userBirthDay + ", password=" + userPassword +
-                    ", repeat password=" + userRePassword);
+                    ", last name=" + userLastname + ", birth day=" + userBirthDay +
+                    ", password=" + userPassword.replaceAll(".", "*") +
+                    ", repeat password=" + userRePassword.replaceAll(".", "*"));
             return "redirect:/register?error";
         }
     }
@@ -116,16 +118,16 @@ public class HomeController {
                            @RequestParam(name = "user_re_new_password") String userReNewPassword) {
 
         if (accountService.updatePassword(userOldPassword, userNewPassword, userReNewPassword) != null) {
-            log.info("!User updated the Password successfully, " + "old password=" +
-                     userOldPassword.replace("(?)","*") + ", new password=" +
-                     userNewPassword.replace("(?)","*") + ", renew password=" +
-                     userReNewPassword.replace("(?)","*"));
+            log.info("!User updated the Password successfully, " +
+                    "old password=" + userOldPassword.replaceAll(".", "*") +
+                    ", new password=" + userNewPassword.replaceAll(".", "*") +
+                    ", renew password=" + userReNewPassword.replaceAll(".", "*"));
             return "redirect:/profile?password_success";
         } else {
-            log.info("!User has not updated the Password, " + "old password=" +
-                    userOldPassword.replace("(?)","*") + ", new password=" +
-                    userNewPassword.replace("(?)","*") + ", renew password=" +
-                    userReNewPassword.replace("(?)","*"));
+            log.info("!User has not updated the Password, " +
+                    "old password=" + userOldPassword.replaceAll(".", "*") +
+                    ", new password=" + userNewPassword.replaceAll(".", "*") +
+                    ", renew password=" + userReNewPassword.replaceAll(".", "*"));
             return "redirect:/profile?password_error";
         }
     }
