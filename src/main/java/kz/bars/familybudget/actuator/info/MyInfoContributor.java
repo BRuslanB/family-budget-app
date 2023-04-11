@@ -23,7 +23,7 @@ public class MyInfoContributor implements InfoContributor {
         builder.withDetail("title", info.getTitle());
         builder.withDetail("description", info.getDescription());
         builder.withDetail("version", info.getVersion());
-        builder.withDetail("group", "kz.bars.familybudget");
-        builder.withDetail("author", "BRuslan");
+        builder.withDetail("author", info.getContact().getName());
+        builder.withDetail("email", info.getContact().getEmail());
     }
 }
