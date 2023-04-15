@@ -1,10 +1,22 @@
 version: '3.9'
 
 services:
+  app:
+    image: 'app-family-budget-image'
+    container_name: app-family-budget-container
+    depends_on:
+      - db
+    environment:
+      - SERVER_PORT=8000
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/family_budget
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - 8080:8000
   db:
     image: 'postgres:alpine'
-    container_name: pg-server
-    restart: always
+    container_name: db-pg-server-container
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres

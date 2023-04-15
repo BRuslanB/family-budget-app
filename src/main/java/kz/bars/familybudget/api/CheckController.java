@@ -1,6 +1,9 @@
 package kz.bars.familybudget.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kz.bars.familybudget.dto.CheckDto;
 import kz.bars.familybudget.service.CheckService;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +21,23 @@ import java.util.List;
 @CrossOrigin
 @Log4j2
 @SecurityRequirement(name = "javainuseapi")
+@Tag(name = "Check", description = "All methods for getting a list of Check")
 public class CheckController {
 
     private final CheckService checkService;
 
     @GetMapping(value = "{id}")
     @PreAuthorize("isAuthenticated()")
-    public CheckDto getCheck(@PathVariable(name = "id") BigInteger id) {
+    @Operation(description = "Getting a Check..")
+    public CheckDto getCheck(@Parameter(description = "'check' id")
+                             @PathVariable(name = "id") BigInteger id) {
         log.info("!Getting a Check, " + "id=" + id);
         return checkService.getCheckDto(id);
     }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
+    @Operation(description = "Check added")
     public CheckDto addCheck(@RequestBody CheckDto checkDto) {
         log.info("!Check added");
         return checkService.addCheckDto(checkDto);
@@ -38,6 +45,7 @@ public class CheckController {
 
     @PutMapping
     @PreAuthorize("isAuthenticated()")
+    @Operation(description = "Check updated")
     public CheckDto updateCheck(@RequestBody CheckDto checkDto) {
         log.info("!Check updated");
         return checkService.updateCheckDto(checkDto);
@@ -45,13 +53,16 @@ public class CheckController {
 
     @DeleteMapping(value = "{id}")
     @PreAuthorize("isAuthenticated()")
-    public void deleteCheck(@PathVariable(name = "id") BigInteger id) {
+    @Operation(description = "Check.. removed")
+    public void deleteCheck(@Parameter(description = "'check' id")
+                            @PathVariable(name = "id") BigInteger id) {
         log.info("!Check removed, " + "id=" + id);
         checkService.deleteCheckDto(id);
     }
 
     @GetMapping()
     @PreAuthorize("isAuthenticated()")
+    @Operation(description = "Getting a list of Check")
     public List<CheckDto> getAllCheck() {
         log.info("!Getting a list of Check");
         return checkService.getAllCheckDto();
@@ -59,7 +70,10 @@ public class CheckController {
 
     @GetMapping(value = "dates/{date1}/{date2}")
     @PreAuthorize("isAuthenticated()")
-    public List<CheckDto> getAllCheckBetweenDate(@PathVariable(name = "date1") LocalDate dateFrom,
+    @Operation(description = "Getting a list of Check for the period from.. to..")
+    public List<CheckDto> getAllCheckBetweenDate(@Parameter(description = "date 'from'")
+                                                 @PathVariable(name = "date1") LocalDate dateFrom,
+                                                 @Parameter(description = "date 'to'")
                                                  @PathVariable(name = "date2") LocalDate dateTo) {
         log.info("!Getting a list of Check for the period " + "from " + dateFrom + " to "+ dateTo);
         return checkService.getAllCheckBetweenDateDto(dateFrom, dateTo);
@@ -67,15 +81,21 @@ public class CheckController {
 
     @GetMapping(value = "budget/{id}")
     @PreAuthorize("isAuthenticated()")
-    public List<CheckDto> getAllCheckByBudgetId(@PathVariable(name = "id") BigInteger id) {
+    @Operation(description = "Getting a list of Checks for a given Income..")
+    public List<CheckDto> getAllCheckByBudgetId(@Parameter(description = "'income' id")
+                                                @PathVariable(name = "id") BigInteger id) {
         log.info("!Getting a list of Checks for a given Income, " + "id=" + id);
         return checkService.getAllCheckByBudgetIdDto(id);
     }
 
     @GetMapping(value = "budget/{id}/dates/{date1}/{date2}")
     @PreAuthorize("isAuthenticated()")
-    public List<CheckDto> getAllCheckByBudgetBetweenDate(@PathVariable(name = "id") BigInteger id,
+    @Operation(description = "Getting a list of Checks for a given Income.. for the period from.. to..")
+    public List<CheckDto> getAllCheckByBudgetBetweenDate(@Parameter(description = "'income' id")
+                                                         @PathVariable(name = "id") BigInteger id,
+                                                         @Parameter(description = "date 'from'")
                                                          @PathVariable(name = "date1") LocalDate dateFrom,
+                                                         @Parameter(description = "date 'to'")
                                                          @PathVariable(name = "date2") LocalDate dateTo) {
         log.info("!Getting a list of Checks for a given Income, " + "id=" + id +
                  " from " + dateFrom + " to "+ dateTo);
@@ -84,15 +104,21 @@ public class CheckController {
 
     @GetMapping(value = "purchase/{id}")
     @PreAuthorize("isAuthenticated()")
-    public List<CheckDto> getAllCheckByPurchaseId(@PathVariable(name = "id") BigInteger id) {
+    @Operation(description = "Getting a list of Checks for a given Expense..")
+    public List<CheckDto> getAllCheckByPurchaseId(@Parameter(description = "'expense' id")
+                                                  @PathVariable(name = "id") BigInteger id) {
         log.info("!Getting a list of Checks for a given Purchase, " + "id=" + id);
         return checkService.getAllCheckByPurchaseIdDto(id);
     }
 
     @GetMapping(value = "purchase/{id}/dates/{date1}/{date2}")
     @PreAuthorize("isAuthenticated()")
-    public List<CheckDto> getAllCheckByPurchaseBetweenDate(@PathVariable(name = "id") BigInteger id,
+    @Operation(description = "Getting a list of Checks for a given Expense.. for the period from.. to..")
+    public List<CheckDto> getAllCheckByPurchaseBetweenDate(@Parameter(description = "'expense' id")
+                                                           @PathVariable(name = "id") BigInteger id,
+                                                           @Parameter(description = "date 'from'")
                                                            @PathVariable(name = "date1") LocalDate dateFrom,
+                                                           @Parameter(description = "date 'to'")
                                                            @PathVariable(name = "date2") LocalDate dateTo) {
         log.info("!Getting a list of Checks for a given Purchase, " + "id=" + id +
                  " from " + dateFrom + " to "+ dateTo);

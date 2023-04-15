@@ -1,0 +1,11 @@
+docker build -t app-family-budget-image . // create image for app
+docker run --name app-family-bydget-container -p8080:8000 app-family-budget-image // create docker container for app
+docker-compose up // create docker-compose container (app & db)
+
+docker images // view all images
+docker rmi <name image> // delete image
+
+docker ps -a // view all containers
+docker start <name container>
+docker stop <name container>
+docker rmi <name image> // delete container

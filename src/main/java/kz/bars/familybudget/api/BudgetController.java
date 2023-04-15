@@ -27,7 +27,7 @@ public class BudgetController {
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    @Operation(description = "Getting a list of income")
+    @Operation(description = "Getting a list of Income")
     public List<BudgetDto> getAllBudget() {
         log.info("!Getting a list of Income");
         return budgetService.getAllBudgetDto();
@@ -36,9 +36,9 @@ public class BudgetController {
     @GetMapping(value = "dates/{date1}/{date2}")
     @PreAuthorize("isAuthenticated()")
     @Operation(description = "Getting a list of Income for the period from.. to..")
-    public List<BudgetDto> getAllBudgetBetweenDate(@Parameter(description = "date from")
+    public List<BudgetDto> getAllBudgetBetweenDate(@Parameter(description = "date 'from'")
                                                    @PathVariable(name = "date1") LocalDate dateFrom,
-                                                   @Parameter(description = "date to")
+                                                   @Parameter(description = "date 'to'")
                                                    @PathVariable(name = "date2") LocalDate dateTo) {
         log.info("!Getting a list of Income for the period " + "from " + dateFrom + " to "+ dateTo);
         return budgetService.getAllBudgetBetweenDateDto(dateFrom, dateTo);
