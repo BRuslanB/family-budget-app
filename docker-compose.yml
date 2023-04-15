@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    image: 'app-family-budget-image'
+    image: 'bruslanb/app-family-budget-image'
     container_name: app-family-budget-container
     depends_on:
       - db
