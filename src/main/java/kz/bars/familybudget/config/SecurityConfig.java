@@ -23,7 +23,6 @@ public class SecurityConfig {
 
     private final UserServiceImpl userService;
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -47,7 +46,7 @@ public class SecurityConfig {
                 .passwordParameter("user_password") //<input type = 'password' name = 'user_password'>
                 .successHandler((req, res, auth) -> {
                     // add your custom logging here
-                    log.info("!User " + auth.getName() + " has logged in successfully");
+                    log.info("!User {} has logged in successfully", auth.getName());
                     // redirect to the profile page after successful authentication
                     res.sendRedirect("/profile");
                 });
@@ -55,6 +54,8 @@ public class SecurityConfig {
         http.logout()
                 .logoutUrl("/logout") //<form action = 'logout' method = 'post'>
                 .logoutSuccessHandler(logoutSuccessHandler()); // add your logout success handler here
+
+        http.httpBasic(); // includes basic authentication
 
         http.csrf().disable(); //ban on post requests
 
@@ -65,7 +66,7 @@ public class SecurityConfig {
     LogoutSuccessHandler logoutSuccessHandler() {
         return (request, response, authentication) -> {
             // add your logging code here
-            log.info("!User " + authentication.getName() + " has logged out");
+            log.info("!User {} has logged out", authentication.getName());
             response.sendRedirect("/signin");
         };
     }
