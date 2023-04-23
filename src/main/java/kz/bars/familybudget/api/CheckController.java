@@ -53,7 +53,7 @@ public class CheckController {
     @Operation(description = "Check.. removed")
     public void deleteCheck(@Parameter(description = "'check' id")
                             @PathVariable(name = "id") BigInteger id) {
-        log.info("!Check removed, id={}", id);
+        log.error("!Check removed, id={}", id);
         checkService.deleteCheckDto(id);
     }
 
