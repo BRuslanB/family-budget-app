@@ -97,16 +97,16 @@ public class HomeController {
 
         if (accountService.registerUser(userEmail, userFirstname, userLastname, userBirthDay,
                 userPassword, userRePassword) != null) {
-            log.info("!User successfully registered, " + "email=" + userEmail + ", first name=" + userFirstname +
-                     ", last name=" + userLastname + ", birth day=" + userBirthDay +
-                     ", password=" + userPassword.replaceAll(".", "*") +
-                     ", repeat password=" + userRePassword.replaceAll(".", "*"));
+            log.info("!User successfully registered, email={}, first name={}, last name={}, birth day={}, " +
+                             "password={}, repeat password={}", userEmail, userFirstname, userLastname, userBirthDay,
+                             userPassword.replaceAll(".", "*"),
+                             userRePassword.replaceAll(".", "*"));
             return "redirect:/register?success";
         } else {
-            log.info("!User not registered, " + "email=" + userEmail + ", first name=" + userFirstname +
-                    ", last name=" + userLastname + ", birth day=" + userBirthDay +
-                    ", password=" + userPassword.replaceAll(".", "*") +
-                    ", repeat password=" + userRePassword.replaceAll(".", "*"));
+            log.info("!User not registered, email={}, first name={}, last name={}, birth day={}, " +
+                    "password={}, repeat password={}",userEmail, userFirstname, userLastname, userBirthDay,
+                    userPassword.replaceAll(".", "*"),
+                    userRePassword.replaceAll(".", "*"));
             return "redirect:/register?error";
         }
     }
@@ -118,16 +118,16 @@ public class HomeController {
                            @RequestParam(name = "user_re_new_password") String userReNewPassword) {
 
         if (accountService.updatePassword(userOldPassword, userNewPassword, userReNewPassword) != null) {
-            log.info("!User updated the Password successfully, " +
-                    "old password=" + userOldPassword.replaceAll(".", "*") +
-                    ", new password=" + userNewPassword.replaceAll(".", "*") +
-                    ", renew password=" + userReNewPassword.replaceAll(".", "*"));
+            log.info("!User updated the Password successfully, old password={}, new password={}, renew password={}",
+                    userOldPassword.replaceAll(".", "*"),
+                    userNewPassword.replaceAll(".", "*"),
+                    userReNewPassword.replaceAll(".", "*"));
             return "redirect:/profile?password_success";
         } else {
-            log.info("!User has not updated the Password, " +
-                    "old password=" + userOldPassword.replaceAll(".", "*") +
-                    ", new password=" + userNewPassword.replaceAll(".", "*") +
-                    ", renew password=" + userReNewPassword.replaceAll(".", "*"));
+            log.info("!User has not updated the Password, old password={}, new password={}, renew password={}",
+                    userOldPassword.replaceAll(".", "*"),
+                    userNewPassword.replaceAll(".", "*"),
+                    userReNewPassword.replaceAll(".", "*"));
             return "redirect:/profile?password_error";
         }
     }
@@ -139,12 +139,12 @@ public class HomeController {
                                 @RequestParam(name = "user_birth_day") LocalDate birthDay) {
 
         if (accountService.updateProfile(firstName, lastName, birthDay) != null) {
-            log.info("!User updated the Profile successfully, " + "first name=" + firstName +
-                     ", last name=" + lastName + ", birth day=" + birthDay);
+            log.info("!User updated the Profile successfully, first name={}, last name={}, birth day={}",
+                    firstName, lastName, birthDay);
             return "redirect:/profile?update_success";
         }
-        log.info("!User has not updated the Profile, " + "first name=" + firstName +
-                 ", last name=" + lastName + ", birth day=" + birthDay);
+        log.info("!User has not updated the Profile, first name={}, last name={}, birth day={}",
+                firstName, lastName, birthDay);
         return "redirect:/profile?update_error";
     }
 
@@ -158,8 +158,7 @@ public class HomeController {
         expenseCategory.setDescription(expenseCategoryDescription);
         expenseCategoryService.addExpenseCategory(expenseCategory);
 
-        log.info("!New Category added, " + "name=" + expenseCategoryName +
-                 ", description=" + expenseCategoryDescription);
+        log.info("!New Category added, name={}, description={}", expenseCategoryName, expenseCategoryDescription);
         return "redirect:/settings?category_success";
     }
 
@@ -176,12 +175,12 @@ public class HomeController {
             expenseCategory.setDescription(expenseCategoryDescription);
             expenseCategoryService.updateExpenseCategory(expenseCategory);
 
-            log.info("!Category updated successfully, " + "id=" + expenseCategoryId +
-                     ", name=" + expenseCategoryName + ", description=" + expenseCategoryDescription);
+            log.info("!Category updated successfully, id={}, name={}, description={}",
+                    expenseCategoryId, expenseCategoryName, expenseCategoryDescription);
             return "redirect:/settings?category_success";
         }
-        log.info("!Category not updated, " + "id=" + expenseCategoryId +
-                 ", name=" + expenseCategoryName + ", description=" + expenseCategoryDescription);
+        log.info("!Category not updated, id={}, name={}, description={}",
+                expenseCategoryId, expenseCategoryName, expenseCategoryDescription);
         return "redirect:/settings?category_error";
     }
 
@@ -191,11 +190,11 @@ public class HomeController {
 
         try {
             expenseCategoryService.deleteExpenseCategory(expenseCategoryId);
-            log.info("!Category removed, " + "id=" + expenseCategoryId);
+            log.error("!Category removed, id={}", expenseCategoryId);
             return "redirect:/settings?category_success";
 
         } catch (Exception e) {
-            log.info("!Category not removed, " + "id=" + expenseCategoryId);
+            log.error("!Category not removed, id={}", expenseCategoryId);
             return "redirect:/settings?category_error";
         }
     }
@@ -216,8 +215,8 @@ public class HomeController {
             purchaseService.addPurchase(purchase);
         }
 
-        log.info("!New Expense added, " + "name=" + expenseName + ", description=" + expenseDescription +
-                 ", category=" + expenseCategoryId);
+        log.info("!New Expense added, name={}, description={}, category={}",
+                expenseName, expenseDescription, expenseCategoryId);
         return "redirect:/settings?expense_success";
     }
 
@@ -241,13 +240,13 @@ public class HomeController {
                 purchaseService.updatePurchase(purchase);
             }
 
-            log.info("!Expense updated successfully, " + "id=" + expenseId + ", name=" + expenseName +
-                    ", description=" + expenseDescription + ", category=" + expenseCategoryId);
+            log.info("!Expense updated successfully id={}, name={}, description={}, category={}",
+                    expenseId, expenseName, expenseDescription, expenseCategoryId);
             return "redirect:/settings?expense_success";
         }
 
-        log.info("!Expense not updated, " + "id=" + expenseId + ", name=" + expenseName +
-                ", description=" + expenseDescription + ", category=" + expenseCategoryId);
+        log.info("!Expense not updated, id={}, name={}, description={}, category={}",
+                expenseId, expenseName, expenseDescription, expenseCategoryId);
         return "redirect:/settings?expense_error";
     }
 
@@ -257,11 +256,11 @@ public class HomeController {
 
         try {
             purchaseService.deletePurchase(expenseId);
-            log.info("!Expense removed, " + "id=" + expenseId);
+            log.error("!Expense removed, id={}", expenseId);
             return "redirect:/settings?expense_success";
 
         } catch (Exception e) {
-            log.info("!Expense not removed, " + "id=" + expenseId);
+            log.error("!Expense not removed, id={}", expenseId);
             return "redirect:/settings?expense_error";
         }
     }
@@ -276,7 +275,7 @@ public class HomeController {
         budget.setDescription(incomeDescription);
         budgetService.addBudget(budget);
 
-        log.info("!New Income added, " + "name=" + incomeName + ", description=" + incomeDescription);
+        log.info("!New Income added, name={}, description={}",incomeName, incomeDescription);
         return "redirect:/settings?income_success";
     }
 
@@ -293,13 +292,11 @@ public class HomeController {
             budget.setDescription(incomeDescription);
             budgetService.updateBudget(budget);
 
-            log.info("!Income updated successfully, " + "id=" + incomeId + ", name=" + incomeName +
-                     ", description=" + incomeDescription);
+            log.info("!Income updated successfully, id={}, name={}, description={}", incomeId, incomeName, incomeDescription);
             return "redirect:/settings?income_success";
         }
 
-        log.info("!Income not updated, " + "id=" + incomeId + ", name=" + incomeName +
-                ", description=" + incomeDescription);
+        log.info("!Income not updated, id={}, name={}, description={}", incomeId,incomeName, incomeDescription);
         return "redirect:/settings?income_error";
     }
 
@@ -309,11 +306,11 @@ public class HomeController {
 
         try {
             budgetService.deleteBudget(incomeId);
-            log.info("!Income removed, " + "id=" + incomeId);
+            log.error("!Income removed, id={}", incomeId);
             return "redirect:/settings?income_success";
 
         } catch (Exception e) {
-            log.info("!Income not removed, " + "id=" + incomeId);
+            log.error("!Income not removed, id={}", incomeId);
             return "redirect:/settings?income_error";
         }
     }
