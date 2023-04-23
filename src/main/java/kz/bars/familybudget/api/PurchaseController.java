@@ -29,7 +29,7 @@ public class PurchaseController {
     @GetMapping
     @Operation(description = "Getting a list of Expense")
     public List<PurchaseDto> getAllPurchase() {
-        log.info("!Getting a list of Purchase");
+        log.debug("!Getting a list of Purchase");
         return purchaseService.getAllPurchaseDto();
     }
 
@@ -39,7 +39,7 @@ public class PurchaseController {
                                                        @PathVariable(name = "date1") LocalDate dateFrom,
                                                        @Parameter(description = "date 'to'")
                                                        @PathVariable(name = "date2") LocalDate dateTo) {
-        log.info("!Getting a list of Purchase for the period from {} to {}", dateFrom, dateTo);
+        log.debug("!Getting a list of Purchase for the period from {} to {}", dateFrom, dateTo);
         return purchaseService.getAllPurchaseBetweenDateDto(dateFrom, dateTo);
     }
 
