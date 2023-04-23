@@ -42,6 +42,8 @@ management:
 
 # logging setting
 logging:
+  root:
+    level: ERROR
   file:
     name: logs/app.log
     append: true
