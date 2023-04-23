@@ -95,4 +95,6 @@ fabric.properties
 
 ### Data ###
 /data/
-/data_test_db/
+
+### Logging ###
+/logs/

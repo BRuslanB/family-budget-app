@@ -31,20 +31,10 @@
                         <li><a class="dropdown-item" th:href="@{'/profile'}">Profile</a></li>
                         <li><a class="dropdown-item" th:href="@{'/settings'}">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="JavaScript:void(0)" onclick="logout()">Logout</a></li>
-                        <form th:action="@{'/logout'}" method="post" id="logoutForm"></form>
+                        <li><a class="dropdown-item" th:href="@{'/logout'}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
-<!--            <form class="d-flex" role="search">-->
-<!--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                <button class="btn btn-outline-light" type="submit">Search</button>-->
-<!--            </form>-->
         </div>
     </div>
 </nav>
-<script type="text/javascript">
-    function logout() {
-        logoutForm.submit();
-    }
-</script>

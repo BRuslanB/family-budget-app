@@ -1,0 +1,17 @@
+docker build -t app-family-budget-image . // create image for app
+docker run --name app-family-budget-container -p8080:8000 app-family-budget-image // create docker container for app
+docker-compose up -d // create docker-compose container (app & db) where parameter -d running in the background
+
+docker images // view all images
+docker rmi <name image> // delete image
+
+docker ps -a // view all containers
+docker start <name container>
+docker stop <name container>
+docker rmi <name image> // delete container
+
+docker logs <name container> // view container logs
+
+docker login docker.io // login to docker hub
+docker tag <name image> <name tag> //create tag for push to docker hub
+docker push <name tag> //image(tag) push to docker hub

@@ -27,8 +27,6 @@ springdoc:
 
 # actuator settings
 management:
-#  server:
-#    port: 9000
   endpoints:
     web:
       exposure:
@@ -41,25 +39,18 @@ management:
   endpoint:
     health:
       show-details: when_authorized
-#  metrics:
-#    tags:
-#      application: initializr-dashboard
 
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: "335247748424-3dai46fj6e07cpnvbsbvaai08rtbvr9e.apps.googleusercontent.com"
-#            client-secret: "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"
-##            redirect-uri: "http://localhost:8000/login/oauth2/code/{registrationId}"
-#            redirect-uri: "http://localhost:8000/login/oauth2/code"
-#            scope:
-#              - email
-#              - profile
-#        provider:
-#          google:
-#            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
-#            token-uri: https://oauth2.googleapis.com/token
-#            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-#            user-name-attribute: email
+# logging setting
+logging:
+  file:
+    name: logs/app.log
+    append: true
+  loggers:
+    kz.bars.familybudget:
+      level: INFO
+  appenders:
+    - type: file
+      immediateFlush: true
+      layout:
+        type: pattern
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
