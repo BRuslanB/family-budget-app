@@ -1,17 +1,34 @@
-docker build -t app-family-budget-image . // create image for app
+#docker build -t <name image> . // create image for app symbol "." mean build file in current directory
+docker build -t app-family-budget-image .
+
+#docker run --name <name container> -p<port ext>:<port int> <name image> // create docker container for app
 docker run --name app-family-budget-container -p8080:8000 app-family-budget-image // create docker container for app
-docker-compose up -d // create docker-compose container (app & db) where parameter -d running in the background
 
-docker images // view all images
-docker rmi <name image> // delete image
+#docker-compose up -d // create docker-compose container (app & db) where parameter -d running in the background
 
-docker ps -a // view all containers
-docker start <name container>
-docker stop <name container>
-docker rmi <name image> // delete container
+#docker images // view all images
 
-docker logs <name container> // view container logs
+#docker rmi <name image / id image> -f // delete image, parameter -f forced deletion
+docker rmi app-family-budget-image
 
-docker login docker.io // login to docker hub
-docker tag <name image> <name tag> //create tag for push to docker hub
-docker push <name tag> //image(tag) push to docker hub
+#docker ps -a // view all containers
+
+#docker start <name container>
+docker start app-family-budget-container
+
+#docker stop <name container>
+docker stop app-family-budget-container
+
+#docker rm <name container / id container> // delete container
+docker rm app-family-budget-container
+
+#docker logs <name container> // view container logs
+docker logs app-family-budget-container
+
+#docker login docker.io // login to docker hub
+
+#docker tag <name image> <name tag> //create tag (with name account) for push to docker hub
+docker tag app-family-budget-image bruslanb/app-family-budget-image:1.0.0
+
+#docker push <name tag> //image(tag) push to docker hub
+docker push bruslanb/app-family-budget-image:1.0.0
