@@ -1,3 +1,16 @@
+----------------------
+#Step by step create docker containers:
+----------------------
+1. docker stop <name container>
+2. docker rm <name container>
+3. docker rmi <name image>
+4. docker build -t <name image> .
+5. docker tag <name image> <name tag>
+6. docker push <name tag>
+7. docker-compose up
+----------------------
+#Docker top commands:
+----------------------
 #docker build -t <name image> . // create image for app symbol "." mean build file in current directory
 docker build -t app-family-budget-image .
 
@@ -32,3 +45,11 @@ docker tag app-family-budget-image bruslanb/app-family-budget-image:1.0.0
 
 #docker push <name tag> //image(tag) push to docker hub
 docker push bruslanb/app-family-budget-image:1.0.0
+
+----------------------
+#Additional gradle commands:
+----------------------
+./gradlew dependencies // is a command that is used to download and display the project's dependencies.
+
+./gradlew wrapper --gradle-version=7.6 //is a command that generates the Gradle wrapper script for the project.
+The wrapper script will be added to the project directory, and it can be used to build the project on machines that do not have Gradle installed.
