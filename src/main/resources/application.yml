@@ -42,14 +42,13 @@ management:
 
 # logging setting
 logging:
-  root:
-    level: ERROR
+  level:
+    root: ERROR
+    kz.bars.familybudget: DEBUG
+    org.springframework.boot.autoconfigure.logging: WARN
   file:
     name: logs/app.log
     append: true
-  loggers:
-    kz.bars.familybudget:
-      level: INFO
   appenders:
     - type: file
       immediateFlush: true

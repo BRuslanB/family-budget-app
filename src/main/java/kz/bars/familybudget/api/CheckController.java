@@ -31,21 +31,21 @@ public class CheckController {
     @Operation(description = "Getting a Check..")
     public CheckDto getCheck(@Parameter(description = "'check' id")
                              @PathVariable(name = "id") BigInteger id) {
-        log.info("!Getting a Check, id={}", id);
+        log.debug("!Getting a Check, id={}", id);
         return checkService.getCheckDto(id);
     }
 
     @PostMapping
     @Operation(description = "Check added")
     public CheckDto addCheck(@RequestBody CheckDto checkDto) {
-        log.info("!Check added");
+        log.debug("!Check added");
         return checkService.addCheckDto(checkDto);
     }
 
     @PutMapping
     @Operation(description = "Check updated")
     public CheckDto updateCheck(@RequestBody CheckDto checkDto) {
-        log.info("!Check updated");
+        log.debug("!Check updated");
         return checkService.updateCheckDto(checkDto);
     }
 
@@ -60,7 +60,7 @@ public class CheckController {
     @GetMapping()
     @Operation(description = "Getting a list of Check")
     public List<CheckDto> getAllCheck() {
-        log.info("!Getting a list of Check");
+        log.debug("!Getting a list of Check");
         return checkService.getAllCheckDto();
     }
 
@@ -70,7 +70,7 @@ public class CheckController {
                                                  @PathVariable(name = "date1") LocalDate dateFrom,
                                                  @Parameter(description = "date 'to'")
                                                  @PathVariable(name = "date2") LocalDate dateTo) {
-        log.info("!Getting a list of Check for the period from {} to {}", dateFrom, dateTo);
+        log.debug("!Getting a list of Check for the period from {} to {}", dateFrom, dateTo);
         return checkService.getAllCheckBetweenDateDto(dateFrom, dateTo);
     }
 
@@ -78,7 +78,7 @@ public class CheckController {
     @Operation(description = "Getting a list of Checks for a given Income..")
     public List<CheckDto> getAllCheckByBudgetId(@Parameter(description = "'income' id")
                                                 @PathVariable(name = "id") BigInteger id) {
-        log.info("!Getting a list of Checks for a given Income, id={}", id);
+        log.debug("!Getting a list of Checks for a given Income, id={}", id);
         return checkService.getAllCheckByBudgetIdDto(id);
     }
 
@@ -90,7 +90,7 @@ public class CheckController {
                                                          @PathVariable(name = "date1") LocalDate dateFrom,
                                                          @Parameter(description = "date 'to'")
                                                          @PathVariable(name = "date2") LocalDate dateTo) {
-        log.info("!Getting a list of Checks for a given Income, id={} from {} to {}", id, dateFrom, dateTo);
+        log.debug("!Getting a list of Checks for a given Income, id={} from {} to {}", id, dateFrom, dateTo);
         return checkService.getAllCheckByBudgetBetweenDateDto(id, dateFrom, dateTo);
     }
 
@@ -98,7 +98,7 @@ public class CheckController {
     @Operation(description = "Getting a list of Checks for a given Expense..")
     public List<CheckDto> getAllCheckByPurchaseId(@Parameter(description = "'expense' id")
                                                   @PathVariable(name = "id") BigInteger id) {
-        log.info("!Getting a list of Checks for a given Purchase, id={}", id);
+        log.debug("!Getting a list of Checks for a given Purchase, id={}", id);
         return checkService.getAllCheckByPurchaseIdDto(id);
     }
 
@@ -110,7 +110,7 @@ public class CheckController {
                                                            @PathVariable(name = "date1") LocalDate dateFrom,
                                                            @Parameter(description = "date 'to'")
                                                            @PathVariable(name = "date2") LocalDate dateTo) {
-        log.info("!Getting a list of Checks for a given Purchase, id={} from {} to {}",id, dateFrom, dateTo);
+        log.debug("!Getting a list of Checks for a given Purchase, id={} from {} to {}",id, dateFrom, dateTo);
         return checkService.getAllCheckByPurchaseBetweenDateDto(id, dateFrom, dateTo);
     }
 

@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .passwordParameter("user_password") //<input type = 'password' name = 'user_password'>
                 .successHandler((req, res, auth) -> {
                     // add your custom logging here
-                    log.info("!User {} has logged in successfully", auth.getName());
+                    log.debug("!User {} has logged in successfully", auth.getName());
                     // redirect to the profile page after successful authentication
                     res.sendRedirect("/profile");
                 });
@@ -66,7 +66,7 @@ public class SecurityConfig {
     LogoutSuccessHandler logoutSuccessHandler() {
         return (request, response, authentication) -> {
             // add your logging code here
-            log.info("!User {} has logged out", authentication.getName());
+            log.debug("!User {} has logged out", authentication.getName());
             response.sendRedirect("/signin");
         };
     }

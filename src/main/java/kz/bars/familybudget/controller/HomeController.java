@@ -28,39 +28,39 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String index() {
-        log.info("!Call method /index()");
+        log.debug("!Call method /index()");
         return "index";
     }
 
     @GetMapping(value = "/signin")
     public String signin() {
-        log.info("!Call method /signin()");
+        log.debug("!Call method /signin()");
         return "signin";
     }
 
     @GetMapping(value = "/authorize")
     public String authorize() {
-        log.info("!Call method /authorize()");
+        log.debug("!Call method /authorize()");
         return "authorize";
     }
 
     @GetMapping(value = "/register")
     public String register() {
-        log.info("!Call method /register()");
+        log.debug("!Call method /register()");
         return "register";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/profile")
     public String profile() {
-        log.info("!Call method /profile()");
+        log.debug("!Call method /profile()");
         return "profile";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/payments")
     public String payments() {
-        log.info("!Call method /payments()");
+        log.debug("!Call method /payments()");
         return "payments";
     }
 
@@ -77,13 +77,13 @@ public class HomeController {
         List<Budget> allBudget =  budgetService.getAllBudget();
         model.addAttribute("allIncome", allBudget);
 
-        log.info("!Call method /settings()");
+        log.debug("!Call method /settings()");
         return "settings";
     }
 
     @GetMapping(value = "/forbidden")
     public String forbidden() {
-        log.info("!Call method /forbidden()");
+        log.debug("!Call method /forbidden()");
         return "forbidden";
     }
 
@@ -97,13 +97,13 @@ public class HomeController {
 
         if (accountService.registerUser(userEmail, userFirstname, userLastname, userBirthDay,
                 userPassword, userRePassword) != null) {
-            log.info("!User successfully registered, email={}, first name={}, last name={}, birth day={}, " +
+            log.debug("!User successfully registered, email={}, first name={}, last name={}, birth day={}, " +
                              "password={}, repeat password={}", userEmail, userFirstname, userLastname, userBirthDay,
                              userPassword.replaceAll(".", "*"),
                              userRePassword.replaceAll(".", "*"));
             return "redirect:/register?success";
         } else {
-            log.info("!User not registered, email={}, first name={}, last name={}, birth day={}, " +
+            log.debug("!User not registered, email={}, first name={}, last name={}, birth day={}, " +
                     "password={}, repeat password={}",userEmail, userFirstname, userLastname, userBirthDay,
                     userPassword.replaceAll(".", "*"),
                     userRePassword.replaceAll(".", "*"));
@@ -118,13 +118,13 @@ public class HomeController {
                            @RequestParam(name = "user_re_new_password") String userReNewPassword) {
 
         if (accountService.updatePassword(userOldPassword, userNewPassword, userReNewPassword) != null) {
-            log.info("!User updated the Password successfully, old password={}, new password={}, renew password={}",
+            log.debug("!User updated the Password successfully, old password={}, new password={}, renew password={}",
                     userOldPassword.replaceAll(".", "*"),
                     userNewPassword.replaceAll(".", "*"),
                     userReNewPassword.replaceAll(".", "*"));
             return "redirect:/profile?password_success";
         } else {
-            log.info("!User has not updated the Password, old password={}, new password={}, renew password={}",
+            log.debug("!User has not updated the Password, old password={}, new password={}, renew password={}",
                     userOldPassword.replaceAll(".", "*"),
                     userNewPassword.replaceAll(".", "*"),
                     userReNewPassword.replaceAll(".", "*"));
@@ -139,11 +139,11 @@ public class HomeController {
                                 @RequestParam(name = "user_birth_day") LocalDate birthDay) {
 
         if (accountService.updateProfile(firstName, lastName, birthDay) != null) {
-            log.info("!User updated the Profile successfully, first name={}, last name={}, birth day={}",
+            log.debug("!User updated the Profile successfully, first name={}, last name={}, birth day={}",
                     firstName, lastName, birthDay);
             return "redirect:/profile?update_success";
         }
-        log.info("!User has not updated the Profile, first name={}, last name={}, birth day={}",
+        log.debug("!User has not updated the Profile, first name={}, last name={}, birth day={}",
                 firstName, lastName, birthDay);
         return "redirect:/profile?update_error";
     }
@@ -158,7 +158,7 @@ public class HomeController {
         expenseCategory.setDescription(expenseCategoryDescription);
         expenseCategoryService.addExpenseCategory(expenseCategory);
 
-        log.info("!New Category added, name={}, description={}", expenseCategoryName, expenseCategoryDescription);
+        log.debug("!New Category added, name={}, description={}", expenseCategoryName, expenseCategoryDescription);
         return "redirect:/settings?category_success";
     }
 
@@ -175,11 +175,11 @@ public class HomeController {
             expenseCategory.setDescription(expenseCategoryDescription);
             expenseCategoryService.updateExpenseCategory(expenseCategory);
 
-            log.info("!Category updated successfully, id={}, name={}, description={}",
+            log.debug("!Category updated successfully, id={}, name={}, description={}",
                     expenseCategoryId, expenseCategoryName, expenseCategoryDescription);
             return "redirect:/settings?category_success";
         }
-        log.info("!Category not updated, id={}, name={}, description={}",
+        log.debug("!Category not updated, id={}, name={}, description={}",
                 expenseCategoryId, expenseCategoryName, expenseCategoryDescription);
         return "redirect:/settings?category_error";
     }
@@ -215,7 +215,7 @@ public class HomeController {
             purchaseService.addPurchase(purchase);
         }
 
-        log.info("!New Expense added, name={}, description={}, category={}",
+        log.debug("!New Expense added, name={}, description={}, category={}",
                 expenseName, expenseDescription, expenseCategoryId);
         return "redirect:/settings?expense_success";
     }
@@ -240,12 +240,12 @@ public class HomeController {
                 purchaseService.updatePurchase(purchase);
             }
 
-            log.info("!Expense updated successfully id={}, name={}, description={}, category={}",
+            log.debug("!Expense updated successfully id={}, name={}, description={}, category={}",
                     expenseId, expenseName, expenseDescription, expenseCategoryId);
             return "redirect:/settings?expense_success";
         }
 
-        log.info("!Expense not updated, id={}, name={}, description={}, category={}",
+        log.debug("!Expense not updated, id={}, name={}, description={}, category={}",
                 expenseId, expenseName, expenseDescription, expenseCategoryId);
         return "redirect:/settings?expense_error";
     }
@@ -275,7 +275,7 @@ public class HomeController {
         budget.setDescription(incomeDescription);
         budgetService.addBudget(budget);
 
-        log.info("!New Income added, name={}, description={}",incomeName, incomeDescription);
+        log.debug("!New Income added, name={}, description={}",incomeName, incomeDescription);
         return "redirect:/settings?income_success";
     }
 
@@ -292,11 +292,11 @@ public class HomeController {
             budget.setDescription(incomeDescription);
             budgetService.updateBudget(budget);
 
-            log.info("!Income updated successfully, id={}, name={}, description={}", incomeId, incomeName, incomeDescription);
+            log.debug("!Income updated successfully, id={}, name={}, description={}", incomeId, incomeName, incomeDescription);
             return "redirect:/settings?income_success";
         }
 
-        log.info("!Income not updated, id={}, name={}, description={}", incomeId,incomeName, incomeDescription);
+        log.debug("!Income not updated, id={}, name={}, description={}", incomeId,incomeName, incomeDescription);
         return "redirect:/settings?income_error";
     }
 

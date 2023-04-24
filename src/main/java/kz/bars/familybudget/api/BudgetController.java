@@ -29,7 +29,7 @@ public class BudgetController {
     @GetMapping
     @Operation(description = "Getting a list of Income")
     public List<BudgetDto> getAllBudget() {
-        log.info("!Getting a list of Income");
+        log.debug("!Getting a list of Income");
         return budgetService.getAllBudgetDto();
     }
 
@@ -39,7 +39,7 @@ public class BudgetController {
                                                    @PathVariable(name = "date1") LocalDate dateFrom,
                                                    @Parameter(description = "date 'to'")
                                                    @PathVariable(name = "date2") LocalDate dateTo) {
-        log.info("!Getting a list of Income for the period from {} to {}",dateFrom, dateTo);
+        log.debug("!Getting a list of Income for the period from {} to {}",dateFrom, dateTo);
         return budgetService.getAllBudgetBetweenDateDto(dateFrom, dateTo);
     }
 
