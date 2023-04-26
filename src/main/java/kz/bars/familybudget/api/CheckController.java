@@ -11,7 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class CheckController {
     @GetMapping(value = "{id}")
     @Operation(description = "Getting a Check..")
     public CheckDto getCheck(@Parameter(description = "'check' id")
-                             @PathVariable(name = "id") BigInteger id) {
+                             @PathVariable(name = "id") Long id) {
         log.debug("!Getting a Check, id={}", id);
         return checkService.getCheckDto(id);
     }
@@ -52,7 +51,7 @@ public class CheckController {
     @DeleteMapping(value = "{id}")
     @Operation(description = "Check.. removed")
     public void deleteCheck(@Parameter(description = "'check' id")
-                            @PathVariable(name = "id") BigInteger id) {
+                            @PathVariable(name = "id") Long id) {
         log.error("!Check removed, id={}", id);
         checkService.deleteCheckDto(id);
     }
@@ -74,18 +73,18 @@ public class CheckController {
         return checkService.getAllCheckBetweenDateDto(dateFrom, dateTo);
     }
 
-    @GetMapping(value = "budget/{id}")
+    @GetMapping(value = "incomes/{id}")
     @Operation(description = "Getting a list of Checks for a given Income..")
     public List<CheckDto> getAllCheckByBudgetId(@Parameter(description = "'income' id")
-                                                @PathVariable(name = "id") BigInteger id) {
+                                                @PathVariable(name = "id") Long id) {
         log.debug("!Getting a list of Checks for a given Income, id={}", id);
         return checkService.getAllCheckByBudgetIdDto(id);
     }
 
-    @GetMapping(value = "budget/{id}/dates/{date1}/{date2}")
+    @GetMapping(value = "incomes/{id}/dates/{date1}/{date2}")
     @Operation(description = "Getting a list of Checks for a given Income.. for the period from.. to..")
     public List<CheckDto> getAllCheckByBudgetBetweenDate(@Parameter(description = "'income' id")
-                                                         @PathVariable(name = "id") BigInteger id,
+                                                         @PathVariable(name = "id") Long id,
                                                          @Parameter(description = "date 'from'")
                                                          @PathVariable(name = "date1") LocalDate dateFrom,
                                                          @Parameter(description = "date 'to'")
@@ -94,18 +93,18 @@ public class CheckController {
         return checkService.getAllCheckByBudgetBetweenDateDto(id, dateFrom, dateTo);
     }
 
-    @GetMapping(value = "purchase/{id}")
+    @GetMapping(value = "expenses/{id}")
     @Operation(description = "Getting a list of Checks for a given Expense..")
     public List<CheckDto> getAllCheckByPurchaseId(@Parameter(description = "'expense' id")
-                                                  @PathVariable(name = "id") BigInteger id) {
+                                                  @PathVariable(name = "id") Long id) {
         log.debug("!Getting a list of Checks for a given Purchase, id={}", id);
         return checkService.getAllCheckByPurchaseIdDto(id);
     }
 
-    @GetMapping(value = "purchase/{id}/dates/{date1}/{date2}")
+    @GetMapping(value = "expenses/{id}/dates/{date1}/{date2}")
     @Operation(description = "Getting a list of Checks for a given Expense.. for the period from.. to..")
     public List<CheckDto> getAllCheckByPurchaseBetweenDate(@Parameter(description = "'expense' id")
-                                                           @PathVariable(name = "id") BigInteger id,
+                                                           @PathVariable(name = "id") Long id,
                                                            @Parameter(description = "date 'from'")
                                                            @PathVariable(name = "date1") LocalDate dateFrom,
                                                            @Parameter(description = "date 'to'")

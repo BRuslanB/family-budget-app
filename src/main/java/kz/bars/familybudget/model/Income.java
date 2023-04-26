@@ -8,15 +8,14 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Budget extends BaseEntity {
+public class Income extends BaseEntity {
 
     @Column(nullable = false)
-    private String income;
+    private String name;
 
     private String description;
 
-    @OneToMany(mappedBy = "budget", fetch = FetchType.LAZY,
-               cascade = CascadeType.ALL) //, orphanRemoval = true)
+    @OneToMany(mappedBy = "income", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //orphanRemoval = false)
     private Set<Check> checks;
 
 }

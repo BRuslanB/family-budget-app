@@ -14,7 +14,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Family Budget API")
                         .description("Family Budget Information")
-                        .version("1.0.2")
+                        .version("1.0.3")
                         .contact(new Contact()
                                 .name("BRuslan")
                                 .email("kz.bars.prod@gmail.com")

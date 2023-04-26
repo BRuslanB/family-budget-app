@@ -5,15 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigInteger;
-
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 public class ExpenseCategoryDto {
 
-    private BigInteger id;
+    private Long id;
     private String name;
     private String description;
 

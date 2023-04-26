@@ -7,14 +7,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.math.BigInteger;
+
 
 @SpringBootTest
 @ActiveProfiles("test")
-//@Component
 public class ExpenseCategoryDtoTests {
 
 	@Autowired
@@ -24,7 +22,7 @@ public class ExpenseCategoryDtoTests {
 	public void testExpenseCategoryMapToDto() {
 		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
-		expenseCategory.setId(BigInteger.valueOf(55));
+		expenseCategory.setId(Long.valueOf(55));
 		expenseCategory.setName("Новая категория");
 		expenseCategory.setDescription("Описание новой категории");
 

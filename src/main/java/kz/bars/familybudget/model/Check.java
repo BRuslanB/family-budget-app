@@ -22,13 +22,13 @@ public class Check extends BaseEntity {
     private String note;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name="budget_id")
+    @JoinColumn(name="income_id")
     @JsonIgnore
-    private Budget budget;
+    private Income income;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name="purchase_id")
+    @JoinColumn(name="expense_id")
     @JsonIgnore
-    private Purchase purchase;
+    private Expense expense;
 
 }
