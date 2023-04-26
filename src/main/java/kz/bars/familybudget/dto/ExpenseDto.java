@@ -3,15 +3,14 @@ package kz.bars.familybudget.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigInteger;
-
 @Getter
 @Setter
-public class BudgetDto {
+public class ExpenseDto {
 
-    private BigInteger id;
-    private String income;
+    private Long id;
+    private String name;
     private String description;
+    private ExpenseCategoryDto category;
     private Double sumVal;
 
 }

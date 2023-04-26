@@ -308,7 +308,7 @@
                     // console.log(allIncomes);
                 }
             }
-            xhttp.open("GET","/budget");
+            xhttp.open("GET","/incomes");
             xhttp.send();
         }
 
@@ -324,7 +324,7 @@
                     for (let i = 0; i < incomesList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + incomesList[i]["id"] + "</td>";
-                        htmlCode += "<td>" + incomesList[i]["income"] + "</td>";
+                        htmlCode += "<td>" + incomesList[i]["name"] + "</td>";
                         htmlCode += "<td>" + incomesList[i]["description"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + incomesList[i]["sumVal"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
@@ -341,10 +341,10 @@
                 tbodyIncomesList.innerHTML = htmlCode;
             }
             if (dateFromCheck != null && dateToCheck != null) {
-                xhttp.open("GET","/budget/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.open("GET","/incomes/dates/" + dateFromCheck + "/" + dateToCheck);
                 xhttp.send();
             } else {
-                xhttp.open("GET","/budget");
+                xhttp.open("GET","/incomes");
                 xhttp.send();
             }
         }
@@ -358,7 +358,7 @@
                     // console.log(allExpenses);
                 }
             }
-            xhttp.open("GET","/purchases");
+            xhttp.open("GET","/expenses");
             xhttp.send();
         }
 
@@ -374,7 +374,7 @@
                     for (let i = 0; i < expensesList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + expensesList[i]["id"] + "</td>";
-                        htmlCode += "<td>" + expensesList[i]["expense"] + "</td>";
+                        htmlCode += "<td>" + expensesList[i]["name"] + "</td>";
                         htmlCode += "<td>" + expensesList[i]["description"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + expensesList[i]["sumVal"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" +
@@ -391,10 +391,10 @@
                 tbodyExpensesList.innerHTML = htmlCode;
             }
             if (dateFromCheck != null && dateToCheck != null) {
-                xhttp.open("GET","/purchases/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.open("GET","/expenses/dates/" + dateFromCheck + "/" + dateToCheck);
                 xhttp.send();
             } else {
-                xhttp.open("GET","/purchases");
+                xhttp.open("GET","/expenses");
                 xhttp.send();
             }
         }
@@ -411,7 +411,7 @@
                     for (let i = 0; i < checksList.length; i++) {
                         htmlCode += "<tr>";
                         htmlCode += "<td>" + checksList[i]["id"] + "</td>";
-                        htmlCode += "<td style='text-align: center;'>" + (checksList[i]["budget"] === null ? "-" : "+") +
+                        htmlCode += "<td style='text-align: center;'>" + (checksList[i]["income"] === null ? "-" : "+") +
                                      checksList[i]["val"] + "</td>";
                         htmlCode += "<td style='text-align: center;'>" + checksList[i]["date"] + "</td>";
                         htmlCode += "<td>" + checksList[i]["note"] + "</td>";
@@ -419,7 +419,7 @@
                                     "<a href='JavaScript:void(0)' class='btn btn-primary btn-sm' " +
                                     "onclick='openCheckDetailsModal(" + checksList[i].id + ")'>Details</a>" + "</td>";
                         htmlCode += "</tr>";
-                        if (checksList[i]["budget"] === null) {
+                        if (checksList[i]["income"] === null) {
                             totalSum -= checksList[i]["val"];
                         } else {
                             totalSum += checksList[i]["val"];
@@ -480,9 +480,9 @@
                 }
             }
             if (dateFromCheck != null && dateToCheck != null) {
-                xhttp.open("GET","/checks/budget/" + id + "/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.open("GET","/checks/incomes/" + id + "/dates/" + dateFromCheck + "/" + dateToCheck);
             } else {
-                xhttp.open("GET","/checks/budget/" + id);
+                xhttp.open("GET","/checks/incomes/" + id);
             }
             xhttp.send();
             modalIncomes.show();
@@ -526,9 +526,9 @@
                 }
             }
             if (dateFromCheck != null && dateToCheck != null) {
-                xhttp.open("GET","/checks/purchase/" + id + "/dates/" + dateFromCheck + "/" + dateToCheck);
+                xhttp.open("GET","/checks/expenses/" + id + "/dates/" + dateFromCheck + "/" + dateToCheck);
             } else {
-                xhttp.open("GET","/checks/purchase/" + id);
+                xhttp.open("GET","/checks/expenses/" + id);
             }
             xhttp.send();
             modalExpenses.show();
@@ -542,30 +542,30 @@
                 let htmlCode = "";
                 let receipt = "";
                 editCheckId.value = result.id;
-                editCheckValue.value = result.value;
+                editCheckValue.value = result.val;
                 editCheckDate.value = result.date;
                 editCheckNote.value = result.note;
                 htmlCode += "<h1 class='modal-title fs-5'>Check Modal Details</h1>"
                 htmlCode += "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
                 divTitleModal.innerHTML = htmlCode;
                 htmlCode = "";
-                if (result.budget !== null) {
+                if (result.income !== null) {
                     receipt = "income";
                     divTitleType.innerHTML = "<label class='fw-bold' for='editCheckType'>INCOME</label>";
                     for (let i = 0; i < allIncomes.length; i++) {
                         htmlCode += "<option value =" + allIncomes[i]["id"];
-                        htmlCode += (allIncomes[i]["id"] === result.budget.id ? " selected" : "")  + ">";
-                        htmlCode += allIncomes[i]["income"] + "</option>";
+                        htmlCode += (allIncomes[i]["id"] === result.income.id ? " selected" : "")  + ">";
+                        htmlCode += allIncomes[i]["name"] + "</option>";
                     }
                     //filling editCheckType
                     editCheckType.innerHTML = htmlCode;
-                } else if (result.purchase !== null) {
+                } else if (result.expense !== null) {
                     receipt = "expense";
                     divTitleType.innerHTML = "<label class='fw-bold' for='editCheckType'>EXPENSE</label>";
                     for (let i = 0; i < allExpenses.length; i++) {
                         htmlCode += "<option value =" + allExpenses[i]["id"];
-                        htmlCode += (allExpenses[i]["id"] === result.purchase.id ? " selected" : "")  + ">";
-                        htmlCode += allExpenses[i]["expense"] + "</option>";
+                        htmlCode += (allExpenses[i]["id"] === result.expense.id ? " selected" : "")  + ">";
+                        htmlCode += allExpenses[i]["name"] + "</option>";
                     }
                     //filling editCheckType
                     editCheckType.innerHTML = htmlCode;
@@ -597,7 +597,7 @@
                 divTitleType.innerHTML = "<label class='fw-bold'>INCOME</label>";
                 for (let i = 0; i < allIncomes.length; i++) {
                     htmlCode += "<option value =" + allIncomes[i]["id"] + ">";
-                    htmlCode += allIncomes[i]["income"] + "</option>";
+                    htmlCode += allIncomes[i]["name"] + "</option>";
                 }
                 //filling editCheckType
                 editCheckType.innerHTML = htmlCode;
@@ -605,7 +605,7 @@
                 divTitleType.innerHTML = "<label class='fw-bold'>EXPENSE</label>";
                 for (let i = 0; i < allExpenses.length; i++) {
                     htmlCode += "<option value =" + allExpenses[i]["id"] + ">";
-                    htmlCode += allExpenses[i]["expense"] + "</option>";
+                    htmlCode += allExpenses[i]["name"] + "</option>";
                 }
                 //filling editCheckType
                 editCheckType.innerHTML = htmlCode;
@@ -642,11 +642,11 @@
                             "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
-                            "budget":
+                            "income":
                                 {
                                     "id": editCheckType.value
                                 },
-                            "purchase": null
+                            "expense": null
                         }
                     )
                 );
@@ -658,8 +658,8 @@
                             "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
-                            "budget": null,
-                            "purchase":
+                            "income": null,
+                            "expense":
                                 {
                                     "id": editCheckType.value
                                 }
@@ -692,11 +692,11 @@
                             "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
-                            "budget":
+                            "income":
                                 {
                                     "id": editCheckType.value
                                 },
-                            "purchase": null
+                            "expense": null
                         }
                     )
                 );
@@ -707,8 +707,8 @@
                             "val": editCheckValue.value,
                             "date": editCheckDate.value,
                             "note": editCheckNote.value,
-                            "budget": null,
-                            "purchase":
+                            "income": null,
+                            "expense":
                                 {
                                     "id": editCheckType.value
                                 }

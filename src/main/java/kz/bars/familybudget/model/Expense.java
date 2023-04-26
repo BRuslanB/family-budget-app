@@ -8,19 +8,18 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Purchase extends BaseEntity {
+public class Expense extends BaseEntity {
 
     @Column(nullable = false)
-    private String expense;
+    private String name;
 
     private String description;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne //no cascade delete
     @JoinColumn(name = "category_id")
     private ExpenseCategory category;
 
-    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL) //, orphanRemoval = true)
+    @OneToMany(mappedBy = "expense", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //orphanRemoval = false)
     private Set<Check> checks;
 
 }

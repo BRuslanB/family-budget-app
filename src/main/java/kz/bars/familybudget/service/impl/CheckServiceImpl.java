@@ -1,20 +1,20 @@
 package kz.bars.familybudget.service.impl;
 
 import kz.bars.familybudget.dto.CheckDto;
-import kz.bars.familybudget.model.Budget;
+import kz.bars.familybudget.model.Income;
 import kz.bars.familybudget.model.Check;
-import kz.bars.familybudget.model.Purchase;
-import kz.bars.familybudget.repository.BudgetRepo;
+import kz.bars.familybudget.model.Expense;
+import kz.bars.familybudget.repository.IncomeRepo;
 import kz.bars.familybudget.repository.CheckRepo;
-import kz.bars.familybudget.repository.PurchaseRepo;
-import kz.bars.familybudget.service.BudgetService;
+import kz.bars.familybudget.repository.ExpenseRepo;
+import kz.bars.familybudget.service.IncomeService;
 import kz.bars.familybudget.service.CheckService;
-import kz.bars.familybudget.service.PurchaseService;
+import kz.bars.familybudget.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +24,13 @@ import java.util.List;
 public class CheckServiceImpl implements CheckService {
 
     private final CheckRepo checkRepo;
-    private final BudgetRepo budgetRepo;
-    private final BudgetService budgetService;
-    private final PurchaseRepo purchaseRepo;
-    private final PurchaseService purchaseService;
+    private final IncomeRepo incomeRepo;
+    private final IncomeService incomeService;
+    private final ExpenseRepo expenseRepo;
+    private final ExpenseService expenseService;
 
     @Override
-    public CheckDto getCheckDto(BigInteger id) {
+    public CheckDto getCheckDto(Long id) {
 
         Check check = checkRepo.findById(id).orElse(null);
         CheckDto checkDto = new CheckDto();
@@ -40,8 +40,8 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setBudget(budgetService.toDto(check.getBudget()));
-            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            checkDto.setIncome(incomeService.toDto(check.getIncome()));
+            checkDto.setExpense(expenseService.toDto(check.getExpense()));
         }
         return checkDto;
     }
@@ -55,15 +55,15 @@ public class CheckServiceImpl implements CheckService {
         check.setDate(checkDto.getDate());
         check.setNote(checkDto.getNote());
         try {
-            if (checkDto.getBudget() != null) {
-                budgetRepo.findById(checkDto.getBudget().getId()).ifPresent(check::setBudget);
+            if (checkDto.getIncome() != null) {
+                incomeRepo.findById(checkDto.getIncome().getId()).ifPresent(check::setIncome);
             }
         } catch(Exception ex) {
 //            check.setBudget(null);
         }
         try {
-            if (checkDto.getPurchase() != null) {
-                purchaseRepo.findById(checkDto.getPurchase().getId()).ifPresent(check::setPurchase);
+            if (checkDto.getExpense() != null) {
+                expenseRepo.findById(checkDto.getExpense().getId()).ifPresent(check::setExpense);
             }
         } catch(Exception ex) {
 //            check.setPurchase(null);
@@ -86,14 +86,14 @@ public class CheckServiceImpl implements CheckService {
             check.setDate(checkDto.getDate());
             check.setNote(checkDto.getNote());
             try {
-                Budget budget = budgetRepo.findById(checkDto.getBudget().getId()).orElseThrow();
-                check.setBudget(budget);
+                Income income = incomeRepo.findById(checkDto.getIncome().getId()).orElseThrow();
+                check.setIncome(income);
             } catch (Exception ex) {
 //                check.setBudget(null);
             }
             try {
-                Purchase purchase = purchaseRepo.findById(checkDto.getPurchase().getId()).orElseThrow();
-                check.setPurchase(purchase);
+                Expense expense = expenseRepo.findById(checkDto.getExpense().getId()).orElseThrow();
+                check.setExpense(expense);
             } catch (Exception ex) {
 //                check.setPurchase(null);
             }
@@ -103,7 +103,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public void deleteCheckDto(BigInteger id) {
+    public void deleteCheckDto(Long id) {
         checkRepo.deleteById(id);
     }
 
@@ -120,8 +120,8 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setBudget(budgetService.toDto(check.getBudget()));
-            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            checkDto.setIncome(incomeService.toDto(check.getIncome()));
+            checkDto.setExpense(expenseService.toDto(check.getExpense()));
             //Add to checkDtoList
             checkDtoList.add(checkDto);
         }
@@ -141,8 +141,8 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setBudget(budgetService.toDto(check.getBudget()));
-            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            checkDto.setIncome(incomeService.toDto(check.getIncome()));
+            checkDto.setExpense(expenseService.toDto(check.getExpense()));
             //Add to checkDtoList
             checkDtoList.add(checkDto);
         }
@@ -150,9 +150,9 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByBudgetIdDto(BigInteger id) {
+    public List<CheckDto> getAllCheckByBudgetIdDto(Long id) {
 
-        List<Check> checkList = checkRepo.findAllByBudgetIdOrderByDate(id);
+        List<Check> checkList = checkRepo.findAllByIncomeIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
 
@@ -162,7 +162,7 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setBudget(budgetService.toDto(check.getBudget()));
+            checkDto.setIncome(incomeService.toDto(check.getIncome()));
             //Add to checkDtoList
             checkDtoList.add(checkDto);
         }
@@ -170,9 +170,9 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(BigInteger id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
 
-        List<Check> checkList = checkRepo.findAllByBudgetIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
+        List<Check> checkList = checkRepo.findAllByIncomeIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
 
@@ -182,7 +182,7 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setBudget(budgetService.toDto(check.getBudget()));
+            checkDto.setIncome(incomeService.toDto(check.getIncome()));
             //Add to checkDtoList
             checkDtoList.add(checkDto);
         }
@@ -190,9 +190,9 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByPurchaseIdDto(BigInteger id) {
+    public List<CheckDto> getAllCheckByPurchaseIdDto(Long id) {
 
-        List<Check> checkList = checkRepo.findAllByPurchaseIdOrderByDate(id);
+        List<Check> checkList = checkRepo.findAllByExpenseIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
 
@@ -202,7 +202,7 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            checkDto.setExpense(expenseService.toDto(check.getExpense()));
             //Add to checkDtoList
             checkDtoList.add(checkDto);
         }
@@ -210,9 +210,9 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(BigInteger id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
 
-        List<Check> checkList = checkRepo.findAllByPurchaseIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
+        List<Check> checkList = checkRepo.findAllByExpenseIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
         CheckDto checkDto;
 
@@ -222,7 +222,7 @@ public class CheckServiceImpl implements CheckService {
             checkDto.setVal(check.getVal());
             checkDto.setDate(check.getDate());
             checkDto.setNote(check.getNote());
-            checkDto.setPurchase(purchaseService.toDto(check.getPurchase()));
+            checkDto.setExpense(expenseService.toDto(check.getExpense()));
             //Add to checkDtoList
             checkDtoList.add(checkDto);
         }

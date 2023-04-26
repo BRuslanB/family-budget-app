@@ -1,8 +1,8 @@
 package kz.bars.familybudget.controller;
 
-import kz.bars.familybudget.model.Budget;
+import kz.bars.familybudget.model.Expense;
+import kz.bars.familybudget.model.Income;
 import kz.bars.familybudget.model.ExpenseCategory;
-import kz.bars.familybudget.model.Purchase;
 import kz.bars.familybudget.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,8 +22,8 @@ import java.util.List;
 public class HomeController {
     private final AccountService accountService;
     private final ExpenseCategoryService expenseCategoryService;
-    private final PurchaseService purchaseService;
-    private final BudgetService budgetService;
+    private final ExpenseService expenseService;
+    private final IncomeService incomeService;
 
     @GetMapping(value = "/")
     public String index() {
@@ -71,11 +70,11 @@ public class HomeController {
         List<ExpenseCategory> allExpenseCategory = expenseCategoryService.getAllExpenseCategory();
         model.addAttribute("allExpenseCategory", allExpenseCategory);
 
-        List<Purchase> allPurchase = purchaseService.getAllPurchase();
-        model.addAttribute("allExpense", allPurchase);
+        List<Expense> allExpense = expenseService.getAllExpense();
+        model.addAttribute("allExpense", allExpense);
 
-        List<Budget> allBudget =  budgetService.getAllBudget();
-        model.addAttribute("allIncome", allBudget);
+        List<Income> allIncome =  incomeService.getAllIncome();
+        model.addAttribute("allIncome", allIncome);
 
         log.debug("!Call method /settings()");
         return "settings";
@@ -164,7 +163,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update-category-expense")
-    public String updateExpenseCategory(@RequestParam(name = "expense_category_id") BigInteger expenseCategoryId,
+    public String updateExpenseCategory(@RequestParam(name = "expense_category_id") Long expenseCategoryId,
                                         @RequestParam(name = "expense_category_name") String expenseCategoryName,
                                         @RequestParam(name = "expense_category_description") String expenseCategoryDescription) {
 
@@ -186,7 +185,7 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete-category-expense")
-    public String deleteExpenseCategory(@RequestParam(name = "expense_category_id") BigInteger expenseCategoryId) {
+    public String deleteExpenseCategory(@RequestParam(name = "expense_category_id") Long expenseCategoryId) {
 
         try {
             expenseCategoryService.deleteExpenseCategory(expenseCategoryId);
@@ -203,16 +202,16 @@ public class HomeController {
     @PostMapping("/add-expense")
     public String addTypeExpense(@RequestParam(name = "expense_name") String expenseName,
                                  @RequestParam(name = "expense_description") String expenseDescription,
-                                 @RequestParam(name = "expense_category_id") BigInteger expenseCategoryId) {
+                                 @RequestParam(name = "expense_category_id") Long expenseCategoryId) {
 
         ExpenseCategory expenseCategory = expenseCategoryService.getExpenseCategory(expenseCategoryId);
 
         if (expenseCategory != null) {
-            Purchase purchase = new Purchase();
-            purchase.setExpense(expenseName);
-            purchase.setDescription(expenseDescription);
-            purchase.setCategory(expenseCategory);
-            purchaseService.addPurchase(purchase);
+            Expense expense = new Expense();
+            expense.setName(expenseName);
+            expense.setDescription(expenseDescription);
+            expense.setCategory(expenseCategory);
+            expenseService.addExpense(expense);
         }
 
         log.debug("!New Expense added, name={}, description={}, category={}",
@@ -222,22 +221,22 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update-expense")
-    public String updateTypeExpense(@RequestParam(name = "expense_id") BigInteger expenseId,
+    public String updateTypeExpense(@RequestParam(name = "expense_id") Long expenseId,
                                     @RequestParam(name = "expense_name") String expenseName,
                                     @RequestParam(name = "expense_description") String expenseDescription,
-                                    @RequestParam(name = "expense_category_id") BigInteger expenseCategoryId) {
+                                    @RequestParam(name = "expense_category_id") Long expenseCategoryId) {
 
-        Purchase purchase = purchaseService.getPurchase(expenseId);
+        Expense expense = expenseService.getExpense(expenseId);
 
-        if (purchase != null) {
+        if (expense != null) {
 
             ExpenseCategory expenseCategory = expenseCategoryService.getExpenseCategory(expenseCategoryId);
 
             if (expenseCategory != null) {
-                purchase.setExpense(expenseName);
-                purchase.setDescription(expenseDescription);
-                purchase.setCategory(expenseCategory);
-                purchaseService.updatePurchase(purchase);
+                expense.setName(expenseName);
+                expense.setDescription(expenseDescription);
+                expense.setCategory(expenseCategory);
+                expenseService.updateExpense(expense);
             }
 
             log.debug("!Expense updated successfully id={}, name={}, description={}, category={}",
@@ -252,10 +251,10 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete-expense")
-    public String deleteTypeExpense(@RequestParam(name = "expense_id") BigInteger expenseId) {
+    public String deleteTypeExpense(@RequestParam(name = "expense_id") Long expenseId) {
 
         try {
-            purchaseService.deletePurchase(expenseId);
+            expenseService.deleteExpense(expenseId);
             log.error("!Expense removed, id={}", expenseId);
             return "redirect:/settings?expense_success";
 
@@ -270,10 +269,10 @@ public class HomeController {
     public String addTypeIncome(@RequestParam(name = "income_name") String incomeName,
                                 @RequestParam(name = "income_description") String incomeDescription) {
 
-        Budget budget = new Budget();
-        budget.setIncome(incomeName);
-        budget.setDescription(incomeDescription);
-        budgetService.addBudget(budget);
+        Income income = new Income();
+        income.setName(incomeName);
+        income.setDescription(incomeDescription);
+        incomeService.addIncome(income);
 
         log.debug("!New Income added, name={}, description={}",incomeName, incomeDescription);
         return "redirect:/settings?income_success";
@@ -281,16 +280,16 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update-income")
-    public String updateTypeIncome(@RequestParam(name = "income_id") BigInteger incomeId,
+    public String updateTypeIncome(@RequestParam(name = "income_id") Long incomeId,
                                    @RequestParam(name = "income_name") String incomeName,
                                    @RequestParam(name = "income_description") String incomeDescription) {
 
-        Budget budget = budgetService.getBudget(incomeId);
+        Income income = incomeService.getIncome(incomeId);
 
-        if (budget != null) {
-            budget.setIncome(incomeName);
-            budget.setDescription(incomeDescription);
-            budgetService.updateBudget(budget);
+        if (income != null) {
+            income.setName(incomeName);
+            income.setDescription(incomeDescription);
+            incomeService.updateIncome(income);
 
             log.debug("!Income updated successfully, id={}, name={}, description={}", incomeId, incomeName, incomeDescription);
             return "redirect:/settings?income_success";
@@ -302,10 +301,10 @@ public class HomeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete-income")
-    public String deleteTypeIncome(@RequestParam(name = "income_id") BigInteger incomeId) {
+    public String deleteTypeIncome(@RequestParam(name = "income_id") Long incomeId) {
 
         try {
-            budgetService.deleteBudget(incomeId);
+            incomeService.deleteIncome(incomeId);
             log.error("!Income removed, id={}", incomeId);
             return "redirect:/settings?income_success";
 

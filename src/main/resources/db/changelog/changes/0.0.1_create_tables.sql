@@ -5,18 +5,18 @@ CREATE TABLE expense_category (
     description TEXT
 );
 
-DROP TABLE IF EXISTS purchase CASCADE;
-CREATE TABLE purchase (
+DROP TABLE IF EXISTS expense CASCADE;
+CREATE TABLE expense (
     id SERIAL PRIMARY KEY NOT NULL,
     category_id INT,
-    expense TEXT NOT NULL,
+    name TEXT NOT NULL,
     description TEXT
 );
 
-DROP TABLE IF EXISTS budget CASCADE;
-CREATE TABLE budget (
+DROP TABLE IF EXISTS income CASCADE;
+CREATE TABLE income (
     id SERIAL PRIMARY KEY NOT NULL,
-    income TEXT NOT NULL,
+    name TEXT NOT NULL,
     description TEXT
 );
 
@@ -26,8 +26,8 @@ CREATE TABLE checks (
     val DOUBLE PRECISION NOT NULL,
     date DATE NOT NULL,
     note TEXT,
-    budget_id INT NULL,
-    purchase_id INT NULL
+    income_id INT NULL,
+    expense_id INT NULL
 );
 
 DROP TABLE IF EXISTS role CASCADE;

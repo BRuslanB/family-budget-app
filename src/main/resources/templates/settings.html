@@ -261,7 +261,7 @@
                             <tbody>
                             <tr th:each="exp : ${allExpense}">
                                 <td th:text="${exp.id}"></td>
-                                <td th:text="${exp.expense}"></td>
+                                <td th:text="${exp.name}"></td>
                                 <td th:text="${exp.description}"></td>
                                 <td th:if="${exp.category != null}" th:text="${exp.category.name}"></td>
                                 <td th:if="${exp.category == null}" th:text="${'No Category'}" th:style="'color: red'"></td>
@@ -306,7 +306,7 @@
                                                             <input type="text" class="form-control"
                                                                    id="edit_expense_name"
                                                                    name="expense_name" required
-                                                                   th:value="${exp.expense}">
+                                                                   th:value="${exp.name}">
                                                         </div>
                                                     </div>
                                                     <div class="row mt-2">
@@ -497,7 +497,7 @@
                             <tbody>
                             <tr th:each="inc : ${allIncome}">
                                 <td th:text="${inc.id}"></td>
-                                <td th:text="${inc.income}"></td>
+                                <td th:text="${inc.name}"></td>
                                 <td th:text="${inc.description}"></td>
                                 <td style="text-align: center;"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN')">
@@ -540,7 +540,7 @@
                                                             <input type="text" class="form-control"
                                                                    id="edit_income_name"
                                                                    name="income_name" required
-                                                                   th:value="${inc.income}">
+                                                                   th:value="${inc.name}">
                                                         </div>
                                                     </div>
                                                     <div class="row mt-2">
