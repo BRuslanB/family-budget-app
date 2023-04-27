@@ -44,7 +44,7 @@ public class ExpenseServiceTests {
 	}
 
 	@Test
-	public void checkPurchaseAdd() {
+	public void checkExpenseAdd() {
 		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
@@ -74,7 +74,7 @@ public class ExpenseServiceTests {
 	}
 
 	@Test
-	public void checkPurchaseUpdate() {
+	public void checkExpenseUpdate() {
 		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
@@ -111,7 +111,7 @@ public class ExpenseServiceTests {
 	}
 
 	@Test
-	public void checkPurchaseDelete() {
+	public void checkExpenseDelete() {
 		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
@@ -136,7 +136,7 @@ public class ExpenseServiceTests {
 	}
 
 	@Test
-	public void checkPurchaseGetById() {
+	public void checkExpenseGetById() {
 		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");
@@ -163,7 +163,7 @@ public class ExpenseServiceTests {
 	}
 
 	@Test
-	public void checkPurchaseGetAll() {
+	public void checkExpenseGetAll() {
 		/*Arrange*/
 		ExpenseCategory expenseCategory = new ExpenseCategory();
 		expenseCategory.setName("Новая категория");

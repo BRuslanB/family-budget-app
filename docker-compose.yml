@@ -3,7 +3,7 @@ version: '3.9'
 services:
   app:
     build: ./app
-    image: 'bruslanb/app-family-budget-image:1.0.2'
+    image: 'bruslanb/app-family-budget-image:1.0.3'
     container_name: app-family-budget-container
     user: '1001:1001' # Specify the UID and GID of the user you want to run the container as
     depends_on:
