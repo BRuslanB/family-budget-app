@@ -19,7 +19,7 @@ public class IncomeDtoTests {
     IncomeService incomeService;
 
 	@Test
-	public void testBudgetToDto() {
+	public void testIncomeToDto() {
 		/*Arrange*/
 		Income income = new Income();
 		income.setId(Long.valueOf(35));

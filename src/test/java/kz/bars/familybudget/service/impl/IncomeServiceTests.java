@@ -35,7 +35,7 @@ public class IncomeServiceTests {
 	}
 
 	@Test
-	public void checkBudgetAdd() {
+	public void checkIncomeAdd() {
 		/*Arrange*/
 		Income income = new Income();
 		income.setName("Новый доход");
@@ -55,7 +55,7 @@ public class IncomeServiceTests {
 	}
 
 	@Test
-	public void checkBudgetUpdate() {
+	public void checkIncomeUpdate() {
 		/*Arrange*/
 		Income income = new Income();
 		income.setName("Новый доход");
@@ -77,7 +77,7 @@ public class IncomeServiceTests {
 	}
 
 	@Test
-	public void checkBudgetDelete() {
+	public void checkIncomeDelete() {
 		/*Arrange*/
 		Income income = new Income();
 		income.setName("Новый доход");
@@ -96,7 +96,7 @@ public class IncomeServiceTests {
 	}
 
 	@Test
-	public void checkBudgetGetById() {
+	public void checkIncomeGetById() {
 		/*Arrange*/
 		Income income = new Income();
 		income.setName("Новый доход");
@@ -114,7 +114,7 @@ public class IncomeServiceTests {
 	}
 
 	@Test
-	public void checkBudgetGetAll() {
+	public void checkIncomeGetAll() {
 		/*Arrange*/
 		List<Income> incomeList = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {

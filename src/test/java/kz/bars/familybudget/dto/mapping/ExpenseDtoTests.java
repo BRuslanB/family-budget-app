@@ -24,7 +24,7 @@ public class ExpenseDtoTests {
 	ExpenseService expenseService;
 
 	@Test
-	public void testPurchaseToDto() {
+	public void testExpenseToDto() {
 		/*Arrange*/
 		Expense expense = new Expense();
 		expense.setId(Long.valueOf(25));
