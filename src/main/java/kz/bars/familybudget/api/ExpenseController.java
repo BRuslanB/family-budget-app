@@ -28,18 +28,18 @@ public class ExpenseController {
 
     @GetMapping
     @Operation(description = "Getting a list of Expense")
-    public List<ExpenseDto> getAllPurchase() {
-        log.debug("!Getting a list of Purchase");
+    public List<ExpenseDto> getAllExpense() {
+        log.debug("!Getting a list of Expense");
         return expenseService.getAllExpenseDto();
     }
 
     @GetMapping(value = "dates/{date1}/{date2}")
     @Operation(description = "Getting a list of Expense for the period from.. to..")
-    public List<ExpenseDto> getAllPurchaseBetweenDate(@Parameter(description = "date 'from'")
+    public List<ExpenseDto> getAllExpenseBetweenDate(@Parameter(description = "date 'from'")
                                                        @PathVariable(name = "date1") LocalDate dateFrom,
                                                       @Parameter(description = "date 'to'")
                                                        @PathVariable(name = "date2") LocalDate dateTo) {
-        log.debug("!Getting a list of Purchase for the period from {} to {}", dateFrom, dateTo);
+        log.debug("!Getting a list of Expense for the period from {} to {}", dateFrom, dateTo);
         return expenseService.getAllExpenseBetweenDateDto(dateFrom, dateTo);
     }
 

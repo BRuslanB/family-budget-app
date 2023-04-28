@@ -59,14 +59,12 @@ public class CheckServiceImpl implements CheckService {
                 incomeRepo.findById(checkDto.getIncome().getId()).ifPresent(check::setIncome);
             }
         } catch(Exception ex) {
-//            check.setBudget(null);
         }
         try {
             if (checkDto.getExpense() != null) {
                 expenseRepo.findById(checkDto.getExpense().getId()).ifPresent(check::setExpense);
             }
         } catch(Exception ex) {
-//            check.setPurchase(null);
         }
        checkRepo.save(check);
        return checkDto;
@@ -89,13 +87,11 @@ public class CheckServiceImpl implements CheckService {
                 Income income = incomeRepo.findById(checkDto.getIncome().getId()).orElseThrow();
                 check.setIncome(income);
             } catch (Exception ex) {
-//                check.setBudget(null);
             }
             try {
                 Expense expense = expenseRepo.findById(checkDto.getExpense().getId()).orElseThrow();
                 check.setExpense(expense);
             } catch (Exception ex) {
-//                check.setPurchase(null);
             }
             checkRepo.save(check);
         }
@@ -150,7 +146,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByBudgetIdDto(Long id) {
+    public List<CheckDto> getAllCheckByIncomeIdDto(Long id) {
 
         List<Check> checkList = checkRepo.findAllByIncomeIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -170,7 +166,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByBudgetBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckByIncomeBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
 
         List<Check> checkList = checkRepo.findAllByIncomeIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -190,7 +186,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByPurchaseIdDto(Long id) {
+    public List<CheckDto> getAllCheckByExpenseIdDto(Long id) {
 
         List<Check> checkList = checkRepo.findAllByExpenseIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -210,7 +206,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByPurchaseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckByExpenseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
 
         List<Check> checkList = checkRepo.findAllByExpenseIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();

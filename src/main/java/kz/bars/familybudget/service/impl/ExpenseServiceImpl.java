@@ -78,7 +78,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                 sum += check.getVal();
             }
             expenseDto.setSumVal(Math.round(sum * 100.0) / 100.0);
-            //Add to purchaseDtoList
+            //Add to expenseDtoList
             expenseDtoList.add(expenseDto);
         }
         return expenseDtoList;
@@ -105,7 +105,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                 }
             }
             expenseDto.setSumVal(Math.round(sum * 100.0) / 100.0);
-            //Add to purchaseDtoList
+            //Add to expenseDtoList
             expenseDtoList.add(expenseDto);
         }
         return expenseDtoList;
