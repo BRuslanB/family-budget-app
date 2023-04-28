@@ -334,7 +334,8 @@
                         totalSum += incomesList[i]["sumVal"];
                     }
                     htmlCode += "<tr>";
-                    htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
+                    htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " +
+                        totalSum.toFixed(2) + "</td>";
                     htmlCode += "</tr>";
                 }
                 //filling tbodyIncomesList
@@ -384,7 +385,8 @@
                         totalSum += expensesList[i]["sumVal"];
                     }
                     htmlCode += "<tr>";
-                    htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " + totalSum + "</td>";
+                    htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "Total: " +
+                        totalSum.toFixed(2) + "</td>";
                     htmlCode += "</tr>";
                 }
                 //filling tbodyExpensesList
@@ -427,7 +429,7 @@
                     }
                     htmlCode += "<tr>";
                     htmlCode += "<td colspan='4' style='font-weight: bold; text-align: right;'>" + "The rest of money: " +
-                                 totalSum + "</td>";
+                                 totalSum.toFixed(2) + "</td>";
                     htmlCode += "</tr>";
                 }
                 //filling tbodyChecksList
