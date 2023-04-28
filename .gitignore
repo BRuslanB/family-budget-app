@@ -62,9 +62,6 @@ cmake-build-*/
 # File-based project format
 *.iws
 
-# File-txt format
-*.txt
-
 # IntelliJ
 .idea/
 out/
@@ -93,11 +90,14 @@ fabric.properties
 .gradle
 /build/
 
-### VS Code ###
+# VS Code
 .vscode/
 
-### Data ###
+# Data
 /data/
 
-### Logging ###
+# Logging
 /logs/
+
+# File-txt format
+*.txt
