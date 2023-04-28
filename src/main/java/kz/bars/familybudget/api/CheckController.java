@@ -75,7 +75,7 @@ public class CheckController {
 
     @GetMapping(value = "incomes/{id}")
     @Operation(description = "Getting a list of Checks for a given Income..")
-    public List<CheckDto> getAllCheckByBudgetId(@Parameter(description = "'income' id")
+    public List<CheckDto> getAllCheckByIncomeId(@Parameter(description = "'income' id")
                                                 @PathVariable(name = "id") Long id) {
         log.debug("!Getting a list of Checks for a given Income, id={}", id);
         return checkService.getAllCheckByIncomeIdDto(id);
@@ -83,7 +83,7 @@ public class CheckController {
 
     @GetMapping(value = "incomes/{id}/dates/{date1}/{date2}")
     @Operation(description = "Getting a list of Checks for a given Income.. for the period from.. to..")
-    public List<CheckDto> getAllCheckByBudgetBetweenDate(@Parameter(description = "'income' id")
+    public List<CheckDto> getAllCheckByIncomeBetweenDate(@Parameter(description = "'income' id")
                                                          @PathVariable(name = "id") Long id,
                                                          @Parameter(description = "date 'from'")
                                                          @PathVariable(name = "date1") LocalDate dateFrom,
