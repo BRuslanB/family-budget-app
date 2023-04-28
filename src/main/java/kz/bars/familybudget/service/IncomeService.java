@@ -3,12 +3,10 @@ package kz.bars.familybudget.service;
 import kz.bars.familybudget.dto.IncomeDto;
 import kz.bars.familybudget.model.Income;
 
-
 import java.time.LocalDate;
 import java.util.List;
 
 public interface IncomeService {
-
     List<Income> getAllIncome();
     Income getIncome(Long id);
     Income addIncome(Income income);

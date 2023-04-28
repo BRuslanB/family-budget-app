@@ -78,7 +78,7 @@ public class CheckController {
     public List<CheckDto> getAllCheckByBudgetId(@Parameter(description = "'income' id")
                                                 @PathVariable(name = "id") Long id) {
         log.debug("!Getting a list of Checks for a given Income, id={}", id);
-        return checkService.getAllCheckByBudgetIdDto(id);
+        return checkService.getAllCheckByIncomeIdDto(id);
     }
 
     @GetMapping(value = "incomes/{id}/dates/{date1}/{date2}")
@@ -90,27 +90,27 @@ public class CheckController {
                                                          @Parameter(description = "date 'to'")
                                                          @PathVariable(name = "date2") LocalDate dateTo) {
         log.debug("!Getting a list of Checks for a given Income, id={} from {} to {}", id, dateFrom, dateTo);
-        return checkService.getAllCheckByBudgetBetweenDateDto(id, dateFrom, dateTo);
+        return checkService.getAllCheckByIncomeBetweenDateDto(id, dateFrom, dateTo);
     }
 
     @GetMapping(value = "expenses/{id}")
     @Operation(description = "Getting a list of Checks for a given Expense..")
-    public List<CheckDto> getAllCheckByPurchaseId(@Parameter(description = "'expense' id")
+    public List<CheckDto> getAllCheckByExpenseId(@Parameter(description = "'expense' id")
                                                   @PathVariable(name = "id") Long id) {
-        log.debug("!Getting a list of Checks for a given Purchase, id={}", id);
-        return checkService.getAllCheckByPurchaseIdDto(id);
+        log.debug("!Getting a list of Checks for a given Expense, id={}", id);
+        return checkService.getAllCheckByExpenseIdDto(id);
     }
 
     @GetMapping(value = "expenses/{id}/dates/{date1}/{date2}")
     @Operation(description = "Getting a list of Checks for a given Expense.. for the period from.. to..")
-    public List<CheckDto> getAllCheckByPurchaseBetweenDate(@Parameter(description = "'expense' id")
+    public List<CheckDto> getAllCheckByExpenseBetweenDate(@Parameter(description = "'expense' id")
                                                            @PathVariable(name = "id") Long id,
                                                            @Parameter(description = "date 'from'")
                                                            @PathVariable(name = "date1") LocalDate dateFrom,
                                                            @Parameter(description = "date 'to'")
                                                            @PathVariable(name = "date2") LocalDate dateTo) {
-        log.debug("!Getting a list of Checks for a given Purchase, id={} from {} to {}",id, dateFrom, dateTo);
-        return checkService.getAllCheckByPurchaseBetweenDateDto(id, dateFrom, dateTo);
+        log.debug("!Getting a list of Checks for a given Expense, id={} from {} to {}",id, dateFrom, dateTo);
+        return checkService.getAllCheckByExpenseBetweenDateDto(id, dateFrom, dateTo);
     }
 
 }
