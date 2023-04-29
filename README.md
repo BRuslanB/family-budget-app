@@ -1,5 +1,5 @@
 # Family Budget Tracker Application
-This is a Java-based application backed by a REST API and an Angular frontend, designed to help families track their expenses and manage their income.
+This is a Java-based application backed by a REST API and a frontend, designed to help families track their expenses and manage their income.
 
 Note: This Family Budget Tracker application is built for training and educational purposes only. It is not intended for commercial or production use.
 
@@ -21,15 +21,12 @@ The Family Budget Tracker application is built using the following technologies:
 * Spring Data JPA
 * Hibernate
 * PostgreSQL
-* Angular 14
 * HTML5/CSS3
 
 # Prerequisites
 Before running the application, you will need to have the following software installed on your machine:
 
 * Java Development Kit (JDK) 17 or higher
-* Node.js
-* Angular CLI
 * Docker
 
 # Getting Started
@@ -37,35 +34,15 @@ To run the application locally, follow these steps:
 
 1. Clone the repository to your local machine:
 ```bash
-git clone https://github.com/BRuslanB/family-income.git
+git clone https://github.com/BRuslanB/family-budget.git
 ```
-2. Create a new MySQL database for the application:
+2. Launch:
 ```bash
 docker-compose up
 ```
-3. Run the application using Graddle:
-```bash
-cd family-income
-./gradlew bootRun
-```
-4. Open a new terminal window and navigate to the frontend directory:
-```bash
-cd family-income/frontend
-```
-5. Install the required Node.js packages:
-```bash
-npm install
-```
-6. Start the Angular development server:
-```bash
-ng serve --open
-```
-7. Open your web browser and navigate to http://localhost:4200
 
 ## Contributing
 If you would like to contribute to the development of this application, please submit a pull request or open an issue on the GitHub repository.
 
 ## License
 This application is licensed under the MIT License. See the LICENSE file for more details.
-
-another change
