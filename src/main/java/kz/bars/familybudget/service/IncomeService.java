@@ -14,6 +14,6 @@ public interface IncomeService {
     void deleteIncome(Long id);
     IncomeDto toDto(Income income);
     List<IncomeDto> getAllIncomeDto();
-    List<IncomeDto> getAllIncomeBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
+    List<IncomeDto> getAllIncomeDtoBetweenDate(LocalDate dateFrom, LocalDate dateTo);
 
 }

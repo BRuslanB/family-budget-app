@@ -21,26 +21,26 @@ import java.util.List;
 @Log4j2
 @PreAuthorize("isAuthenticated()")
 @SecurityRequirement(name = "family-budget-api")
-@Tag(name = "Expense", description = "All methods for getting a list of Expense")
+@Tag(name = "Expense", description = "All methods for getting a list of Expenses")
 public class ExpenseController {
 
     private final ExpenseService expenseService;
 
     @GetMapping
-    @Operation(description = "Getting a list of Expense")
+    @Operation(description = "Getting a list of Expenses")
     public List<ExpenseDto> getAllExpense() {
-        log.debug("!Getting a list of Expense");
+        log.debug("!Getting a list of Expenses");
         return expenseService.getAllExpenseDto();
     }
 
     @GetMapping(value = "dates/{date1}/{date2}")
-    @Operation(description = "Getting a list of Expense for the period from.. to..")
+    @Operation(description = "Getting a list of Expenses for the period from.. to..")
     public List<ExpenseDto> getAllExpenseBetweenDate(@Parameter(description = "date 'from'")
                                                        @PathVariable(name = "date1") LocalDate dateFrom,
                                                       @Parameter(description = "date 'to'")
                                                        @PathVariable(name = "date2") LocalDate dateTo) {
-        log.debug("!Getting a list of Expense for the period from {} to {}", dateFrom, dateTo);
-        return expenseService.getAllExpenseBetweenDateDto(dateFrom, dateTo);
+        log.debug("!Getting a list of Expenses for the period from {} to {}", dateFrom, dateTo);
+        return expenseService.getAllExpenseDtoBetweenDate(dateFrom, dateTo);
     }
 
 }

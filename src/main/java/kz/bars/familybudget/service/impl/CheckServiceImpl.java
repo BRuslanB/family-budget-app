@@ -125,7 +125,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckBetweenDateDto(LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckDtoBetweenDate(LocalDate dateFrom, LocalDate dateTo) {
         List<Check> checkList;
         checkList = checkRepo.findAllByDateBetweenOrderByDate(dateFrom, dateTo);
 
@@ -146,7 +146,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByIncomeIdDto(Long id) {
+    public List<CheckDto> getAllCheckDtoByIncomeId(Long id) {
 
         List<Check> checkList = checkRepo.findAllByIncomeIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -166,7 +166,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByIncomeBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckDtoByIncomeBetweenDate(Long id, LocalDate dateFrom, LocalDate dateTo) {
 
         List<Check> checkList = checkRepo.findAllByIncomeIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -186,7 +186,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByExpenseIdDto(Long id) {
+    public List<CheckDto> getAllCheckDtoByExpenseId(Long id) {
 
         List<Check> checkList = checkRepo.findAllByExpenseIdOrderByDate(id);
         List<CheckDto> checkDtoList = new ArrayList<>();
@@ -206,7 +206,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<CheckDto> getAllCheckByExpenseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo) {
+    public List<CheckDto> getAllCheckDtoByExpenseBetweenDate(Long id, LocalDate dateFrom, LocalDate dateTo) {
 
         List<Check> checkList = checkRepo.findAllByExpenseIdAndDateBetweenOrderByDate(id, dateFrom, dateTo);
         List<CheckDto> checkDtoList = new ArrayList<>();

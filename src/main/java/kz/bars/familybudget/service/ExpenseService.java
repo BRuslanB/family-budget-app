@@ -14,6 +14,6 @@ public interface ExpenseService {
     void deleteExpense(Long id);
     ExpenseDto toDto(Expense expense);
     List<ExpenseDto> getAllExpenseDto();
-    List<ExpenseDto> getAllExpenseBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
+    List<ExpenseDto> getAllExpenseDtoBetweenDate(LocalDate dateFrom, LocalDate dateTo);
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
 @Log4j2
 @PreAuthorize("isAuthenticated()")
 @SecurityRequirement(name = "family-budget-api")
-@Tag(name = "Check", description = "All methods for getting a list of Check")
+@Tag(name = "Check", description = "All methods for getting a list of Checks")
 public class CheckController {
 
     private final CheckService checkService;
@@ -57,20 +57,20 @@ public class CheckController {
     }
 
     @GetMapping()
-    @Operation(description = "Getting a list of Check")
+    @Operation(description = "Getting a list of Checks")
     public List<CheckDto> getAllCheck() {
-        log.debug("!Getting a list of Check");
+        log.debug("!Getting a list of Checks");
         return checkService.getAllCheckDto();
     }
 
     @GetMapping(value = "dates/{date1}/{date2}")
-    @Operation(description = "Getting a list of Check for the period from.. to..")
+    @Operation(description = "Getting a list of Checks for the period from.. to..")
     public List<CheckDto> getAllCheckBetweenDate(@Parameter(description = "date 'from'")
                                                  @PathVariable(name = "date1") LocalDate dateFrom,
                                                  @Parameter(description = "date 'to'")
                                                  @PathVariable(name = "date2") LocalDate dateTo) {
-        log.debug("!Getting a list of Check for the period from {} to {}", dateFrom, dateTo);
-        return checkService.getAllCheckBetweenDateDto(dateFrom, dateTo);
+        log.debug("!Getting a list of Checks for the period from {} to {}", dateFrom, dateTo);
+        return checkService.getAllCheckDtoBetweenDate(dateFrom, dateTo);
     }
 
     @GetMapping(value = "incomes/{id}")
@@ -78,7 +78,7 @@ public class CheckController {
     public List<CheckDto> getAllCheckByIncomeId(@Parameter(description = "'income' id")
                                                 @PathVariable(name = "id") Long id) {
         log.debug("!Getting a list of Checks for a given Income, id={}", id);
-        return checkService.getAllCheckByIncomeIdDto(id);
+        return checkService.getAllCheckDtoByIncomeId(id);
     }
 
     @GetMapping(value = "incomes/{id}/dates/{date1}/{date2}")
@@ -90,7 +90,7 @@ public class CheckController {
                                                          @Parameter(description = "date 'to'")
                                                          @PathVariable(name = "date2") LocalDate dateTo) {
         log.debug("!Getting a list of Checks for a given Income, id={} from {} to {}", id, dateFrom, dateTo);
-        return checkService.getAllCheckByIncomeBetweenDateDto(id, dateFrom, dateTo);
+        return checkService.getAllCheckDtoByIncomeBetweenDate(id, dateFrom, dateTo);
     }
 
     @GetMapping(value = "expenses/{id}")
@@ -98,7 +98,7 @@ public class CheckController {
     public List<CheckDto> getAllCheckByExpenseId(@Parameter(description = "'expense' id")
                                                   @PathVariable(name = "id") Long id) {
         log.debug("!Getting a list of Checks for a given Expense, id={}", id);
-        return checkService.getAllCheckByExpenseIdDto(id);
+        return checkService.getAllCheckDtoByExpenseId(id);
     }
 
     @GetMapping(value = "expenses/{id}/dates/{date1}/{date2}")
@@ -110,7 +110,7 @@ public class CheckController {
                                                            @Parameter(description = "date 'to'")
                                                            @PathVariable(name = "date2") LocalDate dateTo) {
         log.debug("!Getting a list of Checks for a given Expense, id={} from {} to {}",id, dateFrom, dateTo);
-        return checkService.getAllCheckByExpenseBetweenDateDto(id, dateFrom, dateTo);
+        return checkService.getAllCheckDtoByExpenseBetweenDate(id, dateFrom, dateTo);
     }
 
 }

@@ -11,10 +11,10 @@ public interface CheckService {
     CheckDto updateCheckDto(CheckDto checkDto);
     void deleteCheckDto(Long id);
     List<CheckDto> getAllCheckDto();
-    List<CheckDto> getAllCheckBetweenDateDto(LocalDate dateFrom, LocalDate dateTo);
-    List<CheckDto> getAllCheckByIncomeIdDto(Long id);
-    List<CheckDto> getAllCheckByIncomeBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo);
-    List<CheckDto> getAllCheckByExpenseIdDto(Long id);
-    List<CheckDto> getAllCheckByExpenseBetweenDateDto(Long id, LocalDate dateFrom, LocalDate dateTo);
+    List<CheckDto> getAllCheckDtoBetweenDate(LocalDate dateFrom, LocalDate dateTo);
+    List<CheckDto> getAllCheckDtoByIncomeId(Long id);
+    List<CheckDto> getAllCheckDtoByIncomeBetweenDate(Long id, LocalDate dateFrom, LocalDate dateTo);
+    List<CheckDto> getAllCheckDtoByExpenseId(Long id);
+    List<CheckDto> getAllCheckDtoByExpenseBetweenDate(Long id, LocalDate dateFrom, LocalDate dateTo);
 
 }
