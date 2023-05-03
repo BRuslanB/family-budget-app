@@ -74,14 +74,14 @@ public class IncomeServiceImpl implements IncomeService {
                 sum += check.getVal();
             }
             incomeDto.setSumVal(Math.round(sum * 100.0) / 100.0);
-            //Add to budgetDtoList
+            //Add to incomeDtoList
             incomeDtoList.add(incomeDto);
         }
         return incomeDtoList;
     }
 
     @Override
-    public List<IncomeDto> getAllIncomeBetweenDateDto(LocalDate dateFrom, LocalDate dateTo) {
+    public List<IncomeDto> getAllIncomeDtoBetweenDate(LocalDate dateFrom, LocalDate dateTo) {
         List<Income> incomeList;
         incomeList = incomeRepo.findAllByChecksBetweenDateOrderByDate(dateFrom, dateTo);
 
@@ -100,7 +100,7 @@ public class IncomeServiceImpl implements IncomeService {
                 }
             }
             incomeDto.setSumVal(Math.round(sum * 100.0) / 100.0);
-            //Add to budgetDtoList
+            //Add to incomeDtoList
             incomeDtoList.add(incomeDto);
         }
         return incomeDtoList;

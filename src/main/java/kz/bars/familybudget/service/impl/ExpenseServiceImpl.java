@@ -85,7 +85,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public List<ExpenseDto> getAllExpenseBetweenDateDto(LocalDate dateFrom, LocalDate dateTo) {
+    public List<ExpenseDto> getAllExpenseDtoBetweenDate(LocalDate dateFrom, LocalDate dateTo) {
         List<Expense> expenseList;
         expenseList = expenseRepo.findAllByChecksBetweenDateOrderByDate(dateFrom, dateTo);
 
