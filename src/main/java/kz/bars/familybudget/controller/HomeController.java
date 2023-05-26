@@ -37,12 +37,6 @@ public class HomeController {
         return "signin";
     }
 
-    @GetMapping(value = "/authorize")
-    public String authorize() {
-        log.debug("!Call method /authorize()");
-        return "authorize";
-    }
-
     @GetMapping(value = "/register")
     public String register() {
         log.debug("!Call method /register()");

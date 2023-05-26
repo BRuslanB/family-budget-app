@@ -20,7 +20,7 @@ import java.util.List;
 @CrossOrigin
 @Log4j2
 @PreAuthorize("isAuthenticated()")
-@SecurityRequirement(name = "family-budget-api")
+@SecurityRequirement(name = "family-budget")
 @Tag(name = "Expense", description = "All methods for getting a list of Expenses")
 public class ExpenseController {
 

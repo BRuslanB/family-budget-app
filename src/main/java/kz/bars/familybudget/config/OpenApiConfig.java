@@ -12,7 +12,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Family Budget API")
+                        .title("Family Budget Application")
                         .description("Family Budget Information")
                         .version("1.0.3")
                         .contact(new Contact()
