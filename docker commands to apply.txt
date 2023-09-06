@@ -20,6 +20,7 @@ docker run --name app-family-budget-container -p8080:8000 app-family-budget-imag
 #docker-compose up -d // create docker-compose container (app & db) where parameter -d running in the background
 
 #docker images // view all images
+#docker ls // view all images
 
 #docker rmi <name image / id image> -f // delete image, parameter -f forced deletion
 docker rmi app-family-budget-image
@@ -40,15 +41,17 @@ docker logs app-family-budget-container
 
 #docker login docker.io // login to docker hub
 
-#docker tag <name image> <name tag> //create tag (with name account) for push to docker hub
-docker tag app-family-budget-image bruslanb/app-family-budget-image:1.0.0
+#docker tag <name image> <name tag>:version //create tag (with name account) for push to docker hub
+docker tag app-family-budget-image bruslanb/app-family-budget-image:1.0.3
 
-#docker push <name tag> //image(tag) push to docker hub
-docker push bruslanb/app-family-budget-image:1.0.0
+#docker push <name tag>:version //image(tag) push to docker hub
+docker push bruslanb/app-family-budget-image:1.0.3
 
 ----------------------
 #Additional gradle commands:
 ----------------------
+docker builder prune - remove all unused build cache
+
 ./gradlew dependencies // is a command that is used to download and display the project's dependencies.
 
 ./gradlew wrapper --gradle-version=7.6 //is a command that generates the Gradle wrapper script for the project.
