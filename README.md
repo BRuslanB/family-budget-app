@@ -13,7 +13,7 @@ The Family Budget Tracker application allows users to:
 * View and filter expense reports by date range, family member, and category
 * Set and monitor income limits for each category
 
-* ## Technologies Used
+## Technologies Used
 The Family Budget Tracker application is built using the following technologies:
 
 * Java 17
