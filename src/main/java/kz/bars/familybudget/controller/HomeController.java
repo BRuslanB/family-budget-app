@@ -71,6 +71,8 @@ public class HomeController {
         model.addAttribute("allIncome", allIncome);
 
         log.debug("!Call method /settings()");
+
+        System.out.println("same debug!!!);
         return "settings";
     }
 
